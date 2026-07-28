@@ -1,0 +1,6 @@
+{
+  "name": "Trilha ENEM",
+  "description": "Auxiliar de estudos personalizado com cronograma adaptativo e acompanhamento ativo por IA para o ENEM.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
