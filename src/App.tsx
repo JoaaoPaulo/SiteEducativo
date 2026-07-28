@@ -171,7 +171,8 @@ export default function App() {
           'Redação Nota 1000': 'Médio'
         },
         studiedTopicIds: [],
-        isSubscribed: true
+        isSubscribed: true,
+        createdAt: new Date().toISOString()
       };
       setUser(mockUser);
       const newTrail = generateTrailForUser(mockUser);

@@ -11,8 +11,15 @@ const DAYS_MAP: Record<string, number> = {
   'sab': 6,
 };
 
+export function formatLocalDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 export function generateTrailForUser(user: UserProfile): StudyTrail {
-  const now = new Date();
+  const now = user.createdAt ? new Date(user.createdAt) : new Date();
   const examDate = new Date(user.examDate);
 
   // Fallback if exam date is invalid or in the past
@@ -44,7 +51,6 @@ export function generateTrailForUser(user: UserProfile): StudyTrail {
   // Total topics available
   const items: TrailItem[] = [];
   let topicIndex = 0;
-  let currentDate = new Date(now);
 
   // Move to next available study day
   for (let week = 1; week <= totalWeeks; week++) {
@@ -90,7 +96,7 @@ export function generateTrailForUser(user: UserProfile): StudyTrail {
             id: `item-w${week}-${dayName}-${topicIndex}`,
             weekNumber: week,
             dayOfWeek: dayName,
-            date: studyDate.toISOString().split('T')[0],
+            date: formatLocalDate(studyDate),
             topic: topicForTrail,
             isRevisionOnly: isRevision,
             status: 'PENDENTE',

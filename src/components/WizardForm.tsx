@@ -114,7 +114,8 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
           availableDays,
           difficulties,
           studiedTopicIds,
-          isSubscribed: false
+          isSubscribed: false,
+          createdAt: new Date().toISOString()
         };
         onSubmit(profile);
       }

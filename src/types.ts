@@ -24,6 +24,7 @@ export interface UserProfile {
   subscriptionPlan?: 'mensal' | 'anual';
   subscriptionDate?: string;
   magicLinkSent?: boolean;
+  createdAt?: string;
 }
 
 export interface ResourceItem {
