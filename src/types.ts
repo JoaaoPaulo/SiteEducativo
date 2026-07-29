@@ -26,21 +26,20 @@ export interface UserProfile {
   magicLinkSent?: boolean;
   createdAt?: string;
   
-  // Novos campos do questionário estendido
-  objetivo?: string; 
+  // Novos campos do questionário ENEM
   curso?: string;
-  notaAlvo?: string;
-  tempoEstudoDia?: string;
-  nivelInicial?: string;
+  universidadeSonho?: string;
   prestouAntes?: boolean;
-  notaAnterior?: string;
+  mediaAproximada?: string;
+  notaAlvoNumero?: number;
+  diasSemanaEstudo?: number;
+  horasEstudoDia?: string;
   materiasDificuldade?: string[];
-  materiasDominio?: string[];
   trabalha?: boolean;
-  periodoEstudo?: string;
+  periodoEstudoOrTrabalho?: string;
+  procrastina?: string;
   preferenciaAprendizado?: string[];
-  cumpreCronograma?: string;
-  maiorDesafio?: string;
+  tempoFoco?: string;
 }
 
 export interface ResourceItem {
