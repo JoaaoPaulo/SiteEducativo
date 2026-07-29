@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserProfile } from '../types';
-import { Compass, Sparkles, User, Lock, Calendar, Mail, ShieldCheck } from 'lucide-react';
+import { GraduationCap, Sparkles, User, Lock, Calendar, Mail, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   user: UserProfile | null;
@@ -29,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           className="flex cursor-pointer items-center gap-2.5 group"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-700 text-white font-bold shadow-xs group-hover:bg-teal-800 transition-colors">
-            <Compass className="h-5 w-5 stroke-[2.5]" />
+            <GraduationCap className="h-5 w-5 stroke-[2.5]" />
           </div>
           <div>
             <div className="flex items-center gap-2">

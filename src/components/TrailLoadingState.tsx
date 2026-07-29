@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Sparkles, Compass, CheckCircle2 } from 'lucide-react';
+import { Sparkles, GraduationCap, CheckCircle2 } from 'lucide-react';
 
 interface TrailLoadingStateProps {
   onFinished: () => void;
@@ -42,7 +42,7 @@ export const TrailLoadingState: React.FC<TrailLoadingStateProps> = ({ onFinished
         {/* Animated Icon */}
         <div className="relative inline-block">
           <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-teal-700 text-white font-bold shadow-md mx-auto">
-            <Compass className="h-10 w-10 animate-spin-slow stroke-[2]" />
+            <GraduationCap className="h-10 w-10 animate-pulse stroke-[2]" />
           </div>
         </div>
 
