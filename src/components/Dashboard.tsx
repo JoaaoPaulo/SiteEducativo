@@ -346,7 +346,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       <button
                         key={`${dateStr}-${idx}`}
                         onClick={() => setSelectedDate(dateStr)}
-                        className={`min-h-[64px] flex flex-col justify-between p-1.5 rounded-2xl border transition-all text-left relative group cursor-pointer ${
+                        className={`aspect-square sm:aspect-auto sm:min-h-[44px] flex flex-col justify-between p-1.5 rounded-xl border transition-all text-left relative group cursor-pointer ${
                           isSelected
                             ? 'bg-teal-50 border-teal-400 text-teal-950 font-black shadow-xs ring-1 ring-teal-400/30'
                             : isCurrentMonth
@@ -375,17 +375,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
                           )}
                         </div>
 
-                        {/* Summary preview on Desktop */}
+                        {/* Minimal Indicator (replaces cluttered text preview) */}
                         {dayItems.length > 0 && (
-                          <div className="hidden sm:block mt-1 text-[9px] font-medium leading-tight truncate w-full text-slate-500 group-hover:text-slate-800">
-                            {dayItems.map(item => item.topic.topic).join(', ')}
-                          </div>
-                        )}
-                        
-                        {/* Day indicator for mobile */}
-                        {dayItems.length > 0 && (
-                          <div className="text-[8px] font-bold text-teal-800 uppercase tracking-widest sm:hidden">
-                            {dayItems.length} mat.
+                          <div className="mt-1 flex items-center gap-1">
+                            <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">
+                              {dayItems.length} {dayItems.length === 1 ? 'mat.' : 'mat.'}
+                            </span>
                           </div>
                         )}
                       </button>
