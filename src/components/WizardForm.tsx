@@ -75,9 +75,15 @@ const UNIVERSIDADE_SUGGESTIONS = [
 
 const DIFICULDADES_LIST = [
   'Matemática',
-  'Linguagens',
-  'Ciências Humanas',
-  'Ciências da Natureza',
+  'Física',
+  'Química',
+  'Biologia',
+  'História',
+  'Geografia',
+  'Filosofia & Sociologia',
+  'Gramática & Literatura',
+  'Inglês / Espanhol',
+  'Artes & Educação Física',
   'Redação'
 ];
 
@@ -137,9 +143,15 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
 
     const areaMapping: Record<string, SubjectArea> = {
       'Matemática': 'Matemática',
-      'Ciências da Natureza': 'Ciências da Natureza',
-      'Ciências Humanas': 'Ciências Humanas',
-      'Linguagens': 'Linguagens e Códigos',
+      'Física': 'Ciências da Natureza',
+      'Química': 'Ciências da Natureza',
+      'Biologia': 'Ciências da Natureza',
+      'História': 'Ciências Humanas',
+      'Geografia': 'Ciências Humanas',
+      'Filosofia & Sociologia': 'Ciências Humanas',
+      'Gramática & Literatura': 'Linguagens e Códigos',
+      'Inglês / Espanhol': 'Linguagens e Códigos',
+      'Artes & Educação Física': 'Linguagens e Códigos',
       'Redação': 'Redação Nota 1000'
     };
 
@@ -151,11 +163,13 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
       }
     });
 
-    // Mark non-selected as Domino Bem
+    // Mark non-selected as Domino Bem if not already marked as Preciso de Muita Ajuda
     Object.keys(areaMapping).forEach(subj => {
-      if (!materiasDificuldade.includes(subj)) {
-        const area = areaMapping[subj];
-        if (area && result[area] !== 'Preciso de Muita Ajuda') {
+      const area = areaMapping[subj];
+      if (area && result[area] !== 'Preciso de Muita Ajuda') {
+        const siblings = Object.keys(areaMapping).filter(k => areaMapping[k] === area);
+        const hasAnyDifficultyInArea = siblings.some(sib => materiasDificuldade.includes(sib));
+        if (!hasAnyDifficultyInArea) {
           result[area] = 'Domino Bem';
         }
       }
@@ -210,7 +224,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
         break;
       case 8:
         if (materiasDificuldade.length === 0) { setErrors('Selecione pelo menos 1 matéria.'); return false; }
-        if (materiasDificuldade.length > 3) { setErrors('Selecione no máximo 3 matérias.'); return false; }
+        if (materiasDificuldade.length > 4) { setErrors('Selecione no máximo 4 matérias.'); return false; }
         break;
       case 9:
         if (trabalha === null) { setErrors('Responda se você trabalha atualmente.'); return false; }
@@ -323,10 +337,10 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
     if (materiasDificuldade.includes(subj)) {
       setMateriasDificuldade(materiasDificuldade.filter(s => s !== subj));
     } else {
-      if (materiasDificuldade.length < 3) {
+      if (materiasDificuldade.length < 4) {
         setMateriasDificuldade([...materiasDificuldade, subj]);
       } else {
-        setErrors('Você pode selecionar no máximo 3 matérias.');
+        setErrors('Você pode selecionar no máximo 4 matérias.');
       }
     }
   };
@@ -741,7 +755,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
                   <div className="space-y-4">
                     <div>
                       <h3 className="text-base sm:text-lg font-black text-slate-900">Quais matérias você sente mais dificuldade?</h3>
-                      <p className="text-xs text-slate-500 mt-1">Selecione até 3 áreas abaixo.</p>
+                      <p className="text-xs text-slate-500 mt-1">Selecione até 4 matérias abaixo.</p>
                     </div>
                     <div className="grid gap-2">
                       {DIFICULDADES_LIST.map(subj => {
