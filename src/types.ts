@@ -25,6 +25,22 @@ export interface UserProfile {
   subscriptionDate?: string;
   magicLinkSent?: boolean;
   createdAt?: string;
+  
+  // Novos campos do questionário estendido
+  objetivo?: string; 
+  curso?: string;
+  notaAlvo?: string;
+  tempoEstudoDia?: string;
+  nivelInicial?: string;
+  prestouAntes?: boolean;
+  notaAnterior?: string;
+  materiasDificuldade?: string[];
+  materiasDominio?: string[];
+  trabalha?: boolean;
+  periodoEstudo?: string;
+  preferenciaAprendizado?: string[];
+  cumpreCronograma?: string;
+  maiorDesafio?: string;
 }
 
 export interface ResourceItem {

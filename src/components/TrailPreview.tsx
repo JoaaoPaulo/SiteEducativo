@@ -19,6 +19,22 @@ export const TrailPreview: React.FC<TrailPreviewProps> = ({
   const week1Items = trail.items.filter(item => item.weekNumber === 1);
   const [activeItem, setActiveItem] = useState<TrailItem | null>(week1Items[0] || null);
 
+  // Agrupar itens da semana por dia
+  const groupedDays = week1Items.reduce((acc, item) => {
+    const key = item.date;
+    if (!acc[key]) {
+      acc[key] = {
+        date: item.date,
+        dayOfWeek: item.dayOfWeek,
+        items: []
+      };
+    }
+    acc[key].items.push(item);
+    return acc;
+  }, {} as Record<string, { date: string; dayOfWeek: string; items: TrailItem[] }>);
+
+  const sortedDays = (Object.values(groupedDays) as Array<{ date: string; dayOfWeek: string; items: TrailItem[] }>).sort((a, b) => a.date.localeCompare(b.date));
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 pb-20">
       
@@ -48,14 +64,11 @@ export const TrailPreview: React.FC<TrailPreviewProps> = ({
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 mt-2">
               Olá, {user.name}! Aqui está sua Semana 1 de estudos
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1">
-              Aproveite os recursos da Semana 1 gratuitamente. Para desbloquear o restante do cronograma e o acompanhamento adaptativo com reordenação dinâmica, ative seu plano Pro.
-            </p>
           </div>
 
           <button
             onClick={onSubscribe}
-            className="flex items-center justify-center gap-2 rounded-2xl bg-teal-700 hover:bg-teal-800 px-6 py-3.5 text-sm font-bold text-white shadow-xs transition-all shrink-0"
+            className="flex items-center gap-2 rounded-2xl bg-teal-700 hover:bg-teal-800 px-5 py-3 text-sm font-bold text-white shadow-xs transition-all shrink-0"
           >
             <Sparkles className="h-4 w-4" />
             <span>Desbloquear Trilha Completa por R$ 29,90/mês</span>
@@ -79,66 +92,75 @@ export const TrailPreview: React.FC<TrailPreviewProps> = ({
             </span>
           </div>
 
-          <div className="space-y-3">
-            {week1Items.map((item) => {
-              const isSelected = activeItem?.id === item.id;
-              return (
-                <div
-                  key={item.id}
-                  onClick={() => setActiveItem(item)}
-                  className={`cursor-pointer rounded-2xl border p-4 transition-all ${
-                    isSelected
-                      ? 'border-teal-700 bg-teal-50/60 shadow-xs'
-                      : 'border-slate-200 bg-white hover:border-slate-300'
-                  }`}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <div className="flex items-center gap-2 text-xs mb-1">
-                        <span className="font-bold text-teal-800 uppercase tracking-wider text-[11px]">
-                          {formatDayFull(item.dayOfWeek)}
-                        </span>
-                        <span className="text-slate-300">•</span>
-                        <span className="text-slate-500 font-medium">{item.topic.area}</span>
-                        {item.isRevisionOnly && (
-                          <span className="rounded bg-teal-100 border border-teal-300 text-teal-900 text-[10px] px-2 py-0.5 font-bold">
-                            🎯 Exercícios de Revisão
-                          </span>
-                        )}
-                        {item.topic.weight === 'ALTA' && (
-                          <span className="rounded bg-rose-50 border border-rose-200 text-rose-800 text-[10px] px-1.5 font-bold">
-                            Alta Incidência
-                          </span>
-                        )}
-                      </div>
-
-                      <h3 className="font-bold text-slate-900 text-base">{item.topic.topic}</h3>
-                      <p className="text-xs text-slate-600 mt-0.5">{item.topic.subtopic}</p>
-                    </div>
-
-                    <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${
-                      item.status === 'CONCLUIDO' 
-                        ? 'bg-emerald-50 text-emerald-800 border-emerald-200' 
-                        : item.status === 'PARCIAL'
-                        ? 'bg-amber-50 text-amber-800 border-amber-200'
-                        : 'bg-slate-100 text-slate-600 border-slate-200'
-                    }`}>
-                      {item.status}
-                    </span>
-                  </div>
-
-                  {/* Resource Chips */}
-                  <div className="mt-3 flex flex-wrap gap-2 pt-2 border-t border-slate-100">
-                    {item.topic.resources.map(res => (
-                      <span key={res.id} className="inline-flex items-center gap-1 rounded-md bg-slate-50 px-2.5 py-1 text-[11px] text-slate-700 border border-slate-200 font-medium">
-                        {res.type === 'video' ? <PlayCircle className="h-3 w-3 text-rose-600" /> : <FileText className="h-3 w-3 text-teal-700" />}
-                        <span>{res.title}</span>
-                      </span>
-                    ))}
-                  </div>
+          <div className="space-y-4">
+            {sortedDays.map((dayGroup) => (
+              <div key={dayGroup.date} className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 space-y-3 shadow-2xs">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                  <h3 className="font-extrabold text-teal-800 text-sm sm:text-base uppercase tracking-wider">
+                    {formatDayFull(dayGroup.dayOfWeek)}
+                  </h3>
+                  <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                    {dayGroup.items.length} {dayGroup.items.length === 1 ? 'matéria' : 'matérias'}
+                  </span>
                 </div>
-              );
-            })}
+                <div className="space-y-2.5">
+                  {dayGroup.items.map((item) => {
+                    const isSelected = activeItem?.id === item.id;
+                    return (
+                      <div
+                        key={item.id}
+                        onClick={() => setActiveItem(item)}
+                        className={`cursor-pointer rounded-xl border p-4 transition-all ${
+                          isSelected
+                            ? 'border-teal-700 bg-teal-50/40 shadow-xs font-semibold'
+                            : 'border-slate-100 bg-slate-50/40 hover:border-slate-200 text-slate-700'
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <div className="flex items-center gap-2 text-xs mb-1 flex-wrap">
+                              <span className="font-bold text-teal-700">{item.topic.area}</span>
+                              {item.isRevisionOnly && (
+                                <span className="rounded bg-teal-100 border border-teal-200 text-teal-900 text-[10px] px-1.5 py-0.2 font-bold">
+                                  Revisão
+                                </span>
+                              )}
+                              {item.topic.weight === 'ALTA' && (
+                                <span className="rounded bg-rose-50 border border-rose-200 text-rose-800 text-[10px] px-1.5 py-0.2 font-bold">
+                                  Alta Incidência
+                                </span>
+                              )}
+                            </div>
+                            <h4 className="font-bold text-slate-900 text-sm sm:text-base">{item.topic.topic}</h4>
+                            <p className="text-xs text-slate-500 mt-0.5">{item.topic.subtopic}</p>
+                          </div>
+
+                          <span className={`text-[9px] font-bold px-2 py-0.5 rounded border ${
+                            item.status === 'CONCLUIDO' 
+                              ? 'bg-emerald-50 text-emerald-800 border-emerald-200' 
+                              : item.status === 'PARCIAL'
+                              ? 'bg-amber-50 text-amber-800 border-amber-200'
+                              : 'bg-slate-100 text-slate-600 border-slate-200'
+                          }`}>
+                            {item.status}
+                          </span>
+                        </div>
+
+                        {/* Resource Chips */}
+                        <div className="mt-3 flex flex-wrap gap-1.5 pt-2 border-t border-slate-100">
+                          {item.topic.resources.map(res => (
+                            <span key={res.id} className="inline-flex items-center gap-1 rounded-md bg-white px-2 py-0.5 text-[10px] text-slate-600 border border-slate-200 font-medium">
+                              {res.type === 'video' ? <PlayCircle className="h-3 w-3 text-rose-500" /> : <FileText className="h-3 w-3 text-teal-600" />}
+                              <span>{res.title}</span>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
 
         </div>
