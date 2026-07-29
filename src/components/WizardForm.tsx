@@ -5,7 +5,6 @@ import {
   ArrowLeft, 
   Check, 
   Sparkles, 
-  Calendar as CalendarIcon, 
   ShieldCheck, 
   Target, 
   Clock, 
@@ -14,14 +13,10 @@ import {
   Award,
   ChevronRight,
   BookOpen,
-  HelpCircle,
-  PlayCircle,
-  FileText,
   Search,
   GraduationCap,
-  CheckSquare,
-  Square,
-  AlertCircle
+  AlertCircle,
+  Phone
 } from 'lucide-react';
 
 interface WizardFormProps {
@@ -36,15 +31,45 @@ const CURSO_SUGGESTIONS = [
   'Engenharia Civil',
   'Psicologia',
   'Administração',
+  'Biomedicina',
+  'Odontologia',
+  'Medicina Veterinária',
+  'Arquitetura e Urbanismo',
+  'Ciência da Computação',
+  'Enfermagem',
+  'Fisioterapia',
+  'Nutrição',
+  'Publicidade e Propaganda',
+  'Relações Internacionais',
+  'Ciências Contábeis',
+  'Engenharia Mecânica',
+  'Engenharia de Produção',
+  'Design Gráfico',
+  'Letras',
+  'Pedagogia',
   'Outro'
 ];
 
 const UNIVERSIDADE_SUGGESTIONS = [
   'USP',
+  'UNICAMP',
+  'UNESP',
   'UFMG',
-  'UFPR',
-  'UEM',
   'UFRJ',
+  'UFPR',
+  'UFSC',
+  'UFRGS',
+  'UEM',
+  'UEL',
+  'UFSCar',
+  'UNIFESP',
+  'UFRN',
+  'UFC',
+  'UnB',
+  'PUC-SP',
+  'PUC-PR',
+  'FGV',
+  'Mackenzie',
   'Não sei ainda'
 ];
 
@@ -56,8 +81,18 @@ const DIFICULDADES_LIST = [
   'Redação'
 ];
 
+const DIAS_DA_SEMANA = [
+  { id: 'seg', label: 'Segunda-feira' },
+  { id: 'ter', label: 'Terça-feira' },
+  { id: 'qua', label: 'Quarta-feira' },
+  { id: 'qui', label: 'Quinta-feira' },
+  { id: 'sex', label: 'Sexta-feira' },
+  { id: 'sab', label: 'Sábado' },
+  { id: 'dom', label: 'Domingo' }
+];
+
 export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) => {
-  // Navigation state (1 to 15)
+  // Navigation state (1 to 16)
   const [qIndex, setQIndex] = useState<number>(1);
   const [showSummary, setShowSummary] = useState<boolean>(false);
   const [errors, setErrors] = useState<string>('');
@@ -69,7 +104,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
   const [prestouAntes, setPrestouAntes] = useState<boolean | null>(null); // Q3
   const [mediaAproximada, setMediaAproximada] = useState(''); // Q4
   const [notaAlvoNumero, setNotaAlvoNumero] = useState(''); // Q5
-  const [diasSemanaEstudo, setDiasSemanaEstudo] = useState<number | null>(null); // Q6
+  const [availableDays, setAvailableDays] = useState<string[]>([]); // Q6 (specific days checklist!)
   const [horasEstudoDia, setHorasEstudoDia] = useState(''); // Q7
   const [materiasDificuldade, setMateriasDificuldade] = useState<string[]>([]); // Q8
   const [trabalha, setTrabalha] = useState<boolean | null>(null); // Q9
@@ -79,6 +114,16 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
   const [tempoFoco, setTempoFoco] = useState(''); // Q13
   const [name, setName] = useState(''); // Q14
   const [email, setEmail] = useState(''); // Q15
+  const [phone, setPhone] = useState(''); // Q16
+
+  // Formatar celular no padrão brasileiro: (XX) 9XXXX-XXXX
+  const formatPhoneNumber = (value: string) => {
+    const clean = value.replace(/\D/g, '');
+    if (clean.length <= 2) return clean;
+    if (clean.length <= 6) return `(${clean.slice(0, 2)}) ${clean.slice(2)}`;
+    if (clean.length <= 10) return `(${clean.slice(0, 2)}) ${clean.slice(2, 6)}-${clean.slice(6)}`;
+    return `(${clean.slice(0, 2)}) ${clean.slice(2, 7)}-${clean.slice(7, 11)}`;
+  };
 
   // Map school subject selections to SubjectArea -> SubjectDifficulty
   const mapSubjectDifficulties = (): Record<SubjectArea, SubjectDifficulty> => {
@@ -106,7 +151,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
       }
     });
 
-    // Mark non-selected as Domino Bem (if they are not difficulties, they are strengths)
+    // Mark non-selected as Domino Bem
     Object.keys(areaMapping).forEach(subj => {
       if (!materiasDificuldade.includes(subj)) {
         const area = areaMapping[subj];
@@ -119,13 +164,6 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
     return result;
   };
 
-  // Convert diasSemanaEstudo number to short availableDays array
-  const getAvailableDaysArray = (): string[] => {
-    const days = diasSemanaEstudo || 5;
-    const map = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom'];
-    return map.slice(0, days);
-  };
-
   // Calculate hoursPerWeek based on study hours/day and days/week
   const calculateHoursPerWeek = (): number => {
     let hoursPerDay = 3;
@@ -136,7 +174,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
     else if (horasEstudoDia === '5h+') hoursPerDay = 5;
     else if (horasEstudoDia === 'Varia bastante') hoursPerDay = 3;
 
-    const days = diasSemanaEstudo || 5;
+    const days = availableDays.length || 5;
     return Math.max(4, hoursPerDay * days);
   };
 
@@ -165,7 +203,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
         }
         break;
       case 6:
-        if (diasSemanaEstudo === null) { setErrors('Selecione quantos dias por semana você pode estudar.'); return false; }
+        if (availableDays.length === 0) { setErrors('Selecione pelo menos 1 dia da semana para estudar.'); return false; }
         break;
       case 7:
         if (!horasEstudoDia) { setErrors('Selecione as horas de estudo por dia.'); return false; }
@@ -195,6 +233,11 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
       case 15:
         if (!email.trim() || !email.includes('@')) { setErrors('Por favor, digite um e-mail de acesso válido.'); return false; }
         break;
+      case 16:
+        const cleanPhone = phone.replace(/\D/g, '');
+        if (!phone.trim()) { setErrors('Por favor, informe seu número de celular.'); return false; }
+        if (cleanPhone.length < 10) { setErrors('Por favor, informe um número de celular válido com DDD.'); return false; }
+        break;
     }
     return true;
   };
@@ -202,12 +245,10 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
   const handleNext = () => {
     if (validateCurrentQuestion()) {
       if (qIndex === 3 && prestouAntes === false) {
-        // Skip question 4 if they haven't taken the ENEM before
         setQIndex(5);
-      } else if (qIndex < 15) {
+      } else if (qIndex < 16) {
         setQIndex(prev => prev + 1);
       } else {
-        // Show study profile summary screen
         setShowSummary(true);
       }
     }
@@ -216,7 +257,6 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
   const handleBack = () => {
     setErrors('');
     if (qIndex === 5 && prestouAntes === false) {
-      // Go back to 3 instead of 4 if skipped
       setQIndex(3);
     } else if (qIndex > 1) {
       setQIndex(prev => prev - 1);
@@ -230,34 +270,35 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
       id: `user-${Date.now()}`,
       name: name.trim(),
       email: email.trim().toLowerCase(),
-      examDate: '2026-11-08', // Default to next official ENEM date
+      examDate: '2026-11-08',
       hoursPerWeek: calculateHoursPerWeek(),
-      availableDays: getAvailableDaysArray(),
+      availableDays: availableDays,
       difficulties: mapSubjectDifficulties(),
       studiedTopicIds: [],
       isSubscribed: false,
       createdAt: new Date().toISOString(),
 
-      // Save custom fields
+      // Custom fields
       curso,
       universidadeSonho,
       prestouAntes: !!prestouAntes,
       mediaAproximada,
       notaAlvoNumero: Number(notaAlvoNumero),
-      diasSemanaEstudo: diasSemanaEstudo || 5,
+      diasSemanaEstudo: availableDays.length,
       horasEstudoDia,
       materiasDificuldade,
       trabalha: !!trabalha,
       periodoEstudoOrTrabalho,
       procrastina,
       preferenciaAprendizado,
-      tempoFoco
+      tempoFoco,
+      phone: phone.trim()
     };
 
     onSubmit(profile);
   };
 
-  // Handlers for lists
+  // List Handlers
   const handleCursoChange = (value: string) => {
     setCurso(value);
     if (value.trim().length > 1) {
@@ -267,6 +308,14 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
       setCursoSuggestions(filtered);
     } else {
       setCursoSuggestions([]);
+    }
+  };
+
+  const toggleDayAvailability = (dayId: string) => {
+    if (availableDays.includes(dayId)) {
+      setAvailableDays(availableDays.filter(d => d !== dayId));
+    } else {
+      setAvailableDays([...availableDays, dayId]);
     }
   };
 
@@ -290,7 +339,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
     }
   };
 
-  // Get Etapa name and icon based on QIndex
+  // Get Etapa based on QIndex
   const getEtapaHeader = () => {
     if (qIndex <= 2) return { name: 'Etapa 1 — Objetivo', icon: <Target className="h-4 w-4 text-teal-600" /> };
     if (qIndex <= 5) return { name: 'Etapa 2 — Situação Atual', icon: <Award className="h-4 w-4 text-teal-600" /> };
@@ -303,13 +352,11 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
 
   const currentEtapa = getEtapaHeader();
 
-  // Helper to find strengths (best subjects)
   const getMelhorMateria = (): string => {
     const strengths = DIFICULDADES_LIST.filter(x => !materiasDificuldade.includes(x));
     return strengths[0] || 'Redação';
   };
 
-  // Helper to find initial priorities
   const getPrioridadeInicial = (): string[] => {
     const list = [...materiasDificuldade];
     if (list.length < 3) {
@@ -332,7 +379,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
           <div className="flex items-center justify-between mb-6">
             <button
               onClick={handleBack}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors animate-fade-in"
             >
               <ArrowLeft className="h-4 w-4" />
               <span>{qIndex === 1 ? 'Voltar' : 'Anterior'}</span>
@@ -345,8 +392,8 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
               </span>
             </div>
 
-            <span className="text-[11px] font-bold font-mono text-teal-800 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-100">
-              Q{qIndex}/15
+            <span className="text-[11px] font-bold font-mono text-teal-800 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-100 animate-scale-in">
+              Q{qIndex}/16
             </span>
           </div>
         )}
@@ -356,7 +403,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
           <div className="w-full h-1.5 bg-slate-200 rounded-full mb-8 overflow-hidden">
             <div 
               className="h-full bg-teal-600 transition-all duration-300 ease-out"
-              style={{ width: `${(qIndex / 15) * 100}%` }}
+              style={{ width: `${(qIndex / 16) * 100}%` }}
             />
           </div>
         )}
@@ -411,6 +458,12 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
                         {universidadeSonho}
                       </p>
                     </div>
+                    <div className="space-y-0.5 col-span-2 border-t border-slate-100 pt-2">
+                      <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">📱 Contato cadastrado</p>
+                      <p className="text-sm font-extrabold text-slate-900">
+                        {phone}
+                      </p>
+                    </div>
                   </div>
 
                   <div className="border-t border-slate-200 pt-3 grid gap-3 text-xs">
@@ -459,7 +512,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
                 </div>
               </motion.div>
             ) : (
-              // 15 STEP QUESTIONS
+              // 16 STEP QUESTIONS
               <motion.div
                 key={qIndex}
                 initial={{ opacity: 0, x: 25 }}
@@ -471,7 +524,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
                 
                 {/* Q1: Curso */}
                 {qIndex === 1 && (
-                  <div className="space-y-4">
+                  <div className="space-y-4 animate-fade-in">
                     <div>
                       <h3 className="text-base sm:text-lg font-black text-slate-900">Qual curso você quer passar?</h3>
                       <p className="text-xs text-slate-500 mt-1">Escreva ou selecione uma carreira dos exemplos abaixo.</p>
@@ -487,16 +540,16 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
                       />
                     </div>
                     
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-1.5 max-h-[140px] overflow-y-auto pr-1 border border-slate-100 p-2 rounded-lg bg-slate-50/30">
                       {CURSO_SUGGESTIONS.map(s => (
                         <button
                           key={s}
                           type="button"
                           onClick={() => { setCurso(s); setCursoSuggestions([]); setQIndex(2); }}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-all ${
+                          className={`px-2.5 py-1 rounded-lg text-xs font-bold border transition-all ${
                             curso === s
                               ? 'bg-teal-700 text-white border-teal-700'
-                              : 'bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300'
+                              : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
                           }`}
                         >
                           {s}
@@ -513,16 +566,16 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
                       <h3 className="text-base sm:text-lg font-black text-slate-900">Qual universidade você sonha em estudar?</h3>
                       <p className="text-xs text-slate-500 mt-1">Isso nos ajuda a impulsionar seu foco.</p>
                     </div>
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 gap-1.5 max-h-[170px] overflow-y-auto p-2 border border-slate-100 rounded-lg bg-slate-50/30">
                       {UNIVERSIDADE_SUGGESTIONS.map(opt => (
                         <button
                           key={opt}
                           type="button"
                           onClick={() => { setUniversidadeSonho(opt); setQIndex(3); }}
-                          className={`p-3.5 rounded-xl border text-xs font-bold text-left transition-all ${
+                          className={`p-2.5 rounded-xl border text-xs font-bold text-left transition-all ${
                             universidadeSonho === opt
                               ? 'border-teal-700 bg-teal-50/80 text-teal-900 font-black'
-                              : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 font-semibold'
+                              : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 font-semibold'
                           }`}
                         >
                           {opt}
@@ -622,28 +675,36 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
                   </div>
                 )}
 
-                {/* Q6: Dias de Estudo */}
+                {/* Q6: Dias da Semana Disponíveis (CHECKBOX LIST ESPECÍFICO) */}
                 {qIndex === 6 && (
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-base sm:text-lg font-black text-slate-900">Quantos dias por semana você consegue estudar?</h3>
-                      <p className="text-xs text-slate-500 mt-1">Frequência semanal dedicada aos estudos.</p>
+                      <h3 className="text-base sm:text-lg font-black text-slate-900">Em quais dias da semana você tem disponibilidade?</h3>
+                      <p className="text-xs text-slate-500 mt-1">Selecione os dias específicos para montarmos seu calendário.</p>
                     </div>
-                    <div className="grid grid-cols-3 gap-2">
-                      {[2, 3, 4, 5, 6, 7].map(opt => (
-                        <button
-                          key={opt}
-                          type="button"
-                          onClick={() => { setDiasSemanaEstudo(opt); setQIndex(7); }}
-                          className={`p-4 rounded-xl border text-xs font-bold text-center transition-all ${
-                            diasSemanaEstudo === opt
-                              ? 'border-teal-700 bg-teal-50/80 text-teal-900 font-black'
-                              : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 font-semibold'
-                          }`}
-                        >
-                          {opt} dias
-                        </button>
-                      ))}
+                    <div className="grid gap-2">
+                      {DIAS_DA_SEMANA.map(day => {
+                        const isSelected = availableDays.includes(day.id);
+                        return (
+                          <button
+                            key={day.id}
+                            type="button"
+                            onClick={() => toggleDayAvailability(day.id)}
+                            className={`p-3.5 rounded-xl border text-xs font-bold text-left flex items-center justify-between transition-all ${
+                              isSelected
+                                ? 'border-teal-700 bg-teal-50/40 text-teal-900 font-black shadow-2xs'
+                                : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 font-semibold'
+                            }`}
+                          >
+                            <span>{day.label}</span>
+                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-all ${
+                              isSelected ? 'border-teal-700 bg-teal-700 text-white' : 'border-slate-300 bg-white'
+                            }`}>
+                              {isSelected && <Check className="h-3.5 w-3.5 stroke-[3]" />}
+                            </div>
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
@@ -697,11 +758,11 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
                             }`}
                           >
                             <span>{subj}</span>
-                            {isSelected ? (
-                              <CheckSquare className="h-4 w-4 text-rose-600" />
-                            ) : (
-                              <Square className="h-4 w-4 text-slate-300" />
-                            )}
+                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-all ${
+                              isSelected ? 'border-rose-600 bg-rose-600 text-white' : 'border-slate-300 bg-white'
+                            }`}>
+                              {isSelected && <Check className="h-3.5 w-3.5 stroke-[3]" />}
+                            </div>
                           </button>
                         );
                       })}
@@ -812,18 +873,18 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
                             key={opt}
                             type="button"
                             onClick={() => togglePreferenciaAprendizado(opt)}
-                            className={`p-3 rounded-xl border text-xs font-bold text-left flex items-center justify-between transition-all ${
+                            className={`p-3.5 rounded-xl border text-xs font-bold text-left flex items-center justify-between transition-all ${
                               isSelected
                                 ? 'border-teal-700 bg-teal-50/70 text-teal-900 font-black'
                                 : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
                             }`}
                           >
                             <span>{opt}</span>
-                            {isSelected ? (
-                              <CheckSquare className="h-4 w-4 text-teal-700" />
-                            ) : (
-                              <Square className="h-4 w-4 text-slate-300" />
-                            )}
+                            <div className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-all ${
+                              isSelected ? 'border-teal-700 bg-teal-700 text-white' : 'border-slate-300 bg-white'
+                            }`}>
+                              {isSelected && <Check className="h-3.5 w-3.5 stroke-[3]" />}
+                            </div>
                           </button>
                         );
                       })}
@@ -892,6 +953,26 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
                   </div>
                 )}
 
+                {/* Q16: Telefone Celular */}
+                {qIndex === 16 && (
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-base sm:text-lg font-black text-slate-900">Qual é o seu número de celular?</h3>
+                      <p className="text-xs text-slate-500 mt-1">Usado para lembretes de estudo via WhatsApp.</p>
+                    </div>
+                    <div className="relative">
+                      <Phone className="h-4 w-4 text-slate-400 absolute left-3.5 top-3.5" />
+                      <input
+                        type="text"
+                        placeholder="Ex: (11) 98765-4321"
+                        value={phone}
+                        onChange={e => setPhone(formatPhoneNumber(e.target.value))}
+                        className="w-full rounded-xl border border-slate-300 bg-slate-50/50 pl-10 pr-4 py-3 text-sm text-slate-900 focus:border-teal-700 focus:bg-white focus:outline-none focus:ring-1 focus:ring-teal-700 transition-all font-bold"
+                      />
+                    </div>
+                  </div>
+                )}
+
                 {/* ERROR FEEDBACK */}
                 {errors && (
                   <div className="rounded-xl border border-rose-200 bg-rose-50 p-3 flex gap-2 items-center text-xs text-rose-800 font-semibold">
@@ -905,7 +986,7 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
                   <button
                     type="button"
                     onClick={handleBack}
-                    className="text-xs font-bold text-slate-400 hover:text-slate-900 transition-colors cursor-pointer"
+                    className="text-xs font-bold text-slate-400 hover:text-slate-900 transition-colors cursor-pointer font-extrabold"
                   >
                     Voltar
                   </button>

@@ -40,6 +40,7 @@ export interface UserProfile {
   procrastina?: string;
   preferenciaAprendizado?: string[];
   tempoFoco?: string;
+  phone?: string;
 }
 
 export interface ResourceItem {

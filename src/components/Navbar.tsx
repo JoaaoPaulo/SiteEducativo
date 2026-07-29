@@ -28,20 +28,22 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={() => setActiveTab(user?.isSubscribed ? 'dashboard' : 'landing')}
           className="flex cursor-pointer items-center gap-2.5 group"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-700 text-white font-bold shadow-xs group-hover:bg-teal-800 transition-colors">
-            <GraduationCap className="h-5 w-5 stroke-[2.5]" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-950 text-teal-400 font-extrabold shadow-sm border border-slate-800 group-hover:bg-slate-900 transition-all duration-300">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+            </svg>
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-lg tracking-tight text-slate-900">
-                Trilha ENEM
+              <span className="font-black text-xl tracking-tight text-slate-900">
+                trilha<span className="text-teal-700">enem</span>
               </span>
-              <span className="rounded-full bg-teal-50 px-2 py-0.5 text-[10px] font-semibold text-teal-800 border border-teal-200/80">
-                Cronograma Adaptativo
+              <span className="rounded-full bg-slate-50 px-2 py-0.5 text-[9px] font-extrabold text-slate-700 border border-slate-200 uppercase tracking-wider">
+                PRO
               </span>
             </div>
-            <p className="text-[11px] text-slate-500 font-medium hidden sm:block">
-              Acompanhamento Ativo & Replanejamento
+            <p className="text-[10px] text-slate-500 font-bold hidden sm:block">
+              Cronograma Inteligente & Adaptativo
             </p>
           </div>
         </div>

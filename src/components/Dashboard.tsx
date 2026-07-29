@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { UserProfile, StudyTrail, TrailItem, CheckInStatus } from '../types';
 import { formatDayFull, formatLocalDate } from '../utils/trailGenerator';
-import { Calendar as CalendarIcon, CheckCircle2, Clock, AlertCircle, RefreshCw, PlayCircle, FileText, ExternalLink, Sparkles, Flame, BookOpen, ChevronLeft, ChevronRight, XCircle } from 'lucide-react';
+import { Calendar as CalendarIcon, CheckCircle2, Clock, AlertCircle, RefreshCw, PlayCircle, FileText, ExternalLink, Sparkles, Flame, BookOpen, ChevronLeft, ChevronRight, XCircle, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface DashboardProps {
   user: UserProfile;
@@ -83,6 +83,24 @@ export const Dashboard: React.FC<DashboardProps> = ({
   }, {} as Record<string, { date: string; dayOfWeek: string; items: TrailItem[] }>);
 
   const listSortedDays = (Object.values(listGroupedDays) as Array<{ date: string; dayOfWeek: string; items: TrailItem[] }>).sort((a, b) => a.date.localeCompare(b.date));
+
+  // Accordion state for list view
+  const [listExpandedDays, setListExpandedDays] = useState<string[]>([]);
+
+  // Automatically expand days when listSortedDays changes
+  React.useEffect(() => {
+    if (listSortedDays.length > 0) {
+      setListExpandedDays([listSortedDays[0].date]);
+    }
+  }, [selectedWeek, selectedDayFilter]);
+
+  const toggleListDayExpanded = (date: string) => {
+    if (listExpandedDays.includes(date)) {
+      setListExpandedDays(listExpandedDays.filter(d => d !== date));
+    } else {
+      setListExpandedDays([...listExpandedDays, date]);
+    }
+  };
 
   // Check if there are overdue/missed items
   const hasMissedItems = trail.items.some(i => i.status === 'ATRASADO');
@@ -586,8 +604,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 ))}
               </div>
 
-              {/* Scheduled Topic Cards grouped by weekday blocks */}
-              <div className="space-y-6">
+              {/* Scheduled Topic Cards grouped by weekday blocks (Accordion style) */}
+              <div className="space-y-4">
                 {listSortedDays.length === 0 ? (
                   <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center text-slate-500 shadow-2xs">
                     <BookOpen className="h-8 w-8 mx-auto text-slate-400 mb-2" />
@@ -595,144 +613,162 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     <p className="text-xs mt-1">Aproveite para revisar resumos anteriores ou descansar!</p>
                   </div>
                 ) : (
-                  listSortedDays.map(dayGroup => (
-                    <div key={dayGroup.date} className="rounded-2xl border border-slate-200 bg-white p-5 space-y-4 shadow-2xs">
-                      <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                        <h3 className="font-extrabold text-teal-800 text-sm sm:text-base uppercase tracking-wider">
-                          {formatDayFull(dayGroup.dayOfWeek)}
-                        </h3>
-                        <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
-                          {dayGroup.items.length} {dayGroup.items.length === 1 ? 'matéria' : 'matérias'}
-                        </span>
-                      </div>
-                      <div className="space-y-4">
-                        {dayGroup.items.map(item => (
-                          <div
-                            key={item.id}
-                            className={`rounded-xl border p-4 transition-all ${
-                              item.status === 'CONCLUIDO'
-                                ? 'border-teal-300 bg-teal-50/20'
-                                : item.status === 'ATRASADO'
-                                ? 'border-rose-200 bg-rose-50/20'
-                                : 'border-slate-100 bg-slate-50/30'
-                            }`}
-                          >
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-3">
-                              <div>
-                                <div className="flex items-center gap-2 text-xs flex-wrap">
-                                  <span className="font-bold text-teal-800 uppercase tracking-wider text-[11px]">
-                                    {item.topic.area}
-                                  </span>
-                                  {item.isRevisionOnly && (
-                                    <span className="rounded bg-teal-100 border border-teal-200 text-teal-900 text-[10px] px-1.5 py-0.2 font-bold">
-                                      Revisão
-                                    </span>
-                                  )}
-                                  {item.topic.weight === 'ALTA' && (
-                                    <span className="rounded bg-amber-50 border border-amber-200 text-amber-800 text-[10px] px-1.5 py-0.2 font-bold">
-                                      Alta Incidência
-                                    </span>
-                                  )}
-                                  {item.replannedCount && item.replannedCount > 0 ? (
-                                    <span className="rounded bg-teal-100 text-teal-900 text-[10px] px-1.5 py-0.2 font-bold border border-teal-200">
-                                      Reorganizado
-                                    </span>
-                                  ) : null}
-                                </div>
+                  listSortedDays.map(dayGroup => {
+                    const isExpanded = listExpandedDays.includes(dayGroup.date);
+                    return (
+                      <div key={dayGroup.date} className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-2xs">
+                        {/* Accordion Trigger Header */}
+                        <div
+                          onClick={() => toggleListDayExpanded(dayGroup.date)}
+                          className="flex items-center justify-between p-4 sm:p-5 cursor-pointer bg-slate-50/50 hover:bg-slate-50 transition-colors border-b border-slate-100"
+                        >
+                          <div className="flex items-center gap-3">
+                            {isExpanded ? (
+                              <ChevronUp className="h-4.5 w-4.5 text-slate-500 shrink-0" />
+                            ) : (
+                              <ChevronDown className="h-4.5 w-4.5 text-slate-500 shrink-0" />
+                            )}
+                            <h3 className="font-extrabold text-slate-800 text-sm sm:text-base uppercase tracking-wider">
+                              {formatDayFull(dayGroup.dayOfWeek)}
+                            </h3>
+                          </div>
+                          <span className="text-[10px] font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded">
+                            {dayGroup.items.length} {dayGroup.items.length === 1 ? 'matéria' : 'matérias'}
+                          </span>
+                        </div>
 
-                                <h4 className="text-base font-bold text-slate-900 mt-1">{item.topic.topic}</h4>
-                                <p className="text-xs text-slate-500 mt-0.5">{item.topic.subtopic}</p>
-                              </div>
-
-                              {/* Status badge */}
-                              <div className="shrink-0">
-                                <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+                        {/* Accordion Content */}
+                        {isExpanded && (
+                          <div className="p-4 sm:p-5 space-y-4 bg-white animate-fade-in">
+                            {dayGroup.items.map(item => (
+                              <div
+                                key={item.id}
+                                className={`rounded-xl border p-4 transition-all ${
                                   item.status === 'CONCLUIDO'
-                                    ? 'bg-teal-50 text-teal-800 border-teal-200'
-                                    : item.status === 'PARCIAL'
-                                    ? 'bg-amber-50 text-amber-800 border-amber-200'
+                                    ? 'border-teal-300 bg-teal-50/20'
                                     : item.status === 'ATRASADO'
-                                    ? 'bg-rose-50 text-rose-800 border-rose-200'
-                                    : 'bg-slate-100 text-slate-600 border-slate-200'
-                                }`}>
-                                  {item.status === 'CONCLUIDO' && 'Estudado'}
-                                  {item.status === 'PARCIAL' && 'Parcial'}
-                                  {item.status === 'ATRASADO' && 'Atrasado'}
-                                  {item.status === 'PENDENTE' && 'Pendente'}
-                                </span>
-                              </div>
-                            </div>
+                                    ? 'border-rose-200 bg-rose-50/20'
+                                    : 'border-slate-100 bg-slate-50/30'
+                                }`}
+                              >
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-3">
+                                  <div>
+                                    <div className="flex items-center gap-2 text-xs flex-wrap">
+                                      <span className="font-bold text-teal-800 uppercase tracking-wider text-[11px]">
+                                        {item.topic.area}
+                                      </span>
+                                      {item.isRevisionOnly && (
+                                        <span className="rounded bg-teal-100 border border-teal-200 text-teal-900 text-[10px] px-1.5 py-0.2 font-bold">
+                                          Revisão
+                                        </span>
+                                      )}
+                                      {item.topic.weight === 'ALTA' && (
+                                        <span className="rounded bg-amber-50 border border-amber-200 text-amber-800 text-[10px] px-1.5 py-0.2 font-bold">
+                                          Alta Incidência
+                                        </span>
+                                      )}
+                                      {item.replannedCount && item.replannedCount > 0 ? (
+                                        <span className="rounded bg-teal-100 text-teal-900 text-[10px] px-1.5 py-0.2 font-bold border border-teal-200">
+                                          Reorganizado
+                                        </span>
+                                      ) : null}
+                                    </div>
 
-                            {/* Resources Links */}
-                            <div className="grid gap-2 sm:grid-cols-2 mb-4">
-                              {item.topic.resources.map(res => (
-                                <a
-                                  key={res.id}
-                                  href={res.url}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-2.5 text-xs hover:border-teal-300 transition-all group"
-                                >
-                                  <div className="flex items-center gap-2">
-                                    {res.type === 'video' ? <PlayCircle className="h-4 w-4 text-slate-600 shrink-0" /> : <FileText className="h-4 w-4 text-teal-700 shrink-0" />}
-                                    <span className="font-semibold text-slate-700 group-hover:text-teal-900 transition-colors truncate max-w-[180px]">
-                                      {res.title}
+                                    <h4 className="text-base font-bold text-slate-900 mt-1">{item.topic.topic}</h4>
+                                    <p className="text-xs text-slate-500 mt-0.5">{item.topic.subtopic}</p>
+                                  </div>
+
+                                  {/* Status badge */}
+                                  <div className="shrink-0">
+                                    <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+                                      item.status === 'CONCLUIDO'
+                                        ? 'bg-teal-50 text-teal-800 border-teal-200'
+                                        : item.status === 'PARCIAL'
+                                        ? 'bg-amber-50 text-amber-800 border-amber-200'
+                                        : item.status === 'ATRASADO'
+                                        ? 'bg-rose-50 text-rose-800 border-rose-200'
+                                        : 'bg-slate-100 text-slate-600 border-slate-200'
+                                    }`}>
+                                      {item.status === 'CONCLUIDO' && 'Estudado'}
+                                      {item.status === 'PARCIAL' && 'Parcial'}
+                                      {item.status === 'ATRASADO' && 'Atrasado'}
+                                      {item.status === 'PENDENTE' && 'Pendente'}
                                     </span>
                                   </div>
-                                  <ExternalLink className="h-3.5 w-3.5 text-slate-400 group-hover:text-teal-700 shrink-0" />
-                                </a>
-                              ))}
-                            </div>
+                                </div>
 
-                            {/* Interactive Check-in Controls */}
-                            <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-100">
-                              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Registrar Progresso:</span>
-                              <div className="flex items-center gap-1.5">
-                                <button
-                                  onClick={() => onCheckIn(item.id, 'CONCLUIDO')}
-                                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
-                                    item.status === 'CONCLUIDO'
-                                      ? 'bg-teal-700 text-white shadow-2xs'
-                                      : 'bg-slate-100 text-slate-700 hover:bg-teal-50 hover:text-teal-900'
-                                  }`}
-                                >
-                                  <CheckCircle2 className="h-3.5 w-3.5" />
-                                  <span>Estudei</span>
-                                </button>
+                                {/* Resources Links */}
+                                <div className="grid gap-2 sm:grid-cols-2 mb-4">
+                                  {item.topic.resources.map(res => (
+                                    <a
+                                      key={res.id}
+                                      href={res.url}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-2.5 text-xs hover:border-teal-300 transition-all group"
+                                    >
+                                      <div className="flex items-center gap-2">
+                                        {res.type === 'video' ? <PlayCircle className="h-4 w-4 text-slate-600 shrink-0" /> : <FileText className="h-4 w-4 text-teal-700 shrink-0" />}
+                                        <span className="font-semibold text-slate-700 group-hover:text-teal-900 transition-colors truncate max-w-[180px]">
+                                          {res.title}
+                                        </span>
+                                      </div>
+                                      <ExternalLink className="h-3.5 w-3.5 text-slate-400 group-hover:text-teal-700 shrink-0" />
+                                    </a>
+                                  ))}
+                                </div>
 
-                                <button
-                                  onClick={() => onCheckIn(item.id, 'PARCIAL')}
-                                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
-                                    item.status === 'PARCIAL'
-                                      ? 'bg-amber-600 text-white shadow-2xs'
-                                      : 'bg-slate-100 text-slate-700 hover:bg-amber-50 hover:text-amber-900'
-                                  }`}
-                                >
-                                  <Clock className="h-3.5 w-3.5" />
-                                  <span>Parcial</span>
-                                </button>
+                                {/* Interactive Check-in Controls */}
+                                <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-100">
+                                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Registrar Progresso:</span>
+                                  <div className="flex items-center gap-1.5">
+                                    <button
+                                      onClick={() => onCheckIn(item.id, 'CONCLUIDO')}
+                                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
+                                        item.status === 'CONCLUIDO'
+                                          ? 'bg-teal-700 text-white shadow-2xs'
+                                          : 'bg-slate-100 text-slate-700 hover:bg-teal-50 hover:text-teal-900'
+                                      }`}
+                                    >
+                                      <CheckCircle2 className="h-3.5 w-3.5" />
+                                      <span>Estudei</span>
+                                    </button>
 
-                                <button
-                                  onClick={() => {
-                                    onCheckIn(item.id, 'ATRASADO');
-                                    onTriggerAiReplan(item);
-                                  }}
-                                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
-                                    item.status === 'ATRASADO'
-                                      ? 'bg-rose-600 text-white shadow-2xs'
-                                      : 'bg-slate-100 text-slate-700 hover:bg-rose-50 hover:text-rose-900'
-                                  }`}
-                                >
-                                  <XCircle className="h-3.5 w-3.5" />
-                                  <span>Não Consegui</span>
-                                </button>
+                                    <button
+                                      onClick={() => onCheckIn(item.id, 'PARCIAL')}
+                                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
+                                        item.status === 'PARCIAL'
+                                          ? 'bg-amber-600 text-white shadow-2xs'
+                                          : 'bg-slate-100 text-slate-700 hover:bg-amber-50 hover:text-amber-900'
+                                      }`}
+                                    >
+                                      <Clock className="h-3.5 w-3.5" />
+                                      <span>Parcial</span>
+                                    </button>
+
+                                    <button
+                                      onClick={() => {
+                                        onCheckIn(item.id, 'ATRASADO');
+                                        onTriggerAiReplan(item);
+                                      }}
+                                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
+                                        item.status === 'ATRASADO'
+                                          ? 'bg-rose-600 text-white shadow-2xs'
+                                          : 'bg-slate-100 text-slate-700 hover:bg-rose-50 hover:text-rose-900'
+                                      }`}
+                                    >
+                                      <XCircle className="h-3.5 w-3.5" />
+                                      <span>Não Consegui</span>
+                                    </button>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
+                            ))}
                           </div>
-                        ))}
+                        )}
                       </div>
-                    </div>
-                  ))
+                    );
+                  })
                 )}
               </div>
             </div>
