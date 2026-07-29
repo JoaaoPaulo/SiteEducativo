@@ -12,6 +12,7 @@ import { AiReplanModal } from './components/AiReplanModal';
 import { EmailNotificationPreview } from './components/EmailNotificationPreview';
 import { UserProfileModal } from './components/UserProfileModal';
 import { MagicLinkModal } from './components/MagicLinkModal';
+import { EnemTopicsView } from './components/EnemTopicsView';
 
 const USER_STORAGE_KEY = 'trilha_enem_user_v1';
 const TRAIL_STORAGE_KEY = 'trilha_enem_trail_v1';
@@ -35,7 +36,7 @@ export default function App() {
     }
   });
 
-  const [activeTab, setActiveTab] = useState<'landing' | 'wizard' | 'loading' | 'preview' | 'dashboard' | 'checkout'>(() => {
+  const [activeTab, setActiveTab] = useState<'landing' | 'wizard' | 'loading' | 'preview' | 'dashboard' | 'checkout' | 'enem-topics'>(() => {
     if (user && trail) {
       return user.isSubscribed ? 'dashboard' : 'preview';
     }
@@ -181,6 +182,21 @@ export default function App() {
     }
   };
 
+  // Toggle studied status for an ENEM topic
+  const handleToggleStudiedTopic = (topicId: string) => {
+    if (!user) return;
+    const isAlreadyStudied = user.studiedTopicIds?.includes(topicId) ?? false;
+    const updatedStudiedTopicIds = isAlreadyStudied
+      ? user.studiedTopicIds.filter(id => id !== topicId)
+      : [...(user.studiedTopicIds || []), topicId];
+
+    const updatedUser: UserProfile = {
+      ...user,
+      studiedTopicIds: updatedStudiedTopicIds
+    };
+    setUser(updatedUser);
+  };
+
   // Logout
   const handleLogout = () => {
     setUser(null);
@@ -245,6 +261,14 @@ export default function App() {
               onClose={() => setActiveTab(user.isSubscribed ? 'dashboard' : 'preview')}
             />
           </div>
+        )}
+
+        {activeTab === 'enem-topics' && user && (
+          <EnemTopicsView
+            user={user}
+            onToggleStudiedTopic={handleToggleStudiedTopic}
+            onRecalculateTrail={handleRecalculateTrail}
+          />
         )}
       </main>
 

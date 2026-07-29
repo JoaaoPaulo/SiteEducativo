@@ -1,11 +1,11 @@
 import React from 'react';
 import { UserProfile } from '../types';
-import { GraduationCap, Sparkles, User, Lock, Calendar, Mail, ShieldCheck } from 'lucide-react';
+import { GraduationCap, Sparkles, User, Lock, Calendar, Mail, ShieldCheck, BookOpen } from 'lucide-react';
 
 interface NavbarProps {
   user: UserProfile | null;
-  activeTab: 'landing' | 'wizard' | 'preview' | 'dashboard' | 'checkout';
-  setActiveTab: (tab: 'landing' | 'wizard' | 'preview' | 'dashboard' | 'checkout') => void;
+  activeTab: 'landing' | 'wizard' | 'preview' | 'dashboard' | 'checkout' | 'enem-topics';
+  setActiveTab: (tab: 'landing' | 'wizard' | 'preview' | 'dashboard' | 'checkout' | 'enem-topics') => void;
   onOpenProfile: () => void;
   onOpenEmailPreview: () => void;
   onOpenMagicLink: () => void;
@@ -94,6 +94,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className="flex items-center gap-1.5">
                   <Calendar className="h-3.5 w-3.5" />
                   <span>Minha Trilha</span>
+                </span>
+              </button>
+
+              {/* View ENEM Topics */}
+              <button
+                onClick={() => setActiveTab('enem-topics')}
+                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
+                  activeTab === 'enem-topics'
+                    ? 'bg-teal-700 text-white shadow-xs hover:bg-teal-800'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                <span className="flex items-center gap-1.5">
+                  <BookOpen className="h-3.5 w-3.5" />
+                  <span>Conteúdos ENEM</span>
                 </span>
               </button>
 
