@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { UserProfile, StudyTrail, TrailItem } from '../types';
 import { Sparkles, RefreshCw, CheckCircle2, Heart, X, Lightbulb } from 'lucide-react';
+import { replanTrailItems, formatLocalDate } from '../utils/trailGenerator';
 
 interface AiReplanModalProps {
   user: UserProfile;
@@ -76,22 +77,17 @@ export const AiReplanModal: React.FC<AiReplanModalProps> = ({
   }, []);
 
   const handleConfirm = () => {
-    // Redistribute missed items into future pending days
-    const updatedItems = trail.items.map(item => {
-      if (item.status === 'ATRASADO' || (missedItem && item.id === missedItem.id)) {
-        return {
-          ...item,
-          status: 'PENDENTE' as const,
-          replannedCount: (item.replannedCount || 0) + 1
-        };
-      }
-      return item;
-    });
+    const startingFromDate = missedItem?.date || formatLocalDate(new Date());
+    const updatedItems = replanTrailItems(trail.items, user, startingFromDate);
+
+    const completedCount = updatedItems.filter(i => i.status === 'CONCLUIDO').length;
+    const missedCount = updatedItems.filter(i => i.status === 'ATRASADO').length;
 
     const newTrail: StudyTrail = {
       ...trail,
       items: updatedItems,
-      missedCount: 0
+      completedCount,
+      missedCount
     };
 
     onApplyReplan(newTrail);

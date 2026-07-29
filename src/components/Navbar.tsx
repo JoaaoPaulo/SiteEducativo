@@ -25,7 +25,13 @@ export const Navbar: React.FC<NavbarProps> = ({
         
         {/* Logo */}
         <div 
-          onClick={() => setActiveTab(user?.isSubscribed ? 'dashboard' : 'landing')}
+          onClick={() => {
+            if (user) {
+              setActiveTab(user.isSubscribed ? 'dashboard' : 'preview');
+            } else {
+              setActiveTab('landing');
+            }
+          }}
           className="flex cursor-pointer items-center gap-2.5 group"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-950 text-teal-400 font-extrabold shadow-sm border border-slate-800 group-hover:bg-slate-900 transition-all duration-300">

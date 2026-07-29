@@ -19,7 +19,14 @@ export function formatLocalDate(date: Date): string {
 }
 
 export function generateTrailForUser(user: UserProfile): StudyTrail {
-  const now = user.createdAt ? new Date(user.createdAt) : new Date();
+  const today = user.createdAt ? new Date(user.createdAt) : new Date();
+  // Alinhar ao início da semana (segunda-feira) para garantir dias em sequência padrão (Seg a Dom)
+  const dayOfWeek = today.getDay();
+  const diffDays = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+  const now = new Date(today);
+  now.setDate(diffDays);
+  now.setHours(0, 0, 0, 0);
+
   const examDate = new Date(user.examDate);
 
   // Fallback if exam date is invalid or in the past
@@ -154,4 +161,77 @@ export function formatDayFull(shortDay: string): string {
     'dom': 'Domingo'
   };
   return map[shortDay] || shortDay;
+}
+
+export function replanTrailItems(
+  items: TrailItem[],
+  user: UserProfile,
+  startingFromDateStr: string
+): TrailItem[] {
+  const untouchedItems: TrailItem[] = [];
+  const itemsToReschedule: TrailItem[] = [];
+
+  items.forEach(item => {
+    if (item.status === 'CONCLUIDO' || item.status === 'PARCIAL' || item.date < startingFromDateStr) {
+      untouchedItems.push(item);
+    } else {
+      itemsToReschedule.push(item);
+    }
+  });
+
+  if (itemsToReschedule.length === 0) return items;
+
+  const userAvailableDays = user.availableDays.length > 0 ? user.availableDays : ['seg', 'ter', 'qua', 'qui', 'sex'];
+
+  let currentDate = new Date(startingFromDateStr + 'T00:00:00');
+  if (isNaN(currentDate.getTime())) {
+    currentDate = new Date();
+  }
+
+  // Se a data inicial for anterior a hoje, começa a reagendar a partir de hoje
+  const todayStr = formatLocalDate(new Date());
+  if (startingFromDateStr < todayStr) {
+    currentDate = new Date(todayStr + 'T00:00:00');
+  }
+
+  const rescheduledItems = itemsToReschedule.map(item => {
+    while (true) {
+      const dayName = getDayShortName(currentDate.getDay());
+      if (userAvailableDays.includes(dayName)) {
+        break;
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    const newDateStr = formatLocalDate(currentDate);
+    const newDayOfWeek = getDayShortName(currentDate.getDay());
+
+    const updated = {
+      ...item,
+      date: newDateStr,
+      dayOfWeek: newDayOfWeek,
+      status: 'PENDENTE' as const,
+      replannedCount: (item.replannedCount || 0) + 1
+    };
+
+    currentDate.setDate(currentDate.getDate() + 1);
+    return updated;
+  });
+
+  const sortedAll = [...untouchedItems, ...rescheduledItems].sort((a, b) => a.date.localeCompare(b.date));
+
+  if (sortedAll.length === 0) return items;
+
+  const firstItemDate = new Date(sortedAll[0].date + 'T00:00:00');
+
+  return sortedAll.map(item => {
+    const itemDate = new Date(item.date + 'T00:00:00');
+    const diffMs = itemDate.getTime() - firstItemDate.getTime();
+    const diffDays = Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+    const weekNumber = Math.floor(diffDays / 7) + 1;
+    return {
+      ...item,
+      weekNumber
+    };
+  });
 }
