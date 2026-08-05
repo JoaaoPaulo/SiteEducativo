@@ -32,85 +32,100 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-teal-500 selection:text-slate-950 relative overflow-hidden">
       
-      {/* Background Decorative Blur Spheres */}
-      <div className="absolute top-[-10%] left-[20%] w-[600px] h-[600px] rounded-full bg-teal-500/10 blur-[150px] pointer-events-none" />
-      <div className="absolute top-[40%] right-[-10%] w-[500px] h-[500px] rounded-full bg-teal-500/8 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-teal-500/5 blur-[180px] pointer-events-none" />
+      {/* Background Decorative Blur Spheres - reduced opacity to keep it premium and simple */}
+      <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] rounded-full bg-teal-500/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-[40%] right-[-10%] w-[400px] h-[400px] rounded-full bg-teal-500/3 blur-[100px] pointer-events-none" />
 
       {/* HERO SECTION */}
-      <section className="relative pt-20 pb-20 px-4 sm:px-6 lg:px-8 border-b border-slate-900">
-        <div className="mx-auto max-w-5xl text-center relative z-10">
+      <section className="relative pt-16 pb-16 px-4 sm:px-6 lg:px-8 border-b border-slate-900">
+        <div className="mx-auto max-w-4xl relative z-10">
           
-          {/* Badge Social Proof */}
+          {/* Main Headline */}
+          <div className="text-center mb-10">
+            <motion.h1 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl font-extrabold tracking-tight sm:text-5xl text-white leading-tight"
+            >
+              Passe no ENEM estudando <span className="text-teal-400">exatamente o que você precisa.</span>
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-medium"
+            >
+              Nossa IA cria um plano personalizado baseado no seu curso, tempo disponível e nível atual.
+            </motion.p>
+          </div>
+
+          {/* Clean 3-Part Answer Grid (O que é? Para quem é? Por que é melhor?) */}
+          <div className="grid gap-6 md:grid-cols-3 mb-10">
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="glass p-5 rounded-2xl border-slate-800 bg-slate-900/30 text-left"
+            >
+              <div className="flex items-center gap-2 mb-2 text-teal-400">
+                <Sparkles className="h-4 w-4" />
+                <span className="text-xs font-bold uppercase tracking-widest block">O que é?</span>
+              </div>
+              <h3 className="font-extrabold text-sm text-white mb-1.5">Cronograma Inteligente</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Um guia de estudos dinâmico que diz exatamente o que revisar e exercitar a cada dia, cobrindo 100% da matriz do ENEM.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="glass p-5 rounded-2xl border-slate-800 bg-slate-900/30 text-left"
+            >
+              <div className="flex items-center gap-2 mb-2 text-teal-400">
+                <Users className="h-4 w-4" />
+                <span className="text-xs font-bold uppercase tracking-widest block">Para quem é?</span>
+              </div>
+              <h3 className="font-extrabold text-sm text-white mb-1.5">Estudantes Focados</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Para quem quer passar em cursos concorridos (Medicina, Engenharia) e precisa otimizar cada hora disponível.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="glass p-5 rounded-2xl border-slate-800 bg-slate-900/30 text-left"
+            >
+              <div className="flex items-center gap-2 mb-2 text-teal-400">
+                <RefreshCw className="h-4 w-4" />
+                <span className="text-xs font-bold uppercase tracking-widest block">Por que é melhor?</span>
+              </div>
+              <h3 className="font-extrabold text-sm text-white mb-1.5">Replanejamento Ativo</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Se você atrasar um dia, a IA reorganiza a semana automaticamente. Sem acúmulo de matéria, sem culpa e sem ansiedade.
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Primary CTA */}
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full border border-teal-500/35 bg-teal-500/10 px-4 py-1.5 text-xs font-semibold text-teal-300 shadow-lg mb-8 backdrop-blur-md"
-          >
-            <Sparkles className="h-4 w-4 text-teal-400" />
-            <span>Criado por estudantes de Engenharia de Software da USP e UFMG</span>
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl font-black tracking-tight sm:text-6xl lg:text-7xl text-white leading-tight"
-          >
-            Passe no ENEM estudando <br />
-            <span className="bg-gradient-to-r from-teal-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent text-glow">
-              exatamente o que você precisa.
-            </span>
-          </motion.h1>
-
-          {/* Subtitle / For Whom & Why Better */}
-          <motion.p 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-8 text-lg sm:text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto font-medium"
-          >
-            Nossa IA cria um plano personalizado baseado no seu curso, tempo disponível e nível atual. Se você atrasar um dia, o cronograma se adapta ativamente sem acumular matéria.
-          </motion.p>
-
-          {/* Primary CTA (Above the fold) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-center"
           >
             <button
               onClick={onStartWizard}
-              className="w-full sm:w-auto flex items-center justify-center gap-3 rounded-2xl bg-teal-500 hover:bg-teal-400 text-slate-950 px-8 py-5 text-lg font-black shadow-lg shadow-teal-500/20 transform hover:-translate-y-1 transition-all cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 px-8 py-4.5 text-base font-black shadow-lg shadow-teal-500/10 transition-all transform hover:scale-102 cursor-pointer animate-pulse"
             >
-              <Sparkles className="h-5.5 w-5.5" />
+              <Sparkles className="h-5 w-5" />
               <span>Criar meu plano gratuito</span>
-              <ArrowRight className="h-5.5 w-5.5 stroke-[2.5]" />
+              <ArrowRight className="h-5 w-5 stroke-[2.5]" />
             </button>
-          </motion.div>
-
-          {/* Micro Trust Signals */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400 font-medium"
-          >
-            <span className="flex items-center gap-2">
-              <CheckCircle2 className="h-4.5 w-4.5 text-teal-400" />
-              Baseado na matriz oficial do ENEM
-            </span>
-            <span className="flex items-center gap-2">
-              <CheckCircle2 className="h-4.5 w-4.5 text-teal-400" />
-              Cronogramas 100% personalizados
-            </span>
-            <span className="flex items-center gap-2">
-              <CheckCircle2 className="h-4.5 w-4.5 text-teal-400" />
-              Prévia instantânea sem cartão de crédito
-            </span>
           </motion.div>
 
         </div>
