@@ -82,8 +82,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-muted tracking-wider uppercase">
             <a href="#como-funciona" className="hover:text-ink transition-colors cursor-pointer">Como funciona</a>
             <a href="#produto" className="hover:text-ink transition-colors cursor-pointer">STDY</a>
-            <a href="#diferenciais" className="hover:text-ink transition-colors cursor-pointer">Diferenciais</a>
-            <a href="#precos" className="hover:text-ink transition-colors cursor-pointer">Planos</a>
             <a href="#faq" className="hover:text-ink transition-colors cursor-pointer">Dúvidas</a>
           </nav>
         )}

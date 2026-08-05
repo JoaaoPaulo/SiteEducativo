@@ -182,21 +182,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               </div>
             </motion.div>
 
-            {/* Floating Card 2: Reorganização (Bottom Left) */}
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-              className="absolute left-[-90px] bottom-[20%] z-20 hidden lg:flex items-start gap-2.5 bg-white border border-line rounded-[10px] p-3.5 shadow-md text-left max-w-[210px] select-none pointer-events-none will-change-transform transform-gpu"
-            >
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-100 mt-0.5 shrink-0">
-                <RefreshCw className="h-3.5 w-3.5" />
-              </div>
-              <div>
-                <p className="text-[9px] text-muted font-bold uppercase tracking-wider">Ajuste de Ritmo</p>
-                <p className="text-xs font-extrabold text-ink mt-0.5 leading-snug">Seu plano foi reorganizado para evitar acúmulos</p>
-              </div>
-            </motion.div>
-
             {/* Floating Card 3: Streak (Top Right) */}
             <motion.div
               animate={{ y: [0, -8, 0] }}
@@ -212,21 +197,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               </div>
             </motion.div>
 
-            {/* Floating Card 4: Projeção de Nota (Bottom Right) */}
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ repeat: Infinity, duration: 4.8, ease: "easeInOut" }}
-              className="absolute right-[-80px] bottom-[25%] z-20 hidden lg:flex items-center gap-2.5 bg-white border border-line rounded-[10px] p-3 shadow-md text-left select-none pointer-events-none will-change-transform transform-gpu"
-            >
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-100 shrink-0">
-                <TrendingUp className="h-3.5 w-3.5" />
-              </div>
-              <div>
-                <p className="text-[9px] text-muted font-bold uppercase tracking-wider">Evolução</p>
-                <p className="text-xs font-extrabold text-ink">+12 pontos projetados</p>
-              </div>
-            </motion.div>
-
             {/* Floating Card 5: Review Due (Top Middle Right) */}
             <motion.div
               animate={{ y: [0, 5, 0] }}
@@ -235,16 +205,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
             >
               <div className="h-2 w-2 rounded-full bg-amber-500 animate-ping" />
               <span className="text-xs font-bold text-ink">Revisão pendente hoje</span>
-            </motion.div>
-
-            {/* Floating Card 6: Mathematics Completed (Bottom Middle Left) */}
-            <motion.div
-              animate={{ y: [0, -5, 0] }}
-              transition={{ repeat: Infinity, duration: 5.2, ease: "easeInOut", delay: 0.3 }}
-              className="absolute left-[15%] bottom-[-20px] z-20 hidden lg:flex items-center gap-2 bg-white border border-line rounded-[10px] p-2 px-3 shadow-md text-left select-none pointer-events-none will-change-transform transform-gpu"
-            >
-              <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-              <span className="text-xs font-bold text-ink">Matemática concluída</span>
             </motion.div>
 
             {/* Dashboard Mockup Body */}
