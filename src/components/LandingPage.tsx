@@ -94,8 +94,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
       
       {/* Background Decorative Subtle Beams & Premium Noise Grain */}
       <div className="absolute inset-0 bg-grain pointer-events-none opacity-60 z-0" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-[550px] bg-gradient-to-b from-blue-500/5 to-transparent blur-[140px] pointer-events-none z-0" />
-      <div className="absolute top-[-10%] left-[10%] w-[400px] h-[400px] rounded-full bg-blue-600/3 blur-[100px] pointer-events-none z-0" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-[550px] bg-gradient-to-b from-blue-500/5 to-transparent blur-[140px] pointer-events-none z-0 will-change-transform transform-gpu" />
+      <div className="absolute top-[-10%] left-[10%] w-[400px] h-[400px] rounded-full bg-blue-600/3 blur-[100px] pointer-events-none z-0 will-change-transform transform-gpu" />
 
       {/* HERO SECTION */}
       <section className="relative pt-24 pb-28 px-4 sm:px-6 lg:px-8 border-b border-line z-10">
@@ -171,7 +171,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
             <motion.div
               animate={{ y: [0, -6, 0] }}
               transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-              className="absolute left-[-60px] top-[15%] z-20 hidden lg:flex items-center gap-2.5 bg-white border border-line rounded-[10px] p-3 shadow-md text-left select-none pointer-events-none"
+              className="absolute left-[-60px] top-[15%] z-20 hidden lg:flex items-center gap-2.5 bg-white border border-line rounded-[10px] p-3 shadow-md text-left select-none pointer-events-none will-change-transform transform-gpu"
             >
               <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 shrink-0">
                 <Check className="h-3 w-3 stroke-[3]" />
@@ -186,7 +186,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-              className="absolute left-[-90px] bottom-[20%] z-20 hidden lg:flex items-start gap-2.5 bg-white border border-line rounded-[10px] p-3.5 shadow-md text-left max-w-[210px] select-none pointer-events-none"
+              className="absolute left-[-90px] bottom-[20%] z-20 hidden lg:flex items-start gap-2.5 bg-white border border-line rounded-[10px] p-3.5 shadow-md text-left max-w-[210px] select-none pointer-events-none will-change-transform transform-gpu"
             >
               <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-100 mt-0.5 shrink-0">
                 <RefreshCw className="h-3.5 w-3.5" />
@@ -201,7 +201,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
             <motion.div
               animate={{ y: [0, -8, 0] }}
               transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut" }}
-              className="absolute right-[-60px] top-[20%] z-20 hidden lg:flex items-center gap-2.5 bg-white border border-line rounded-[10px] p-3 shadow-md text-left select-none pointer-events-none"
+              className="absolute right-[-60px] top-[20%] z-20 hidden lg:flex items-center gap-2.5 bg-white border border-line rounded-[10px] p-3 shadow-md text-left select-none pointer-events-none will-change-transform transform-gpu"
             >
               <div className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-50 text-amber-600 border border-amber-100 shrink-0">
                 <Zap className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
@@ -216,7 +216,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ repeat: Infinity, duration: 4.8, ease: "easeInOut" }}
-              className="absolute right-[-80px] bottom-[25%] z-20 hidden lg:flex items-center gap-2.5 bg-white border border-line rounded-[10px] p-3 shadow-md text-left select-none pointer-events-none"
+              className="absolute right-[-80px] bottom-[25%] z-20 hidden lg:flex items-center gap-2.5 bg-white border border-line rounded-[10px] p-3 shadow-md text-left select-none pointer-events-none will-change-transform transform-gpu"
             >
               <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-100 shrink-0">
                 <TrendingUp className="h-3.5 w-3.5" />
@@ -231,7 +231,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
             <motion.div
               animate={{ y: [0, 5, 0] }}
               transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 0.5 }}
-              className="absolute right-[12%] top-[-25px] z-20 hidden lg:flex items-center gap-2 bg-white border border-line rounded-[10px] p-2 px-3 shadow-md text-left select-none pointer-events-none"
+              className="absolute right-[12%] top-[-25px] z-20 hidden lg:flex items-center gap-2 bg-white border border-line rounded-[10px] p-2 px-3 shadow-md text-left select-none pointer-events-none will-change-transform transform-gpu"
             >
               <div className="h-2 w-2 rounded-full bg-amber-500 animate-ping" />
               <span className="text-xs font-bold text-ink">Revisão pendente hoje</span>
@@ -241,7 +241,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
             <motion.div
               animate={{ y: [0, -5, 0] }}
               transition={{ repeat: Infinity, duration: 5.2, ease: "easeInOut", delay: 0.3 }}
-              className="absolute left-[15%] bottom-[-20px] z-20 hidden lg:flex items-center gap-2 bg-white border border-line rounded-[10px] p-2 px-3 shadow-md text-left select-none pointer-events-none"
+              className="absolute left-[15%] bottom-[-20px] z-20 hidden lg:flex items-center gap-2 bg-white border border-line rounded-[10px] p-2 px-3 shadow-md text-left select-none pointer-events-none will-change-transform transform-gpu"
             >
               <CheckCircle2 className="h-4 w-4 text-emerald-600" />
               <span className="text-xs font-bold text-ink">Matemática concluída</span>
