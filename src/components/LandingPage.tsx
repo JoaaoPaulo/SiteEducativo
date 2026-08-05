@@ -92,21 +92,22 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
   return (
     <div className="min-h-screen bg-surface text-ink flex flex-col selection:bg-blue-600 selection:text-white relative overflow-hidden bg-grad-superficie">
       
-      {/* Background Decorative Blur Spheres - reduced opacity to keep it premium and simple */}
-      <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] rounded-full bg-blue-600/5 blur-[120px] pointer-events-none" />
-      <div className="absolute top-[40%] right-[-10%] w-[400px] h-[400px] rounded-full bg-blue-600/3 blur-[100px] pointer-events-none" />
+      {/* Background Decorative Subtle Beams & Premium Noise Grain */}
+      <div className="absolute inset-0 bg-grain pointer-events-none opacity-60 z-0" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-[550px] bg-gradient-to-b from-blue-500/5 to-transparent blur-[140px] pointer-events-none z-0" />
+      <div className="absolute top-[-10%] left-[10%] w-[400px] h-[400px] rounded-full bg-blue-600/3 blur-[100px] pointer-events-none z-0" />
 
       {/* HERO SECTION */}
-      <section className="relative pt-16 pb-16 px-4 sm:px-6 lg:px-8 border-b border-line">
-        <div className="mx-auto max-w-4xl relative z-10">
+      <section className="relative pt-24 pb-28 px-4 sm:px-6 lg:px-8 border-b border-line z-10">
+        <div className="mx-auto max-w-5xl relative">
           
-          {/* Main Headline */}
-          <div className="text-center mb-10">
+          {/* Main Headline & Description */}
+          <div className="text-center mb-12">
             <motion.h1 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl font-extrabold tracking-tight sm:text-5xl text-ink leading-tight font-display"
+              className="text-4xl font-extrabold tracking-tight sm:text-6xl text-ink leading-tight font-display max-w-3xl mx-auto"
             >
               Um plano de estudos que se <span className="text-blue-600">refaz sozinho.</span>
             </motion.h1>
@@ -114,84 +115,260 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-4 text-base sm:text-lg text-muted max-w-2xl mx-auto font-medium"
+              className="mt-6 text-base sm:text-lg text-muted max-w-2xl mx-auto leading-relaxed font-medium"
             >
               Responda três perguntas e receba um plano feito para o seu objetivo, o seu tempo e as suas lacunas. A cada semana, ele muda com você.
             </motion.p>
-          </div>
-
-          {/* Clean 3-Part Answer Grid (O que é? Para quem é? Por que é melhor?) */}
-          <div className="grid gap-6 md:grid-cols-3 mb-10">
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white border border-line p-5 rounded-[10px] shadow-xs text-left"
-            >
-              <div className="flex items-center gap-2 mb-2 text-blue-600">
-                <Sparkles className="h-4 w-4" />
-                <span className="text-xs font-bold uppercase tracking-widest block">O que é?</span>
-              </div>
-              <h3 className="font-extrabold text-sm text-ink mb-1.5 font-display">Plano sob medida</h3>
-              <p className="text-xs text-muted leading-relaxed">
-                Um plano de estudos dinâmico estruturado para o seu tempo livre e lacunas, cobrindo exatamente o edital do ENEM.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-white border border-line p-5 rounded-[10px] shadow-xs text-left"
-            >
-              <div className="flex items-center gap-2 mb-2 text-blue-600">
-                <Users className="h-4 w-4" />
-                <span className="text-xs font-bold uppercase tracking-widest block">Para quem é?</span>
-              </div>
-              <h3 className="font-extrabold text-sm text-ink mb-1.5 font-display">Para quem tem pressa</h3>
-              <p className="text-xs text-muted leading-relaxed">
-                Feito para quem concilia escola, cursinho ou trabalho e não pode perder nenhuma hora com estudos ineficientes.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-white border border-line p-5 rounded-[10px] shadow-xs text-left"
-            >
-              <div className="flex items-center gap-2 mb-2 text-blue-600">
-                <RefreshCw className="h-4 w-4" />
-                <span className="text-xs font-bold uppercase tracking-widest block">Por que é melhor?</span>
-              </div>
-              <h3 className="font-extrabold text-sm text-ink mb-1.5 font-display">Reorganização sem culpa</h3>
-              <p className="text-xs text-muted leading-relaxed">
-                Perdeu o dia de ontem? O plano se reorganiza e redistribui as sessões automaticamente, sem acumular matérias ou gerar culpa.
-              </p>
-            </motion.div>
           </div>
 
           {/* Primary & Secondary CTAs (Page 72) */}
           <motion.div 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <button
               onClick={onStartWizard}
-              className="w-full sm:w-auto h-12 px-6 rounded-[10px] bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-98 text-white font-semibold text-sm transition-all duration-120 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+              className="w-full sm:w-auto h-12 px-8 rounded-[10px] bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-98 text-white font-semibold text-sm transition-all duration-120 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-blue-600/10"
             >
               <span>Criar meu plano — grátis</span>
               <ArrowRight className="h-4 w-4 stroke-[2]" />
             </button>
             <a
               href="#como-funciona"
-              className="w-full sm:w-auto h-12 px-6 rounded-[10px] bg-white border border-line text-ink hover:bg-slate-50 font-semibold text-sm active:scale-98 transition-all duration-120 flex items-center justify-center cursor-pointer"
+              className="w-full sm:w-auto h-12 px-8 rounded-[10px] bg-white border border-line text-ink hover:bg-slate-50 font-semibold text-sm active:scale-98 transition-all duration-120 flex items-center justify-center cursor-pointer shadow-2xs"
             >
               Ver como funciona
             </a>
           </motion.div>
+
+          {/* Social Proof / Trust Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col items-center justify-center gap-2 mt-8 text-xs text-muted font-medium"
+          >
+            <div className="flex items-center gap-0.5 text-amber-500">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-center mt-1">
+              <span><strong>+12.000</strong> planos de estudos criados</span>
+              <span className="text-slate-300 hidden sm:inline">•</span>
+              <span>Baseado na matriz oficial do ENEM</span>
+              <span className="text-slate-300 hidden sm:inline">•</span>
+              <span>Personalizado em menos de 2 minutos</span>
+            </div>
+          </motion.div>
+
+          {/* PRODUCT SHOWCASE: Dashboard Mockup & Floating Cards */}
+          <div className="relative mt-16 max-w-4xl mx-auto">
+            
+            {/* Floating Card 1: Today's Goal (Top Left) */}
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+              className="absolute left-[-60px] top-[15%] z-20 hidden lg:flex items-center gap-2.5 bg-white border border-line rounded-[10px] p-3 shadow-md text-left select-none pointer-events-none"
+            >
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 shrink-0">
+                <Check className="h-3 w-3 stroke-[3]" />
+              </div>
+              <div>
+                <p className="text-[9px] text-muted font-bold uppercase tracking-wider">Meta de Hoje</p>
+                <p className="text-xs font-extrabold text-ink">87% concluído</p>
+              </div>
+            </motion.div>
+
+            {/* Floating Card 2: Reorganização (Bottom Left) */}
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+              className="absolute left-[-90px] bottom-[20%] z-20 hidden lg:flex items-start gap-2.5 bg-white border border-line rounded-[10px] p-3.5 shadow-md text-left max-w-[210px] select-none pointer-events-none"
+            >
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-100 mt-0.5 shrink-0">
+                <RefreshCw className="h-3.5 w-3.5" />
+              </div>
+              <div>
+                <p className="text-[9px] text-muted font-bold uppercase tracking-wider">Ajuste de Ritmo</p>
+                <p className="text-xs font-extrabold text-ink mt-0.5 leading-snug">Seu plano foi reorganizado para evitar acúmulos</p>
+              </div>
+            </motion.div>
+
+            {/* Floating Card 3: Streak (Top Right) */}
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut" }}
+              className="absolute right-[-60px] top-[20%] z-20 hidden lg:flex items-center gap-2.5 bg-white border border-line rounded-[10px] p-3 shadow-md text-left select-none pointer-events-none"
+            >
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-50 text-amber-600 border border-amber-100 shrink-0">
+                <Zap className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
+              </div>
+              <div>
+                <p className="text-[9px] text-muted font-bold uppercase tracking-wider">Consistência</p>
+                <p className="text-xs font-extrabold text-ink">3 dias seguidos</p>
+              </div>
+            </motion.div>
+
+            {/* Floating Card 4: Projeção de Nota (Bottom Right) */}
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ repeat: Infinity, duration: 4.8, ease: "easeInOut" }}
+              className="absolute right-[-80px] bottom-[25%] z-20 hidden lg:flex items-center gap-2.5 bg-white border border-line rounded-[10px] p-3 shadow-md text-left select-none pointer-events-none"
+            >
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-100 shrink-0">
+                <TrendingUp className="h-3.5 w-3.5" />
+              </div>
+              <div>
+                <p className="text-[9px] text-muted font-bold uppercase tracking-wider">Evolução</p>
+                <p className="text-xs font-extrabold text-ink">+12 pontos projetados</p>
+              </div>
+            </motion.div>
+
+            {/* Floating Card 5: Review Due (Top Middle Right) */}
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 0.5 }}
+              className="absolute right-[12%] top-[-25px] z-20 hidden lg:flex items-center gap-2 bg-white border border-line rounded-[10px] p-2 px-3 shadow-md text-left select-none pointer-events-none"
+            >
+              <div className="h-2 w-2 rounded-full bg-amber-500 animate-ping" />
+              <span className="text-xs font-bold text-ink">Revisão pendente hoje</span>
+            </motion.div>
+
+            {/* Floating Card 6: Mathematics Completed (Bottom Middle Left) */}
+            <motion.div
+              animate={{ y: [0, -5, 0] }}
+              transition={{ repeat: Infinity, duration: 5.2, ease: "easeInOut", delay: 0.3 }}
+              className="absolute left-[15%] bottom-[-20px] z-20 hidden lg:flex items-center gap-2 bg-white border border-line rounded-[10px] p-2 px-3 shadow-md text-left select-none pointer-events-none"
+            >
+              <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+              <span className="text-xs font-bold text-ink">Matemática concluída</span>
+            </motion.div>
+
+            {/* Dashboard Mockup Body */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="rounded-[16px] border border-line bg-white shadow-2xl overflow-hidden text-ink flex flex-col md:flex-row min-h-[380px]"
+            >
+              {/* Mock Sidebar */}
+              <div className="w-full md:w-[170px] bg-slate-50 border-r border-line p-4 flex flex-row md:flex-col justify-between md:justify-start gap-4">
+                <div className="flex items-center gap-2 mb-2 md:mb-6">
+                  <svg className="h-5 w-5 text-blue-600 shrink-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 58 L50 75 V85 L15 68 Z" fill="#1D4ED8" />
+                    <path d="M50 75 L85 58 V68 L50 85 Z" fill="#60A5FA" />
+                    <path d="M15 58 L50 75 L85 58 L50 41 Z" fill="#2563EB" />
+                    <path d="M50 55 L78 27 M78 27 H62 M78 27 V43" stroke="#2563EB" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span className="font-extrabold text-sm tracking-[0.14em] uppercase text-ink font-display">stdy</span>
+                </div>
+                <div className="flex flex-row md:flex-col gap-1.5 w-full">
+                  {[
+                    { label: 'Hoje', active: true, icon: TrendingUp },
+                    { label: 'Meu plano', active: false, icon: FileText },
+                    { label: 'Evolução', active: false, icon: Award },
+                    { label: 'Ajustes', active: false, icon: Calendar },
+                  ].map((item, idx) => (
+                    <div
+                      key={idx}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-[8px] text-xs font-semibold w-full transition-colors ${
+                        item.active 
+                          ? 'bg-blue-50 text-blue-700 font-extrabold border border-blue-100/50' 
+                          : 'text-muted hover:bg-slate-100 hover:text-ink'
+                      }`}
+                    >
+                      <item.icon className={`h-4 w-4 ${item.active ? 'text-blue-600' : 'text-muted'}`} />
+                      <span>{item.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Main Mock Content */}
+              <div className="flex-1 bg-white p-5 flex flex-col justify-between overflow-y-auto">
+                <div className="space-y-4">
+                  {/* Header */}
+                  <div className="flex justify-between items-start border-b border-line pb-3">
+                    <div>
+                      <p className="text-[9px] text-muted font-bold uppercase tracking-widest">Quinta-feira, 12 de Março</p>
+                      <h4 className="text-lg font-extrabold text-ink font-display mt-0.5">Bom dia, Ana.</h4>
+                    </div>
+                    <div className="flex items-center gap-1.5 bg-blue-50 border border-blue-200 px-3 py-1 rounded-[8px] text-[10px] text-blue-700 font-bold">
+                      <Zap className="h-3 w-3 text-blue-600 fill-blue-600" />
+                      <span>55 min hoje</span>
+                    </div>
+                  </div>
+
+                  {/* Reorganization Alert Banner */}
+                  <div className="bg-blue-50/50 border border-blue-100 p-3.5 rounded-[10px] flex items-start gap-2.5">
+                    <AlertCircle className="h-4 w-4 text-blue-600 mt-0.5 shrink-0" />
+                    <div className="text-left">
+                      <span className="text-[9px] font-black text-blue-800 uppercase tracking-widest block">Reorganização Ativa</span>
+                      <p className="text-xs text-slate-600 mt-0.5 leading-snug">
+                        Você não estudou ontem. O plano reorganizou as matérias automaticamente e redistribuiu a sessão de História para sábado para manter sua meta do ENEM.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Daily Schedule Row List */}
+                  <div className="space-y-2">
+                    {/* Session 1 (Completed) */}
+                    <div className="bg-slate-50 border border-line p-3 rounded-[10px] flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 shrink-0">
+                          <Check className="h-3 w-3 stroke-[3]" />
+                        </div>
+                        <div className="text-left">
+                          <h5 className="font-extrabold text-xs text-ink font-display">Estequiometria</h5>
+                          <p className="text-[9px] text-muted">Química • 25 min • Exercícios concluídos</p>
+                        </div>
+                      </div>
+                      <span className="text-[9px] bg-blue-50 border border-blue-200 text-blue-700 px-2 py-0.5 rounded-[4px] font-bold">Alta Incidência</span>
+                    </div>
+
+                    {/* Session 2 (Active) */}
+                    <div className="bg-blue-50/30 border border-blue-200 p-3 rounded-[10px] flex items-center justify-between shadow-2xs">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 border border-blue-200 text-blue-600 shrink-0">
+                          <Clock className="h-3 w-3" />
+                        </div>
+                        <div className="text-left">
+                          <h5 className="font-extrabold text-xs text-ink font-display">Trigonometria</h5>
+                          <p className="text-[9px] text-muted">Matemática • 18 min • Revisão pendente</p>
+                        </div>
+                      </div>
+                      <button className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-[10px] font-bold px-3 py-1 rounded-[8px] active:scale-98 transition-all cursor-pointer">
+                        Começar
+                      </button>
+                    </div>
+
+                    {/* Session 3 (Pending) */}
+                    <div className="bg-white border border-line p-3 rounded-[10px] flex items-center justify-between opacity-50">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-slate-100 border border-line text-muted shrink-0">
+                          <Lock className="h-3 w-3" />
+                        </div>
+                        <div className="text-left">
+                          <h5 className="font-extrabold text-xs text-muted font-display">Modernismo</h5>
+                          <p className="text-[9px] text-muted">Literatura • 12 min • Leitura</p>
+                        </div>
+                      </div>
+                      <span className="text-[9px] bg-slate-100 text-muted px-2 py-0.5 rounded-[4px] font-bold">Estratégico</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer info */}
+                <div className="mt-4 border-t border-line pt-2.5 flex justify-between items-center text-[9px] text-muted">
+                  <span>Escopo do ENEM: 100% mapeado</span>
+                  <span>Atualizado há poucos segundos</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
 
         </div>
       </section>
@@ -795,6 +972,47 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               <span>Começar agora, leva 2 minutos</span>
               <ArrowRight className="h-4 w-4 text-white" />
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ SECTION (Page 72 Brandbook) */}
+      <section id="faq" className="px-4 py-20 sm:px-6 lg:px-8 border-b border-line bg-surface relative z-10">
+        <div className="mx-auto max-w-3xl">
+          <div className="text-center mb-12">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 font-display">Objeções</h2>
+            <p className="text-3xl font-black text-ink sm:text-5xl mt-3 font-display">
+              Perguntas Frequentes
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: "E se eu perder um dia?",
+                a: "O plano se reorganiza sozinho. Você não precisa recomeçar do zero, nem acumula matérias acumuladas. O sistema simplesmente ajusta o ritmo para os seus próximos dias disponíveis."
+              },
+              {
+                q: "Preciso saber exatamente o que quero estudar?",
+                a: "Não. Se ainda estiver decidindo ou descobrindo suas preferências, o plano começa pelos tópicos de maior peso e incidência que são comuns a todos os cursos e áreas."
+              },
+              {
+                q: "Posso cancelar a assinatura quando quiser?",
+                a: "Sim. O cancelamento é feito diretamente nos ajustes do seu perfil com um único clique, sem burocracias, sem precisar falar com ninguém e sem taxas adicionais."
+              }
+            ].map((faq, idx) => (
+              <details key={idx} className="group border border-line bg-white rounded-[10px] [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex items-center justify-between p-5 text-sm font-bold text-ink cursor-pointer font-display select-none">
+                  <span>{faq.q}</span>
+                  <span className="ml-1.5 shrink-0 rounded-full bg-slate-50 p-1.5 text-muted group-open:rotate-90 transition-transform duration-200">
+                    <ChevronRight className="h-4 w-4" />
+                  </span>
+                </summary>
+                <div className="p-5 pt-0 border-t border-line text-xs text-muted leading-relaxed text-left">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
           </div>
         </div>
       </section>
