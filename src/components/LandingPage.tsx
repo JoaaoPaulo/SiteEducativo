@@ -108,7 +108,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               transition={{ duration: 0.6 }}
               className="text-4xl font-extrabold tracking-tight sm:text-5xl text-ink leading-tight font-display"
             >
-              Passe no ENEM estudando <span className="text-blue-600">exatamente o que você precisa.</span>
+              Um plano de estudos que se <span className="text-blue-600">refaz sozinho.</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 15 }}
@@ -116,7 +116,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mt-4 text-base sm:text-lg text-muted max-w-2xl mx-auto font-medium"
             >
-              Nossa IA cria um plano personalizado baseado no seu curso, tempo disponível e nível atual.
+              Responda três perguntas e receba um plano feito para o seu objetivo, o seu tempo e as suas lacunas. A cada semana, ele muda com você.
             </motion.p>
           </div>
 
@@ -126,15 +126,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white border border-line p-5 rounded-2xl shadow-2xs text-left"
+              className="bg-white border border-line p-5 rounded-[10px] shadow-xs text-left"
             >
               <div className="flex items-center gap-2 mb-2 text-blue-600">
                 <Sparkles className="h-4 w-4" />
                 <span className="text-xs font-bold uppercase tracking-widest block">O que é?</span>
               </div>
-              <h3 className="font-extrabold text-sm text-ink mb-1.5 font-display">Cronograma Inteligente</h3>
+              <h3 className="font-extrabold text-sm text-ink mb-1.5 font-display">Plano sob medida</h3>
               <p className="text-xs text-muted leading-relaxed">
-                Um guia de estudos dinâmico que diz exatamente o que revisar e exercitar a cada dia, cobrindo 100% da matriz do ENEM.
+                Um plano de estudos dinâmico estruturado para o seu tempo livre e lacunas, cobrindo exatamente o edital do ENEM.
               </p>
             </motion.div>
 
@@ -142,15 +142,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-white border border-line p-5 rounded-2xl shadow-2xs text-left"
+              className="bg-white border border-line p-5 rounded-[10px] shadow-xs text-left"
             >
               <div className="flex items-center gap-2 mb-2 text-blue-600">
                 <Users className="h-4 w-4" />
                 <span className="text-xs font-bold uppercase tracking-widest block">Para quem é?</span>
               </div>
-              <h3 className="font-extrabold text-sm text-ink mb-1.5 font-display">Estudantes Focados</h3>
+              <h3 className="font-extrabold text-sm text-ink mb-1.5 font-display">Para quem tem pressa</h3>
               <p className="text-xs text-muted leading-relaxed">
-                Para quem quer passar em cursos concorridos (Medicina, Engenharia) e precisa otimizar cada hora disponível.
+                Feito para quem concilia escola, cursinho ou trabalho e não pode perder nenhuma hora com estudos ineficientes.
               </p>
             </motion.div>
 
@@ -158,34 +158,39 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-white border border-line p-5 rounded-2xl shadow-2xs text-left"
+              className="bg-white border border-line p-5 rounded-[10px] shadow-xs text-left"
             >
               <div className="flex items-center gap-2 mb-2 text-blue-600">
                 <RefreshCw className="h-4 w-4" />
                 <span className="text-xs font-bold uppercase tracking-widest block">Por que é melhor?</span>
               </div>
-              <h3 className="font-extrabold text-sm text-ink mb-1.5 font-display">Replanejamento Ativo</h3>
+              <h3 className="font-extrabold text-sm text-ink mb-1.5 font-display">Reorganização sem culpa</h3>
               <p className="text-xs text-muted leading-relaxed">
-                Se você atrasar um dia, a IA reorganiza a semana automaticamente. Sem acúmulo de matéria, sem culpa e sem ansiedade.
+                Perdeu o dia de ontem? O plano se reorganiza e redistribui as sessões automaticamente, sem acumular matérias ou gerar culpa.
               </p>
             </motion.div>
           </div>
 
-          {/* Primary CTA */}
+          {/* Primary & Secondary CTAs (Page 72) */}
           <motion.div 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-center"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3"
           >
             <button
               onClick={onStartWizard}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl bg-grad-institucional hover:opacity-95 text-white px-10 py-5 text-lg font-black shadow-xl shadow-blue-600/25 transform hover:-translate-y-1 hover:scale-105 transition-all duration-300 border border-white/10 cursor-pointer animate-pulse"
+              className="w-full sm:w-auto h-12 px-6 rounded-[10px] bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-98 text-white font-semibold text-sm transition-all duration-120 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
             >
-              <Sparkles className="h-5.5 w-5.5" />
-              <span>Criar meu plano gratuito</span>
-              <ArrowRight className="h-5.5 w-5.5 stroke-[2.5]" />
+              <span>Criar meu plano — grátis</span>
+              <ArrowRight className="h-4 w-4 stroke-[2]" />
             </button>
+            <a
+              href="#como-funciona"
+              className="w-full sm:w-auto h-12 px-6 rounded-[10px] bg-white border border-line text-ink hover:bg-slate-50 font-semibold text-sm active:scale-98 transition-all duration-120 flex items-center justify-center cursor-pointer"
+            >
+              Ver como funciona
+            </a>
           </motion.div>
 
         </div>
@@ -201,30 +206,30 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               </div>
               <div className="text-xs text-muted font-semibold mt-1">Questões Resolvidas (Meta Mínima)</div>
             </div>
-            <div className="p-4 rounded-2xl border border-line bg-white shadow-2xs">
+            <div className="p-4 rounded-[10px] border border-line bg-white shadow-2xs">
               <div className="text-3xl sm:text-4xl font-extrabold text-blue-600">
                 <CountUp end={50} />
               </div>
               <div className="text-xs text-muted font-semibold mt-1">Disciplinas e Mapas Mentais</div>
             </div>
-            <div className="p-4 rounded-2xl border border-line bg-white shadow-2xs">
+            <div className="p-4 rounded-[10px] border border-line bg-white shadow-2xs">
               <div className="text-3xl sm:text-4xl font-extrabold text-blue-600">
                 <CountUp end={100} suffix="%" />
               </div>
               <div className="text-xs text-muted font-semibold mt-1">Personalizado p/ sua Meta</div>
             </div>
-            <div className="p-4 rounded-2xl border border-line bg-white shadow-2xs">
+            <div className="p-4 rounded-[10px] border border-line bg-white shadow-2xs">
               <div className="text-3xl sm:text-4xl font-extrabold text-blue-600">
                 <CountUp end={24} suffix="h" />
               </div>
-              <div className="text-xs text-muted font-semibold mt-1">Suporte Tira-Dúvidas com IA</div>
+              <div className="text-xs text-muted font-semibold mt-1">Suporte Tira-Dúvidas 24h</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* SECTION 2: COMO FUNCIONA EM 3 PASSOS (INTERATIVO) */}
-      <section className="px-4 py-20 sm:px-6 lg:px-8 border-b border-line bg-grad-superficie">
+      <section id="como-funciona" className="px-4 py-20 sm:px-6 lg:px-8 border-b border-line bg-grad-superficie">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-12">
             <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 font-display">Simplicidade Extrema</h2>
@@ -244,20 +249,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                 {
                   id: 0,
                   num: '01',
-                  title: 'Responda o formulário',
-                  desc: 'Diga seu curso dos sonhos, suas dificuldades por área e quantas horas por dia você tem disponível.'
+                  title: 'Conte seu objetivo',
+                  desc: 'Curso, prova e data. Três perguntas, dois minutos.'
                 },
                 {
                   id: 1,
                   num: '02',
-                  title: 'Receba seu plano personalizado',
-                  desc: 'Nossa IA calcula o peso das matérias e monta um cronograma otimizado com foco no que realmente cai no ENEM.'
+                  title: 'Receba o plano',
+                  desc: 'Ordem, duração e motivo de cada sessão — para hoje e para a semana.'
                 },
                 {
                   id: 2,
                   num: '03',
-                  title: 'Estude com acompanhamento',
-                  desc: 'Faça seus estudos diários com a IA tirando dúvidas e reorganizando a semana automaticamente se você atrasar.'
+                  title: 'Estude e siga',
+                  desc: 'Cada resposta ajusta o que vem depois. Você não precisa refazer nada.'
                 }
               ].map(s => {
                 const isActive = activeStep === s.id;
@@ -266,14 +271,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                     key={s.id}
                     onMouseEnter={() => setActiveStep(s.id)}
                     onClick={() => setActiveStep(s.id)}
-                    className={`p-5 rounded-2xl border transition-all duration-300 text-left cursor-pointer ${
+                    className={`p-5 rounded-[10px] border transition-all duration-300 text-left cursor-pointer ${
                       isActive 
-                        ? 'border-blue-600/30 bg-blue-600/5 shadow-md shadow-blue-600/5' 
+                        ? 'border-blue-600/30 bg-blue-600/5 shadow-xs' 
                         : 'border-line bg-white hover:border-slate-300'
                     }`}
                   >
                     <div className="flex items-center gap-3 mb-2">
-                      <span className={`text-xs font-black px-2 py-0.5 rounded ${
+                      <span className={`text-xs font-black px-2 py-0.5 rounded-[4px] ${
                         isActive ? 'bg-blue-600/15 text-blue-600' : 'bg-slate-100 text-muted'
                       }`}>{s.num}</span>
                       <h3 className={`font-black text-sm ${isActive ? 'text-ink font-display' : 'text-muted font-display'}`}>{s.title}</h3>
@@ -332,12 +337,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                     className="space-y-4 text-left"
                   >
                     <div className="flex items-center justify-between border-b border-line pb-3">
-                      <span className="text-xs font-bold text-muted">Trilha Gerada em Tempo Real</span>
+                      <span className="text-xs font-bold text-muted">Plano Gerado em Tempo Real</span>
                       <span className="text-[10px] bg-blue-100 text-blue-700 border border-blue-200 px-2 py-0.5 rounded font-black">Pronto</span>
                     </div>
 
                     <div className="space-y-2.5">
-                      <div className="bg-slate-50 border border-line p-3 rounded-xl flex items-center justify-between">
+                      <div className="bg-slate-50 border border-line p-3 rounded-[10px] flex items-center justify-between">
                         <div>
                           <span className="text-[9px] text-muted font-bold uppercase block">SEGUNDA-FEIRA</span>
                           <span className="text-xs font-black text-ink">Razão, Proporção e Regra de Três</span>
@@ -345,7 +350,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                         <span className="text-[9px] bg-blue-100 border border-blue-200 text-blue-700 px-2 py-0.5 rounded font-bold">Alta Incidência</span>
                       </div>
 
-                      <div className="bg-slate-50 border border-line p-3 rounded-xl flex items-center justify-between">
+                      <div className="bg-slate-50 border border-line p-3 rounded-[10px] flex items-center justify-between">
                         <div>
                           <span className="text-[9px] text-muted font-bold uppercase block">TERÇA-FEIRA</span>
                           <span className="text-xs font-black text-ink">Cadeias Alimentares e Ecologia</span>
@@ -353,7 +358,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                         <span className="text-[9px] bg-blue-100 border border-blue-200 text-blue-700 px-2 py-0.5 rounded font-bold">Alta Incidência</span>
                       </div>
 
-                      <div className="bg-slate-50/40 border border-line p-3 rounded-xl flex items-center justify-between opacity-50">
+                      <div className="bg-slate-50/40 border border-line p-3 rounded-[10px] flex items-center justify-between opacity-50">
                         <div>
                           <span className="text-[9px] text-muted font-bold uppercase block">QUARTA-FEIRA</span>
                           <span className="text-xs font-black text-muted">Calorimetria & Térmica</span>
@@ -377,7 +382,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                     </div>
 
                     <div className="space-y-3">
-                      <div className="bg-slate-50 border border-line p-3 rounded-xl flex items-center justify-between">
+                      <div className="bg-slate-50 border border-line p-3 rounded-[10px] flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <CheckCircle2 className="h-4.5 w-4.5 text-emerald-600" />
                           <span className="text-xs text-ink">Meta diária cumprida!</span>
@@ -385,12 +390,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                         <span className="text-xs font-bold text-muted">100% concluído</span>
                       </div>
 
-                      <div className="bg-amber-50 border border-amber-200 p-3 rounded-xl flex items-start gap-2.5">
+                      <div className="bg-amber-50 border border-amber-200 p-3 rounded-[10px] flex items-start gap-2.5">
                         <AlertCircle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
                         <div>
                           <span className="text-[10px] font-black text-amber-700 block uppercase">Reorganização Ativa</span>
                           <span className="text-[10.5px] text-slate-600 leading-relaxed block mt-0.5">
-                            Você não pôde estudar ontem. A IA remanejou a tarefa de Calorimetria para o sábado, mantendo a carga da semana equilibrada.
+                            Você não pôde estudar ontem. O plano remanejou a tarefa de Calorimetria para o sábado, mantendo a carga da semana equilibrada.
                           </span>
                         </div>
                       </div>
@@ -411,37 +416,36 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
           <div className="mt-14 text-center">
             <button
               onClick={onStartWizard}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl bg-grad-institucional hover:opacity-95 text-white px-8 py-4.5 text-base font-black shadow-xl shadow-blue-600/25 transform hover:-translate-y-1 hover:scale-103 transition-all duration-300 border border-white/10 cursor-pointer animate-pulse"
+              className="w-full sm:w-auto h-12 px-6 rounded-[10px] bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-98 text-white font-semibold text-sm transition-all duration-120 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
             >
-              <Sparkles className="h-5 w-5" />
-              <span>Começar minha trilha agora</span>
-              <ArrowRight className="h-5 w-5 stroke-[2.5]" />
+              <span>Criar meu plano — grátis</span>
+              <ArrowRight className="h-4 w-4 stroke-[2]" />
             </button>
           </div>
         </div>
       </section>
 
       {/* PRODUCT SHOWCASE (Mostrar o Produto) */}
-      <section className="px-4 py-20 sm:px-6 lg:px-8 border-b border-line bg-surface">
+      <section id="produto" className="px-4 py-20 sm:px-6 lg:px-8 border-b border-line bg-surface">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-12">
             <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 font-display">Visualização em Tempo Real</h2>
             <p className="text-3xl font-black text-ink sm:text-5xl mt-3 font-display">
-              Explore o sistema por dentro
+              Explore o STDY por dentro
             </p>
             <p className="text-muted text-sm sm:text-base mt-2">
-              Nossa interface foi projetada para ser limpa, motivadora e extremamente eficiente.
+              Nossa interface foi projetada para ser limpa, clara e focada no que importa.
             </p>
           </div>
 
           {/* Interactive Showcase Component */}
-          <div className="rounded-3xl border border-line bg-white p-1 md:p-2 shadow-2xl relative overflow-hidden text-ink">
+          <div className="rounded-[16px] border border-line bg-white p-1 md:p-2 shadow-2xl relative overflow-hidden text-ink">
             
             {/* Tab Selectors */}
             <div className="flex flex-wrap border-b border-line p-2 gap-1.5 md:gap-2">
               <button
                 onClick={() => setActiveDemoTab('dashboard')}
-                className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-xl transition-all cursor-pointer ${
+                className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-[10px] transition-all cursor-pointer ${
                   activeDemoTab === 'dashboard'
                     ? 'bg-slate-100 text-ink border border-line shadow-xs font-black'
                     : 'text-muted hover:bg-slate-50 hover:text-ink'
@@ -449,12 +453,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               >
                 <div className="flex items-center justify-center gap-2">
                   <TrendingUp className="h-4 w-4 text-blue-600" />
-                  <span>Dashboard</span>
+                  <span>Hoje</span>
                 </div>
               </button>
               <button
                 onClick={() => setActiveDemoTab('weekly')}
-                className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-xl transition-all cursor-pointer ${
+                className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-[10px] transition-all cursor-pointer ${
                   activeDemoTab === 'weekly'
                     ? 'bg-slate-100 text-ink border border-line shadow-xs font-black'
                     : 'text-muted hover:bg-slate-50 hover:text-ink'
@@ -462,12 +466,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               >
                 <div className="flex items-center justify-center gap-2">
                   <FileText className="h-4 w-4 text-blue-600" />
-                  <span>Plano Semanal</span>
+                  <span>Meu plano</span>
                 </div>
               </button>
               <button
                 onClick={() => setActiveDemoTab('calendar')}
-                className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-xl transition-all cursor-pointer ${
+                className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-[10px] transition-all cursor-pointer ${
                   activeDemoTab === 'calendar'
                     ? 'bg-slate-100 text-ink border border-line shadow-xs font-black'
                     : 'text-muted hover:bg-slate-50 hover:text-ink'
@@ -475,12 +479,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               >
                 <div className="flex items-center justify-center gap-2">
                   <Calendar className="h-4 w-4 text-blue-600" />
-                  <span>Calendário IA</span>
+                  <span>Reorganização</span>
                 </div>
               </button>
               <button
                 onClick={() => setActiveDemoTab('ai')}
-                className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-xl transition-all cursor-pointer ${
+                className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-[10px] transition-all cursor-pointer ${
                   activeDemoTab === 'ai'
                     ? 'bg-slate-100 text-ink border border-line shadow-xs font-black'
                     : 'text-muted hover:bg-slate-50 hover:text-ink'
@@ -488,12 +492,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               >
                 <div className="flex items-center justify-center gap-2">
                   <MessageSquare className="h-4 w-4 text-blue-600" />
-                  <span>Tira-Dúvidas IA</span>
+                  <span>Tira-Dúvidas</span>
                 </div>
               </button>
               <button
                 onClick={() => setActiveDemoTab('evolution')}
-                className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-xl transition-all cursor-pointer ${
+                className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-[10px] transition-all cursor-pointer ${
                   activeDemoTab === 'evolution'
                     ? 'bg-slate-100 text-ink border border-line shadow-xs font-black'
                     : 'text-muted hover:bg-slate-50 hover:text-ink'
@@ -507,7 +511,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
             </div>
 
             {/* Active Demo Window */}
-            <div className="p-4 md:p-8 min-h-[350px] bg-slate-50/50 rounded-b-3xl text-ink">
+            <div className="p-4 md:p-8 min-h-[350px] bg-slate-50/50 rounded-b-[16px] text-ink">
               {activeDemoTab === 'dashboard' && (
                 <div className="space-y-6">
                   {/* Dashboard Mockup */}
@@ -786,9 +790,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
           <div className="mt-12 text-center">
             <button
               onClick={onStartWizard}
-              className="inline-flex items-center gap-3 rounded-2xl bg-grad-institucional hover:opacity-95 px-6 py-3.5 text-sm font-black text-white shadow-xl shadow-blue-600/25 transition-all cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 h-12 px-6 rounded-[10px] bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-98 text-white font-semibold text-sm transition-all duration-120 cursor-pointer shadow-xs"
             >
-              <span>Começar agora</span>
+              <span>Começar agora, leva 2 minutos</span>
               <ArrowRight className="h-4 w-4 text-white" />
             </button>
           </div>
@@ -797,8 +801,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
 
       {/* Footer */}
       <footer className="border-t border-line bg-white px-4 py-10 text-center text-xs text-muted relative z-10">
-        <p>© 2026 AdaptoSTDY — Auxiliar de Estudos Personalizado com IA. Todos os direitos reservados.</p>
-        <p className="mt-2 text-muted/80">Baseado 100% na Matriz de Referência Oficial do ENEM.</p>
+        <p>© 2026 ADAPTO — O plano evolui com você.</p>
+        <p className="mt-2 text-muted/80">stdy.app • adapto.com.br</p>
       </footer>
 
     </div>
