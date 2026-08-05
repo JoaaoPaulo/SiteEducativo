@@ -16,7 +16,9 @@ import {
   Search,
   GraduationCap,
   AlertCircle,
-  Phone
+  Phone,
+  Star,
+  Lock
 } from 'lucide-react';
 
 interface WizardFormProps {
@@ -430,100 +432,208 @@ export const WizardForm: React.FC<WizardFormProps> = ({ onSubmit, onCancel }) =>
               // STUDY PROFILE SUMMARY SCREEN (VALOR IMEDIATO: RESULTADO)
               <motion.div
                 key="summary"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-6"
+                variants={{
+                  hidden: { opacity: 0 },
+                  show: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.12
+                    }
+                  }
+                }}
+                initial="hidden"
+                animate="show"
+                className="space-y-8"
               >
-                <div className="text-center space-y-2">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 border border-teal-100 text-teal-700 shadow-2xs">
-                    <GraduationCap className="h-8 w-8 text-teal-700" />
+                {/* Header */}
+                <motion.div variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }} className="text-center space-y-3">
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 text-blue-600 shadow-2xs">
+                    <GraduationCap className="h-8 w-8" />
                   </div>
-                  <h2 className="text-2xl font-black text-slate-900">Seu Perfil ENEM está pronto!</h2>
-                  <p className="text-xs text-slate-500">
-                    Com base nas suas respostas, montamos um plano personalizado para maximizar suas chances de aprovação.
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight leading-tight">
+                    🎯 Seu plano para <span className="text-blue-600">{curso}</span> foi criado.
+                  </h2>
+                  <p className="text-xs text-muted max-w-sm mx-auto leading-relaxed">
+                    Analisamos sua rotina, tempo disponível e dificuldades para criar um plano exclusivo.
                   </p>
-                </div>
+                </motion.div>
 
-                {/* Profile Grid Cards */}
-                <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-5 space-y-4 shadow-2xs">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-0.5">
-                      <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">🎯 Curso</p>
-                      <p className="text-sm font-extrabold text-slate-900 truncate">
-                        {curso}
-                      </p>
-                    </div>
-                    <div className="space-y-0.5">
-                      <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">📈 Meta</p>
-                      <p className="text-sm font-extrabold text-teal-800">
-                        {notaAlvoNumero} pontos
-                      </p>
-                    </div>
-                    <div className="space-y-0.5">
-                      <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">⏳ Tempo disponível</p>
-                      <p className="text-sm font-extrabold text-slate-900">
-                        {horasEstudoDia === 'Varia bastante' ? 'Horários Flexíveis' : `${horasEstudoDia} por dia`}
-                      </p>
-                    </div>
-                    <div className="space-y-0.5">
-                      <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">🏛️ Alvo</p>
-                      <p className="text-sm font-extrabold text-slate-900 truncate">
-                        {universidadeSonho}
-                      </p>
-                    </div>
-                    <div className="space-y-0.5 col-span-2 border-t border-slate-100 pt-2">
-                      <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">📱 Contato cadastrado</p>
-                      <p className="text-sm font-extrabold text-slate-900">
-                        {phone}
-                      </p>
-                    </div>
+                {/* Loading Generation Checklist */}
+                <motion.div 
+                  variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }} 
+                  className="rounded-[10px] border border-line bg-slate-50/50 p-4 space-y-3"
+                >
+                  <div className="flex items-center justify-between text-[10px] font-bold text-muted uppercase tracking-wider">
+                    <span>Geração do plano de estudos</span>
+                    <span className="text-emerald-600">100% concluído</span>
                   </div>
-
-                  <div className="border-t border-slate-200 pt-3 grid gap-3 text-xs">
-                    <div>
-                      <span className="font-bold text-rose-800 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded mr-2">
-                        📚 Maior Dificuldade
-                      </span>
-                      <span className="font-semibold text-slate-700">
-                        {materiasDificuldade.join(', ')}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded mr-2">
-                        💪 Melhor Matéria
-                      </span>
-                      <span className="font-semibold text-slate-700">
-                        {getMelhorMateria()}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Priority Section */}
-                <div className="rounded-xl border border-teal-200 bg-teal-50/50 p-4 space-y-2">
-                  <p className="text-xs font-bold text-teal-900 flex items-center gap-1.5">
-                    <Flame className="h-4 w-4 text-teal-700" />
-                    <span>🔥 Prioridade Inicial da Trilha:</span>
-                  </p>
-                  <ul className="text-xs text-teal-950 font-semibold list-disc pl-5 space-y-1">
-                    {getPrioridadeInicial().map((p, idx) => (
-                      <li key={idx}>{p}</li>
+                  <div className="space-y-2">
+                    {[
+                      'Análise de Perfil concluída',
+                      'Matriz do ENEM cruzada com suas lacunas',
+                      'Estratégia de prioridade programada'
+                    ].map((stepText, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                        <div className="flex h-4 w-4 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 shrink-0">
+                          <Check className="h-2.5 w-2.5 stroke-[3]" />
+                        </div>
+                        <span>{stepText}</span>
+                      </div>
                     ))}
-                  </ul>
-                </div>
+                  </div>
+                </motion.div>
 
-                <div className="text-center">
-                  <p className="text-xs text-slate-500 font-bold mb-3">Seu plano de estudos já está pronto.</p>
+                {/* Personalization Insights Grid */}
+                <motion.div 
+                  variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
+                  className="grid gap-4 md:grid-cols-2"
+                >
+                  {/* Smart Responses */}
+                  <div className="rounded-[10px] border border-line bg-white p-4 space-y-3 text-left">
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-muted">Ajustes da Rotina</span>
+                    <div className="space-y-2.5 text-xs text-slate-700 font-medium leading-relaxed">
+                      <p>
+                        • Seu cronograma foi otimizado para quem estuda apenas <strong className="text-blue-600">{horasEstudoDia === 'Varia bastante' ? 'em horários flexíveis' : horasEstudoDia}</strong> por dia.
+                      </p>
+                      <p>
+                        • <strong className="text-blue-600">{materiasDificuldade[0] || 'Química'}</strong> será sua prioridade de reforço nas próximas semanas.
+                      </p>
+                      <p>
+                        • <strong className="text-emerald-700">{getMelhorMateria()}</strong> exigirá menos tempo de teoria por já ser seu ponto forte.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* AI Insights Card */}
+                  <div className="rounded-[10px] border border-blue-100 bg-blue-50/30 p-4 space-y-3 text-left">
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-blue-600">Recomendações do Plano</span>
+                    <div className="space-y-2.5 text-xs text-slate-700 font-medium leading-relaxed">
+                      <p>
+                        🚀 Rotina calculada para cobrir todo o edital do ENEM antes da data da prova.
+                      </p>
+                      <p>
+                        💡 Foco em exercícios de fixação para as áreas de maior dificuldade indicadas.
+                      </p>
+                      <p>
+                        📅 Revisões periódicas automáticas baseadas na curva de esquecimento.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* PRODUCT PREVIEW: Mockup Dashboard (Tuesday/Wednesday Locked) */}
+                <motion.div 
+                  variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
+                  className="rounded-[12px] border border-line bg-white shadow-md overflow-hidden text-left"
+                >
+                  <div className="border-b border-line bg-slate-50/50 p-3 px-4 flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold text-muted uppercase tracking-wider">Pré-visualização do Plano</span>
+                    <span className="text-[9px] bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-[4px] font-bold">Amostra do Primeiro Dia</span>
+                  </div>
+
+                  <div className="p-4 space-y-3.5">
+                    {/* Active Day - Monday */}
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center text-[10px] text-muted font-bold">
+                        <span>SEGUNDA-FEIRA (ATIVO)</span>
+                        <span className="text-blue-600">82% concluído hoje</span>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="bg-slate-50 border border-line p-2.5 rounded-[8px] flex items-center gap-2 text-xs">
+                          <Check className="h-3.5 w-3.5 text-emerald-600 stroke-[3] shrink-0" />
+                          <span className="font-semibold text-slate-700 truncate">Química • Leitura de Estequiometria</span>
+                        </div>
+                        <div className="bg-slate-50 border border-line p-2.5 rounded-[8px] flex items-center gap-2 text-xs">
+                          <Check className="h-3.5 w-3.5 text-emerald-600 stroke-[3] shrink-0" />
+                          <span className="font-semibold text-slate-700 truncate">Biologia • Exercícios de Citologia</span>
+                        </div>
+                        <div className="bg-blue-50/30 border border-blue-200 p-2.5 rounded-[8px] flex items-center justify-between text-xs">
+                          <div className="flex items-center gap-2 truncate">
+                            <div className="h-2 w-2 rounded-full bg-blue-500 animate-ping shrink-0" />
+                            <span className="font-bold text-slate-800 truncate">Física • Revisão de Calorimetria</span>
+                          </div>
+                          <span className="text-[8px] bg-blue-100 border border-blue-200 text-blue-800 px-2 py-0.5 rounded font-bold shrink-0">Próximo</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Locked Days */}
+                    <div className="space-y-2 pt-2 border-t border-line relative">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/95 z-10 flex flex-col items-center justify-center gap-1.5 select-none pointer-events-none">
+                        <div className="bg-slate-900 text-white rounded-full p-1.5 shadow-md">
+                          <Lock className="h-3.5 w-3.5" />
+                        </div>
+                        <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Plano Completo Bloqueado</span>
+                      </div>
+                      
+                      <div className="blur-[1.5px] opacity-40 space-y-2 select-none pointer-events-none">
+                        <div className="flex justify-between items-center text-[10px] text-muted font-bold">
+                          <span>TERÇA-FEIRA</span>
+                        </div>
+                        <div className="bg-slate-50 border border-line p-2.5 rounded-[8px] flex items-center gap-2 text-xs">
+                          <div className="h-3.5 w-3.5 rounded-full border border-line shrink-0" />
+                          <span className="font-semibold text-slate-400">História • Revolução Industrial</span>
+                        </div>
+                        <div className="bg-slate-50 border border-line p-2.5 rounded-[8px] flex items-center gap-2 text-xs">
+                          <div className="h-3.5 w-3.5 rounded-full border border-line shrink-0" />
+                          <span className="font-semibold text-slate-400">Matemática • Proporções</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Value Checklist */}
+                <motion.div 
+                  variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
+                  className="space-y-2 text-left"
+                >
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-muted block mb-1">O que está incluído no seu acesso</span>
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {[
+                      'Cronograma diário personalizado',
+                      'Revisões automáticas programadas',
+                      'Reorganização semanal sem culpa',
+                      'Meta semanal baseada no seu tempo',
+                      'Matriz do ENEM 100% mapeada',
+                      'Recomendações e resoluções de questões',
+                      'Acompanhamento de evolução real'
+                    ].map((val, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                        <div className="flex h-4 w-4 items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-100 shrink-0">
+                          <Check className="h-2.5 w-2.5 stroke-[2.5]" />
+                        </div>
+                        <span>{val}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* Social Proof & CTA */}
+                <motion.div 
+                  variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
+                  className="text-center pt-2 space-y-3"
+                >
+                  <div className="flex flex-col items-center justify-center gap-1">
+                    <div className="flex items-center gap-0.5 text-amber-500">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-3 w-3 fill-amber-500 text-amber-500" />
+                      ))}
+                    </div>
+                    <span className="text-[10px] text-muted font-semibold">
+                      Milhares de planos personalizados criados • 100% Matriz do ENEM
+                    </span>
+                  </div>
+
                   <button
                     type="button"
                     onClick={handleFinalSubmit}
-                    className="w-full flex items-center justify-center gap-2 rounded-2xl bg-teal-700 hover:bg-teal-800 py-4 text-sm font-black text-white shadow-md shadow-teal-700/20 transition-all hover:-translate-y-0.5 cursor-pointer"
+                    className="w-full h-12 rounded-[10px] bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-98 text-white font-semibold text-sm transition-all duration-120 flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-blue-600/10"
                   >
-                    <span>Desbloquear meu plano completo</span>
+                    <span>Liberar meu plano personalizado</span>
                     <Sparkles className="h-4 w-4" />
                   </button>
-                </div>
+                </motion.div>
               </motion.div>
             ) : (
               // 16 STEP QUESTIONS
