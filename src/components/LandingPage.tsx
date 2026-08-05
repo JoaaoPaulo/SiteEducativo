@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Sparkles, 
   ArrowRight, 
@@ -18,13 +18,54 @@ import {
   Users,
   Check,
   X,
-  GraduationCap
+  GraduationCap,
+  Clock,
+  Lock
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface LandingPageProps {
   onStartWizard: () => void;
 }
+
+interface CountUpProps {
+  end: number;
+  duration?: number;
+  prefix?: string;
+  suffix?: string;
+}
+
+const CountUp: React.FC<CountUpProps> = ({ end, duration = 1500, prefix = '', suffix = '' }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const endVal = end;
+    if (start === endVal) return;
+
+    const totalMiliseconds = duration;
+    const incrementTime = Math.min(Math.ceil(totalMiliseconds / endVal), 30);
+    
+    let timer = setInterval(() => {
+      start += Math.ceil(endVal / (totalMiliseconds / incrementTime));
+      if (start >= endVal) {
+        clearInterval(timer);
+        setCount(endVal);
+      } else {
+        setCount(start);
+      }
+    }, incrementTime);
+
+    return () => clearInterval(timer);
+  }, [end, duration]);
+
+  const formatNumber = (num: number) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
+  return <span>{prefix}{formatNumber(count)}{suffix}</span>;
+};
+
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
   const [activeDemoTab, setActiveDemoTab] = useState<'dashboard' | 'weekly' | 'calendar' | 'ai' | 'evolution'>('dashboard');
@@ -120,11 +161,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
           >
             <button
               onClick={onStartWizard}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 px-8 py-4.5 text-base font-black shadow-lg shadow-teal-500/10 transition-all transform hover:scale-102 cursor-pointer animate-pulse"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-teal-500 via-teal-400 to-indigo-500 hover:from-teal-400 hover:via-teal-300 hover:to-indigo-400 text-slate-950 px-10 py-5 text-lg font-black shadow-2xl shadow-teal-500/25 transform hover:-translate-y-1 hover:scale-105 transition-all duration-300 border border-white/20 cursor-pointer animate-pulse"
             >
-              <Sparkles className="h-5 w-5" />
+              <Sparkles className="h-5.5 w-5.5" />
               <span>Criar meu plano gratuito</span>
-              <ArrowRight className="h-5 w-5 stroke-[2.5]" />
+              <ArrowRight className="h-5.5 w-5.5 stroke-[2.5]" />
             </button>
           </motion.div>
 
@@ -136,19 +177,27 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
         <div className="mx-auto max-w-5xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/70 backdrop-blur-xs">
-              <div className="text-3xl sm:text-4xl font-extrabold text-white bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">+2.000</div>
+              <div className="text-3xl sm:text-4xl font-extrabold text-white bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
+                <CountUp end={1000} prefix="+" />
+              </div>
               <div className="text-xs text-slate-400 font-semibold mt-1">Questões Resolvidas (Meta Mínima)</div>
             </div>
             <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/70 backdrop-blur-xs">
-              <div className="text-3xl sm:text-4xl font-extrabold text-white bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">50</div>
+              <div className="text-3xl sm:text-4xl font-extrabold text-white bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
+                <CountUp end={50} />
+              </div>
               <div className="text-xs text-slate-400 font-semibold mt-1">Disciplinas e Mapas Mentais</div>
             </div>
             <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/70 backdrop-blur-xs">
-              <div className="text-3xl sm:text-4xl font-extrabold text-white bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">100%</div>
+              <div className="text-3xl sm:text-4xl font-extrabold text-white bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
+                <CountUp end={100} suffix="%" />
+              </div>
               <div className="text-xs text-slate-400 font-semibold mt-1">Personalizado p/ sua Meta</div>
             </div>
             <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/70 backdrop-blur-xs">
-              <div className="text-3xl sm:text-4xl font-extrabold text-white bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">24h</div>
+              <div className="text-3xl sm:text-4xl font-extrabold text-white bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
+                <CountUp end={24} suffix="h" />
+              </div>
               <div className="text-xs text-slate-400 font-semibold mt-1">Suporte Tira-Dúvidas com IA</div>
             </div>
           </div>
@@ -175,8 +224,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
             <div className="grid gap-8 md:grid-cols-3 relative z-10">
               {/* Step 1 */}
               <div className="glass rounded-2xl p-6 flex flex-col items-center text-center group hover:border-teal-500/50 transition-all duration-300">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-500/10 text-teal-400 border border-teal-500/20 font-black text-xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
-                  1️⃣
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-teal-400 border border-slate-800 font-extrabold text-sm mb-6 shadow-md group-hover:scale-110 transition-transform">
+                  01
                 </div>
                 <h3 className="font-extrabold text-lg text-white mb-2">Responda um formulário</h3>
                 <p className="text-sm text-slate-400 leading-relaxed">
@@ -186,8 +235,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
 
               {/* Step 2 */}
               <div className="glass rounded-2xl p-6 flex flex-col items-center text-center group hover:border-teal-500/50 transition-all duration-300">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-500/10 text-teal-400 border border-teal-500/20 font-black text-xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
-                  2️⃣
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-teal-400 border border-slate-800 font-extrabold text-sm mb-6 shadow-md group-hover:scale-110 transition-transform">
+                  02
                 </div>
                 <h3 className="font-extrabold text-lg text-white mb-2">Receba seu plano personalizado</h3>
                 <p className="text-sm text-slate-400 leading-relaxed">
@@ -197,8 +246,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
 
               {/* Step 3 */}
               <div className="glass rounded-2xl p-6 flex flex-col items-center text-center group hover:border-teal-500/50 transition-all duration-300">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-500/10 text-teal-400 border border-teal-500/20 font-black text-xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
-                  3️⃣
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-teal-400 border border-slate-800 font-extrabold text-sm mb-6 shadow-md group-hover:scale-110 transition-transform">
+                  03
                 </div>
                 <h3 className="font-extrabold text-lg text-white mb-2">Estude com acompanhamento</h3>
                 <p className="text-sm text-slate-400 leading-relaxed">
@@ -313,7 +362,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                   {/* Dashboard Mockup */}
                   <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-slate-900 pb-4">
                     <div>
-                      <h4 className="text-lg font-bold text-white">Olá, Joshua 👋</h4>
+                      <h4 className="text-lg font-bold text-white">Olá, Joshua</h4>
                       <p className="text-xs text-slate-400">Meta: Medicina (USP) • Faltam 95 dias para o ENEM</p>
                     </div>
                     <div className="flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 px-3.5 py-1.5 rounded-xl">
@@ -413,7 +462,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                     <div className="bg-slate-900/90 border border-slate-700/80 p-4 rounded-xl flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className="flex h-7 w-7 items-center justify-center rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400">
-                          <span className="text-xs font-bold">⏳</span>
+                          <Clock className="h-4 w-4 text-teal-400" />
                         </div>
                         <div>
                           <span className="text-[10px] text-teal-400 font-bold block uppercase tracking-wider">Quarta-feira (Hoje)</span>
@@ -427,7 +476,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                     <div className="bg-slate-900/30 border border-slate-900 p-4 rounded-xl flex items-center justify-between opacity-60">
                       <div className="flex items-center gap-3">
                         <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-800 border border-slate-700 text-slate-400">
-                          <span className="text-xs font-bold">🔒</span>
+                          <Lock className="h-4 w-4 text-slate-500" />
                         </div>
                         <div>
                           <span className="text-[10px] text-slate-500 font-bold block uppercase tracking-wider">Quinta-feira</span>
@@ -453,7 +502,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
 
                   <div className="bg-slate-900/50 border border-slate-800 p-4 rounded-2xl flex flex-col md:flex-row gap-6 items-center justify-between">
                     <div className="space-y-2">
-                      <div className="text-xs text-amber-400 font-bold">⚠️ DETECTAMOS ATRAZO NA QUARTA-FEIRA</div>
+                      <div className="text-xs text-amber-400 font-bold flex items-center gap-1.5">
+                        <AlertCircle className="h-4 w-4 shrink-0" />
+                        <span>DETECTAMOS ATRASO NA QUARTA-FEIRA</span>
+                      </div>
                       <p className="text-xs text-slate-300 leading-relaxed max-w-md">
                         "Sem acúmulo de matérias ou ansiedade: redistribuímos Calorimetria de Física para o seu Sábado mantendo o ritmo planejado."
                       </p>
