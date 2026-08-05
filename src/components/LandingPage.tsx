@@ -35,40 +35,59 @@ interface CountUpProps {
   suffix?: string;
 }
 
-const CountUp: React.FC<CountUpProps> = ({ end, duration = 1500, prefix = '', suffix = '' }) => {
+const CountUp: React.FC<CountUpProps> = ({ end, duration = 1200, prefix = '', suffix = '' }) => {
   const [count, setCount] = useState(0);
+  const [startCount, setStartCount] = useState(false);
+  const ref = React.useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    let start = 0;
-    const endVal = end;
-    if (start === endVal) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStartCount(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
 
-    const totalMiliseconds = duration;
-    const incrementTime = Math.min(Math.ceil(totalMiliseconds / endVal), 30);
-    
-    let timer = setInterval(() => {
-      start += Math.ceil(endVal / (totalMiliseconds / incrementTime));
-      if (start >= endVal) {
-        clearInterval(timer);
-        setCount(endVal);
-      } else {
-        setCount(start);
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!startCount) return;
+
+    let startTimestamp: number | null = null;
+    let animationFrameId: number;
+
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      setCount(Math.floor(progress * end));
+      if (progress < 1) {
+        animationFrameId = window.requestAnimationFrame(step);
       }
-    }, incrementTime);
+    };
 
-    return () => clearInterval(timer);
-  }, [end, duration]);
+    animationFrameId = window.requestAnimationFrame(step);
+    return () => window.cancelAnimationFrame(animationFrameId);
+  }, [startCount, end, duration]);
 
   const formatNumber = (num: number) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
-  return <span>{prefix}{formatNumber(count)}{suffix}</span>;
+  return <span ref={ref}>{prefix}{formatNumber(count)}{suffix}</span>;
 };
 
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
   const [activeDemoTab, setActiveDemoTab] = useState<'dashboard' | 'weekly' | 'calendar' | 'ai' | 'evolution'>('dashboard');
+  const [activeStep, setActiveStep] = useState<number>(0);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-teal-500 selection:text-slate-950 relative overflow-hidden">
@@ -204,10 +223,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
         </div>
       </section>
 
-      {/* SECTION 2: COMO FUNCIONA EM 3 PASSOS */}
+      {/* SECTION 2: COMO FUNCIONA EM 3 PASSOS (INTERATIVO) */}
       <section className="px-4 py-20 sm:px-6 lg:px-8 border-b border-slate-900 bg-slate-950/50">
         <div className="mx-auto max-w-5xl">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-xs font-bold uppercase tracking-widest text-teal-400">Simplicidade Extrema</h2>
             <p className="text-3xl font-black text-white sm:text-5xl mt-3">
               Como funciona o sistema?
@@ -217,53 +236,186 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
             </p>
           </div>
 
-          <div className="relative">
-            {/* Connection Line for Desktop */}
-            <div className="hidden md:block absolute top-1/2 left-[10%] right-[10%] h-[2px] bg-slate-800 -translate-y-12 z-0" />
+          <div className="grid gap-8 md:grid-cols-12 items-stretch mt-8">
+            
+            {/* Step Selection Triggers */}
+            <div className="md:col-span-5 flex flex-col justify-center gap-4">
+              {[
+                {
+                  id: 0,
+                  num: '01',
+                  title: 'Responda o formulário',
+                  desc: 'Diga seu curso dos sonhos, suas dificuldades por área e quantas horas por dia você tem disponível.'
+                },
+                {
+                  id: 1,
+                  num: '02',
+                  title: 'Receba seu plano personalizado',
+                  desc: 'Nossa IA calcula o peso das matérias e monta um cronograma otimizado com foco no que realmente cai no ENEM.'
+                },
+                {
+                  id: 2,
+                  num: '03',
+                  title: 'Estude com acompanhamento',
+                  desc: 'Faça seus estudos diários com a IA tirando dúvidas e reorganizando a semana automaticamente se você atrasar.'
+                }
+              ].map(s => {
+                const isActive = activeStep === s.id;
+                return (
+                  <div
+                    key={s.id}
+                    onMouseEnter={() => setActiveStep(s.id)}
+                    onClick={() => setActiveStep(s.id)}
+                    className={`p-5 rounded-2xl border transition-all duration-300 text-left cursor-pointer ${
+                      isActive 
+                        ? 'border-teal-500/40 bg-teal-500/5 shadow-lg shadow-teal-500/5' 
+                        : 'border-slate-900 bg-slate-950/30 hover:border-slate-800'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className={`text-xs font-black px-2 py-0.5 rounded ${
+                        isActive ? 'bg-teal-500/20 text-teal-300' : 'bg-slate-900 text-slate-500'
+                      }`}>{s.num}</span>
+                      <h3 className={`font-black text-sm ${isActive ? 'text-white' : 'text-slate-400'}`}>{s.title}</h3>
+                    </div>
+                    <p className="text-xs text-slate-400 leading-relaxed">{s.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
 
-            <div className="grid gap-8 md:grid-cols-3 relative z-10">
-              {/* Step 1 */}
-              <div className="glass rounded-2xl p-6 flex flex-col items-center text-center group hover:border-teal-500/50 transition-all duration-300">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-teal-400 border border-slate-800 font-extrabold text-sm mb-6 shadow-md group-hover:scale-110 transition-transform">
-                  01
-                </div>
-                <h3 className="font-extrabold text-lg text-white mb-2">Responda um formulário</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">
-                  Leva apenas 2 minutos. Diga seu curso dos sonhos, suas dificuldades e quantas horas você tem para estudar.
-                </p>
-              </div>
+            {/* Dynamic Visual Showcase */}
+            <div className="md:col-span-7 flex flex-col justify-center">
+              <div className="glass rounded-3xl p-6 min-h-[280px] flex flex-col justify-between border-slate-900 bg-slate-900/20 shadow-xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 h-24 w-24 rounded-full bg-teal-500/5 blur-xl pointer-events-none" />
+                
+                {/* Step 1 Visual content */}
+                {activeStep === 0 && (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="space-y-4"
+                  >
+                    <div className="flex items-center justify-between border-b border-slate-900 pb-3">
+                      <span className="text-xs font-bold text-slate-400">Questionário Inteligente</span>
+                      <span className="text-[10px] bg-teal-500/10 text-teal-300 border border-teal-500/20 px-2 py-0.5 rounded font-black">Meta: 800+</span>
+                    </div>
 
-              {/* Step 2 */}
-              <div className="glass rounded-2xl p-6 flex flex-col items-center text-center group hover:border-teal-500/50 transition-all duration-300">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-teal-400 border border-slate-800 font-extrabold text-sm mb-6 shadow-md group-hover:scale-110 transition-transform">
-                  02
-                </div>
-                <h3 className="font-extrabold text-lg text-white mb-2">Receba seu plano personalizado</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">
-                  Nossa IA calcula o peso das matérias e monta um cronograma otimizado com foco no que realmente cai no ENEM.
-                </p>
-              </div>
+                    <div className="space-y-3 text-left">
+                      <div className="bg-slate-950/70 p-3.5 rounded-xl border border-slate-900">
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Qual seu curso dos sonhos?</label>
+                        <div className="flex items-center justify-between mt-1 text-sm font-bold text-white bg-slate-900 border border-slate-800 px-3 py-2 rounded-lg">
+                          <span>Medicina</span>
+                          <Check className="h-4 w-4 text-teal-400 stroke-[3]" />
+                        </div>
+                      </div>
 
-              {/* Step 3 */}
-              <div className="glass rounded-2xl p-6 flex flex-col items-center text-center group hover:border-teal-500/50 transition-all duration-300">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-teal-400 border border-slate-800 font-extrabold text-sm mb-6 shadow-md group-hover:scale-110 transition-transform">
-                  03
+                      <div className="bg-slate-950/70 p-3.5 rounded-xl border border-slate-900">
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Quantas horas você tem por dia?</label>
+                        <div className="flex gap-2 mt-1.5">
+                          {['2h', '3h', '4h+', 'Sem tempo'].map((h, i) => (
+                            <span key={i} className={`text-xs px-3 py-1 rounded-md border font-extrabold ${
+                              h === '3h' ? 'border-teal-500 text-teal-300 bg-teal-500/5' : 'border-slate-800 text-slate-400'
+                            }`}>{h}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Step 2 Visual content */}
+                {activeStep === 1 && (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="space-y-4 text-left"
+                  >
+                    <div className="flex items-center justify-between border-b border-slate-900 pb-3">
+                      <span className="text-xs font-bold text-slate-400">Trilha Gerada em Tempo Real</span>
+                      <span className="text-[10px] bg-teal-500/10 text-teal-300 border border-teal-500/20 px-2 py-0.5 rounded font-black">Pronto</span>
+                    </div>
+
+                    <div className="space-y-2.5">
+                      <div className="bg-slate-950/80 border border-slate-900 p-3 rounded-xl flex items-center justify-between">
+                        <div>
+                          <span className="text-[9px] text-slate-500 font-bold uppercase block">SEGUNDA-FEIRA</span>
+                          <span className="text-xs font-black text-white">Razão, Proporção e Regra de Três</span>
+                        </div>
+                        <span className="text-[9px] bg-teal-500/10 border border-teal-500/20 text-teal-300 px-2 py-0.5 rounded font-bold">Alta Incidência</span>
+                      </div>
+
+                      <div className="bg-slate-950/80 border border-slate-900 p-3 rounded-xl flex items-center justify-between">
+                        <div>
+                          <span className="text-[9px] text-slate-500 font-bold uppercase block">TERÇA-FEIRA</span>
+                          <span className="text-xs font-black text-white">Cadeias Alimentares e Ecologia</span>
+                        </div>
+                        <span className="text-[9px] bg-teal-500/10 border border-teal-500/20 text-teal-300 px-2 py-0.5 rounded font-bold">Alta Incidência</span>
+                      </div>
+
+                      <div className="bg-slate-950/40 border border-slate-900 p-3 rounded-xl flex items-center justify-between opacity-50">
+                        <div>
+                          <span className="text-[9px] text-slate-600 font-bold uppercase block">QUARTA-FEIRA</span>
+                          <span className="text-xs font-black text-slate-400">Calorimetria & Térmica</span>
+                        </div>
+                        <span className="text-[9px] bg-slate-900 text-slate-500 px-2 py-0.5 rounded font-bold">Estratégico</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Step 3 Visual content */}
+                {activeStep === 2 && (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="space-y-4 text-left"
+                  >
+                    <div className="flex items-center justify-between border-b border-slate-900 pb-3">
+                      <span className="text-xs font-bold text-slate-400">Acompanhamento de Consistência</span>
+                      <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-black">Em Curso</span>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="bg-slate-950/80 border border-slate-900 p-3 rounded-xl flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="h-4.5 w-4.5 text-emerald-400" />
+                          <span className="text-xs text-slate-200">Meta diária cumprida!</span>
+                        </div>
+                        <span className="text-xs font-bold text-slate-400">100% concluído</span>
+                      </div>
+
+                      <div className="bg-amber-950/20 border border-amber-900/30 p-3 rounded-xl flex items-start gap-2.5">
+                        <AlertCircle className="h-4 w-4 text-amber-500 shrink-0 mt-0.5" />
+                        <div>
+                          <span className="text-[10px] font-black text-amber-400 block uppercase">Reorganização Ativa</span>
+                          <span className="text-[10.5px] text-slate-300 leading-relaxed block mt-0.5">
+                            Você não pôde estudar ontem. A IA remanejou a tarefa de Calorimetria para o sábado, mantendo a carga da semana equilibrada.
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Simulated interactive trigger help text */}
+                <div className="mt-4 text-[10px] text-slate-500 text-center italic border-t border-slate-900/60 pt-2.5">
+                  Passe o mouse ou toque nas etapas para simular o funcionamento
                 </div>
-                <h3 className="font-extrabold text-lg text-white mb-2">Estude com acompanhamento</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">
-                  Faça seus estudos diários com a IA tirando dúvidas e reorganizando a semana automaticamente se você atrasar.
-                </p>
               </div>
             </div>
+
           </div>
 
-          <div className="mt-12 text-center">
+          {/* Prominent Step CTA */}
+          <div className="mt-14 text-center">
             <button
               onClick={onStartWizard}
-              className="inline-flex items-center gap-2 text-sm font-bold text-teal-400 hover:text-teal-300 group cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-400 hover:to-indigo-500 text-white px-8 py-4.5 text-base font-black shadow-lg shadow-teal-500/20 transform hover:-translate-y-1 hover:scale-103 transition-all duration-300 border border-white/10 cursor-pointer animate-pulse"
             >
-              <span>Começar agora</span>
-              <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <Sparkles className="h-5 w-5" />
+              <span>Começar minha trilha agora</span>
+              <ArrowRight className="h-5 w-5 stroke-[2.5]" />
             </button>
           </div>
         </div>

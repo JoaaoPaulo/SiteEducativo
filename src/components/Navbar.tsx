@@ -131,7 +131,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
               <button
                 onClick={() => setActiveTab('wizard')}
-                className="flex items-center gap-1.5 rounded-lg bg-teal-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-xs hover:bg-teal-500 transition-all"
+                className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-400 hover:to-indigo-400 px-4 py-2 text-xs font-black text-slate-950 shadow-md shadow-teal-500/25 transform hover:-translate-y-0.5 transition-all duration-300 border border-white/10 cursor-pointer"
               >
                 <Sparkles className="h-3.5 w-3.5" />
                 <span>Criar Trilha Grátis</span>
