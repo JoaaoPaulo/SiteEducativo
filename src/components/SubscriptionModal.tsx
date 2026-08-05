@@ -24,7 +24,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   const [expiry, setExpiry] = useState('');
   const [cvv, setCvv] = useState('');
 
-  const pixKey = "00020126580014BR.GOV.BCB.PIX0136trilhaenem-assinatura-pro-2026520400005303986540529.905802BR5910TrilhaENEM6009SAO PAULO62070503***6304E0C1";
+  const pixKey = "00020126580014BR.GOV.BCB.PIX0136adaptostdy-assinatura-pro-2026520400005303986540529.905802BR5910AdaptoSTDY6009SAO PAULO62070503***6304E0C1";
 
   const handleCopyPix = () => {
     navigator.clipboard?.writeText(pixKey);
@@ -61,9 +61,9 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
         {/* Header */}
         <div className="text-center">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-teal-50 border border-teal-200 px-3 py-1 text-xs font-bold text-teal-800 mb-3">
-            <Sparkles className="h-3.5 w-3.5 text-teal-700" />
-            <span>Assinatura Mensal • Plano Trilha ENEM Pro</span>
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-xs font-bold text-blue-800 mb-3">
+            <Sparkles className="h-3.5 w-3.5 text-blue-600" />
+            <span>Assinatura Mensal • Plano AdaptoSTDY Pro</span>
           </div>
 
           <h2 className="text-2xl font-black text-slate-900">R$ 29,90 <span className="text-xs font-medium text-slate-500">/ mês</span></h2>

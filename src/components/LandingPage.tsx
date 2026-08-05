@@ -286,8 +286,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
 
             {/* Dynamic Visual Showcase */}
             <div className="md:col-span-7 flex flex-col justify-center">
-              <div className="rounded-3xl p-6 min-h-[280px] flex flex-col justify-between border-slate-800 bg-grad-profundidade shadow-2xl relative overflow-hidden text-white">
-                <div className="absolute top-0 right-0 h-24 w-24 rounded-full bg-blue-600/10 blur-xl pointer-events-none" />
+              <div className="rounded-3xl p-6 min-h-[280px] flex flex-col justify-between border border-line bg-white shadow-lg relative overflow-hidden text-ink">
+                <div className="absolute top-0 right-0 h-24 w-24 rounded-full bg-blue-500/5 blur-xl pointer-events-none" />
                 
                 {/* Step 1 Visual content */}
                 {activeStep === 0 && (
@@ -296,26 +296,26 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                     animate={{ opacity: 1, scale: 1 }}
                     className="space-y-4"
                   >
-                    <div className="flex items-center justify-between border-b border-slate-900 pb-3">
-                      <span className="text-xs font-bold text-slate-400">Questionário Inteligente</span>
-                      <span className="text-[10px] bg-teal-500/10 text-teal-300 border border-teal-500/20 px-2 py-0.5 rounded font-black">Meta: 800+</span>
+                    <div className="flex items-center justify-between border-b border-line pb-3">
+                      <span className="text-xs font-bold text-muted">Questionário Inteligente</span>
+                      <span className="text-[10px] bg-blue-100 text-blue-700 border border-blue-200 px-2 py-0.5 rounded font-black">Meta: 800+</span>
                     </div>
 
                     <div className="space-y-3 text-left">
-                      <div className="bg-slate-950/70 p-3.5 rounded-xl border border-slate-900">
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Qual seu curso dos sonhos?</label>
-                        <div className="flex items-center justify-between mt-1 text-sm font-bold text-white bg-slate-900 border border-slate-800 px-3 py-2 rounded-lg">
+                      <div className="bg-slate-50 p-3.5 rounded-xl border border-line">
+                        <label className="text-[10px] font-bold text-muted uppercase tracking-wider">Qual seu curso dos sonhos?</label>
+                        <div className="flex items-center justify-between mt-1 text-sm font-bold text-ink bg-white border border-line px-3 py-2 rounded-lg">
                           <span>Medicina</span>
-                          <Check className="h-4 w-4 text-teal-400 stroke-[3]" />
+                          <Check className="h-4 w-4 text-blue-600 stroke-[3]" />
                         </div>
                       </div>
 
-                      <div className="bg-slate-950/70 p-3.5 rounded-xl border border-slate-900">
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Quantas horas você tem por dia?</label>
+                      <div className="bg-slate-50 p-3.5 rounded-xl border border-line">
+                        <label className="text-[10px] font-bold text-muted uppercase tracking-wider">Quantas horas você tem por dia?</label>
                         <div className="flex gap-2 mt-1.5">
                           {['2h', '3h', '4h+', 'Sem tempo'].map((h, i) => (
                             <span key={i} className={`text-xs px-3 py-1 rounded-md border font-extrabold ${
-                              h === '3h' ? 'border-teal-500 text-teal-300 bg-teal-500/5' : 'border-slate-800 text-slate-400'
+                              h === '3h' ? 'border-blue-600 text-blue-600 bg-blue-50' : 'border-line text-muted'
                             }`}>{h}</span>
                           ))}
                         </div>
@@ -331,34 +331,34 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                     animate={{ opacity: 1, scale: 1 }}
                     className="space-y-4 text-left"
                   >
-                    <div className="flex items-center justify-between border-b border-slate-900 pb-3">
-                      <span className="text-xs font-bold text-slate-400">Trilha Gerada em Tempo Real</span>
-                      <span className="text-[10px] bg-teal-500/10 text-teal-300 border border-teal-500/20 px-2 py-0.5 rounded font-black">Pronto</span>
+                    <div className="flex items-center justify-between border-b border-line pb-3">
+                      <span className="text-xs font-bold text-muted">Trilha Gerada em Tempo Real</span>
+                      <span className="text-[10px] bg-blue-100 text-blue-700 border border-blue-200 px-2 py-0.5 rounded font-black">Pronto</span>
                     </div>
 
                     <div className="space-y-2.5">
-                      <div className="bg-slate-950/80 border border-slate-900 p-3 rounded-xl flex items-center justify-between">
+                      <div className="bg-slate-50 border border-line p-3 rounded-xl flex items-center justify-between">
                         <div>
-                          <span className="text-[9px] text-slate-500 font-bold uppercase block">SEGUNDA-FEIRA</span>
-                          <span className="text-xs font-black text-white">Razão, Proporção e Regra de Três</span>
+                          <span className="text-[9px] text-muted font-bold uppercase block">SEGUNDA-FEIRA</span>
+                          <span className="text-xs font-black text-ink">Razão, Proporção e Regra de Três</span>
                         </div>
-                        <span className="text-[9px] bg-teal-500/10 border border-teal-500/20 text-teal-300 px-2 py-0.5 rounded font-bold">Alta Incidência</span>
+                        <span className="text-[9px] bg-blue-100 border border-blue-200 text-blue-700 px-2 py-0.5 rounded font-bold">Alta Incidência</span>
                       </div>
 
-                      <div className="bg-slate-950/80 border border-slate-900 p-3 rounded-xl flex items-center justify-between">
+                      <div className="bg-slate-50 border border-line p-3 rounded-xl flex items-center justify-between">
                         <div>
-                          <span className="text-[9px] text-slate-500 font-bold uppercase block">TERÇA-FEIRA</span>
-                          <span className="text-xs font-black text-white">Cadeias Alimentares e Ecologia</span>
+                          <span className="text-[9px] text-muted font-bold uppercase block">TERÇA-FEIRA</span>
+                          <span className="text-xs font-black text-ink">Cadeias Alimentares e Ecologia</span>
                         </div>
-                        <span className="text-[9px] bg-teal-500/10 border border-teal-500/20 text-teal-300 px-2 py-0.5 rounded font-bold">Alta Incidência</span>
+                        <span className="text-[9px] bg-blue-100 border border-blue-200 text-blue-700 px-2 py-0.5 rounded font-bold">Alta Incidência</span>
                       </div>
 
-                      <div className="bg-slate-950/40 border border-slate-900 p-3 rounded-xl flex items-center justify-between opacity-50">
+                      <div className="bg-slate-50/40 border border-line p-3 rounded-xl flex items-center justify-between opacity-50">
                         <div>
-                          <span className="text-[9px] text-slate-600 font-bold uppercase block">QUARTA-FEIRA</span>
-                          <span className="text-xs font-black text-slate-400">Calorimetria & Térmica</span>
+                          <span className="text-[9px] text-muted font-bold uppercase block">QUARTA-FEIRA</span>
+                          <span className="text-xs font-black text-muted">Calorimetria & Térmica</span>
                         </div>
-                        <span className="text-[9px] bg-slate-900 text-slate-500 px-2 py-0.5 rounded font-bold">Estratégico</span>
+                        <span className="text-[9px] bg-slate-100 text-muted px-2 py-0.5 rounded font-bold">Estratégico</span>
                       </div>
                     </div>
                   </motion.div>
@@ -371,25 +371,25 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                     animate={{ opacity: 1, scale: 1 }}
                     className="space-y-4 text-left"
                   >
-                    <div className="flex items-center justify-between border-b border-slate-900 pb-3">
-                      <span className="text-xs font-bold text-slate-400">Acompanhamento de Consistência</span>
-                      <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-black">Em Curso</span>
+                    <div className="flex items-center justify-between border-b border-line pb-3">
+                      <span className="text-xs font-bold text-muted">Acompanhamento de Consistência</span>
+                      <span className="text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-black">Em Curso</span>
                     </div>
 
                     <div className="space-y-3">
-                      <div className="bg-slate-950/80 border border-slate-900 p-3 rounded-xl flex items-center justify-between">
+                      <div className="bg-slate-50 border border-line p-3 rounded-xl flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <CheckCircle2 className="h-4.5 w-4.5 text-emerald-400" />
-                          <span className="text-xs text-slate-200">Meta diária cumprida!</span>
+                          <CheckCircle2 className="h-4.5 w-4.5 text-emerald-600" />
+                          <span className="text-xs text-ink">Meta diária cumprida!</span>
                         </div>
-                        <span className="text-xs font-bold text-slate-400">100% concluído</span>
+                        <span className="text-xs font-bold text-muted">100% concluído</span>
                       </div>
 
-                      <div className="bg-amber-950/20 border border-amber-900/30 p-3 rounded-xl flex items-start gap-2.5">
-                        <AlertCircle className="h-4 w-4 text-amber-500 shrink-0 mt-0.5" />
+                      <div className="bg-amber-50 border border-amber-200 p-3 rounded-xl flex items-start gap-2.5">
+                        <AlertCircle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
                         <div>
-                          <span className="text-[10px] font-black text-amber-400 block uppercase">Reorganização Ativa</span>
-                          <span className="text-[10.5px] text-slate-300 leading-relaxed block mt-0.5">
+                          <span className="text-[10px] font-black text-amber-700 block uppercase">Reorganização Ativa</span>
+                          <span className="text-[10.5px] text-slate-600 leading-relaxed block mt-0.5">
                             Você não pôde estudar ontem. A IA remanejou a tarefa de Calorimetria para o sábado, mantendo a carga da semana equilibrada.
                           </span>
                         </div>
@@ -399,7 +399,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                 )}
 
                 {/* Simulated interactive trigger help text */}
-                <div className="mt-4 text-[10px] text-slate-500 text-center italic border-t border-slate-900/60 pt-2.5">
+                <div className="mt-4 text-[10px] text-muted text-center italic border-t border-line pt-2.5">
                   Passe o mouse ou toque nas etapas para simular o funcionamento
                 </div>
               </div>
@@ -435,20 +435,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
           </div>
 
           {/* Interactive Showcase Component */}
-          <div className="rounded-3xl border border-slate-800 bg-grad-profundidade p-1 md:p-2 shadow-2xl relative overflow-hidden text-white">
+          <div className="rounded-3xl border border-line bg-white p-1 md:p-2 shadow-2xl relative overflow-hidden text-ink">
             
             {/* Tab Selectors */}
-            <div className="flex flex-wrap border-b border-slate-900 p-2 gap-1.5 md:gap-2">
+            <div className="flex flex-wrap border-b border-line p-2 gap-1.5 md:gap-2">
               <button
                 onClick={() => setActiveDemoTab('dashboard')}
                 className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-xl transition-all cursor-pointer ${
                   activeDemoTab === 'dashboard'
-                    ? 'bg-slate-900 text-white border border-slate-800 shadow-sm text-glow'
-                    : 'text-slate-400 hover:bg-slate-900/40 hover:text-slate-200'
+                    ? 'bg-slate-100 text-ink border border-line shadow-xs font-black'
+                    : 'text-muted hover:bg-slate-50 hover:text-ink'
                 }`}
               >
                 <div className="flex items-center justify-center gap-2">
-                  <TrendingUp className="h-4 w-4 text-teal-400" />
+                  <TrendingUp className="h-4 w-4 text-blue-600" />
                   <span>Dashboard</span>
                 </div>
               </button>
@@ -456,12 +456,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                 onClick={() => setActiveDemoTab('weekly')}
                 className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-xl transition-all cursor-pointer ${
                   activeDemoTab === 'weekly'
-                    ? 'bg-slate-900 text-white border border-slate-800 shadow-sm text-glow'
-                    : 'text-slate-400 hover:bg-slate-900/40 hover:text-slate-200'
+                    ? 'bg-slate-100 text-ink border border-line shadow-xs font-black'
+                    : 'text-muted hover:bg-slate-50 hover:text-ink'
                 }`}
               >
                 <div className="flex items-center justify-center gap-2">
-                  <FileText className="h-4 w-4 text-teal-400" />
+                  <FileText className="h-4 w-4 text-blue-600" />
                   <span>Plano Semanal</span>
                 </div>
               </button>
@@ -469,12 +469,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                 onClick={() => setActiveDemoTab('calendar')}
                 className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-xl transition-all cursor-pointer ${
                   activeDemoTab === 'calendar'
-                    ? 'bg-slate-900 text-white border border-slate-800 shadow-sm text-glow'
-                    : 'text-slate-400 hover:bg-slate-900/40 hover:text-slate-200'
+                    ? 'bg-slate-100 text-ink border border-line shadow-xs font-black'
+                    : 'text-muted hover:bg-slate-50 hover:text-ink'
                 }`}
               >
                 <div className="flex items-center justify-center gap-2">
-                  <Calendar className="h-4 w-4 text-teal-400" />
+                  <Calendar className="h-4 w-4 text-blue-600" />
                   <span>Calendário IA</span>
                 </div>
               </button>
@@ -482,12 +482,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                 onClick={() => setActiveDemoTab('ai')}
                 className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-xl transition-all cursor-pointer ${
                   activeDemoTab === 'ai'
-                    ? 'bg-slate-900 text-white border border-slate-800 shadow-sm text-glow'
-                    : 'text-slate-400 hover:bg-slate-900/40 hover:text-slate-200'
+                    ? 'bg-slate-100 text-ink border border-line shadow-xs font-black'
+                    : 'text-muted hover:bg-slate-50 hover:text-ink'
                 }`}
               >
                 <div className="flex items-center justify-center gap-2">
-                  <MessageSquare className="h-4 w-4 text-teal-400" />
+                  <MessageSquare className="h-4 w-4 text-blue-600" />
                   <span>Tira-Dúvidas IA</span>
                 </div>
               </button>
@@ -495,79 +495,78 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                 onClick={() => setActiveDemoTab('evolution')}
                 className={`flex-1 min-w-[120px] text-xs font-bold py-3 px-4 rounded-xl transition-all cursor-pointer ${
                   activeDemoTab === 'evolution'
-                    ? 'bg-slate-900 text-white border border-slate-800 shadow-sm text-glow'
-                    : 'text-slate-400 hover:bg-slate-900/40 hover:text-slate-200'
+                    ? 'bg-slate-100 text-ink border border-line shadow-xs font-black'
+                    : 'text-muted hover:bg-slate-50 hover:text-ink'
                 }`}
               >
                 <div className="flex items-center justify-center gap-2">
-                  <Award className="h-4 w-4 text-teal-400" />
+                  <Award className="h-4 w-4 text-blue-600" />
                   <span>Evolução</span>
                 </div>
               </button>
             </div>
 
             {/* Active Demo Window */}
-            <div className="p-4 md:p-8 min-h-[350px] bg-slate-950/80 rounded-b-3xl">
-              
+            <div className="p-4 md:p-8 min-h-[350px] bg-slate-50/50 rounded-b-3xl text-ink">
               {activeDemoTab === 'dashboard' && (
                 <div className="space-y-6">
                   {/* Dashboard Mockup */}
-                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-slate-900 pb-4">
+                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-line pb-4">
                     <div>
-                      <h4 className="text-lg font-bold text-white">Olá, Joshua</h4>
-                      <p className="text-xs text-slate-400">Meta: Medicina (USP) • Faltam 95 dias para o ENEM</p>
+                      <h4 className="text-lg font-bold text-ink font-display">Olá, Joshua</h4>
+                      <p className="text-xs text-muted">Meta: Medicina (USP) • Faltam 95 dias para o ENEM</p>
                     </div>
-                    <div className="flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 px-3.5 py-1.5 rounded-xl">
-                      <Zap className="h-4 w-4 text-teal-400 fill-teal-400" />
-                      <span className="text-xs font-bold text-teal-300">5 dias de ofensiva!</span>
+                    <div className="flex items-center gap-2 bg-blue-50 border border-blue-200 px-3.5 py-1.5 rounded-xl">
+                      <Zap className="h-4 w-4 text-blue-600 fill-blue-600" />
+                      <span className="text-xs font-bold text-blue-700">5 dias de ofensiva!</span>
                     </div>
                   </div>
 
                   <div className="grid gap-4 md:grid-cols-3">
-                    <div className="bg-slate-900/50 border border-slate-900 p-4 rounded-xl">
-                      <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Progresso Geral</div>
-                      <div className="text-2xl font-black text-white mt-1">64%</div>
-                      <div className="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
-                        <div className="bg-teal-500 h-1.5 rounded-full" style={{ width: '64%' }}></div>
+                    <div className="bg-white border border-line p-4 rounded-xl">
+                      <div className="text-[10px] uppercase font-bold tracking-wider text-muted">Progresso Geral</div>
+                      <div className="text-2xl font-black text-ink mt-1">64%</div>
+                      <div className="w-full bg-slate-100 rounded-full h-1.5 mt-2 overflow-hidden">
+                        <div className="bg-blue-600 h-1.5 rounded-full" style={{ width: '64%' }}></div>
                       </div>
                     </div>
-                    <div className="bg-slate-900/50 border border-slate-900 p-4 rounded-xl">
-                      <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Meta da Semana</div>
-                      <div className="text-2xl font-black text-white mt-1">9 / 12h</div>
-                      <div className="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
-                        <div className="bg-teal-500 h-1.5 rounded-full" style={{ width: '75%' }}></div>
+                    <div className="bg-white border border-line p-4 rounded-xl">
+                      <div className="text-[10px] uppercase font-bold tracking-wider text-muted">Meta da Semana</div>
+                      <div className="text-2xl font-black text-ink mt-1">9 / 12h</div>
+                      <div className="w-full bg-slate-100 rounded-full h-1.5 mt-2 overflow-hidden">
+                        <div className="bg-blue-600 h-1.5 rounded-full" style={{ width: '75%' }}></div>
                       </div>
                     </div>
-                    <div className="bg-slate-900/50 border border-slate-900 p-4 rounded-xl">
-                      <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Respostas Corretas</div>
-                      <div className="text-2xl font-black text-white mt-1">82.4%</div>
-                      <div className="text-[10px] text-teal-400 mt-2 font-medium">Acima da média de corte (800+)</div>
+                    <div className="bg-white border border-line p-4 rounded-xl">
+                      <div className="text-[10px] uppercase font-bold tracking-wider text-muted">Respostas Corretas</div>
+                      <div className="text-2xl font-black text-ink mt-1">82.4%</div>
+                      <div className="text-[10px] text-blue-600 mt-2 font-medium">Acima da média de corte (800+)</div>
                     </div>
                   </div>
 
                   {/* Task Card */}
-                  <div className="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-lg">
+                  <div className="bg-white border border-line p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
                     <div>
-                      <div className="inline-block text-[9px] font-extrabold bg-teal-500/10 border border-teal-500/25 px-2 py-0.5 rounded text-teal-400 mb-1">
+                      <div className="inline-block text-[9px] font-extrabold bg-blue-50 border border-blue-200 px-2 py-0.5 rounded text-blue-700 mb-1">
                         TAREFA DE HOJE • ALTA INCIDÊNCIA
                       </div>
-                      <h5 className="font-extrabold text-sm text-white">Termodinâmica e Calorimetria</h5>
-                      <p className="text-xs text-slate-400 mt-0.5">Física • 50 minutos • Videoaula + 10 questões</p>
+                      <h5 className="font-extrabold text-sm text-ink font-display">Termodinâmica e Calorimetria</h5>
+                      <p className="text-xs text-muted mt-0.5">Física • 50 minutos • Videoaula + 10 questões</p>
                     </div>
-                    <button className="bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 self-start sm:self-auto cursor-pointer">
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 self-start sm:self-auto cursor-pointer">
                       <Check className="h-4 w-4 stroke-[3]" />
                       <span>Concluir Estudo</span>
                     </button>
                   </div>
 
                   {/* IA MOTIVATION BUBBLE */}
-                  <div className="bg-indigo-950/20 border border-indigo-900/30 p-3.5 rounded-2xl flex items-start gap-3">
-                    <div className="bg-teal-500/10 border border-teal-500/20 p-2 rounded-xl text-teal-400">
+                  <div className="bg-blue-50 border border-blue-100/50 p-3.5 rounded-2xl flex items-start gap-3">
+                    <div className="bg-blue-100 border border-blue-200 p-2 rounded-xl text-blue-600">
                       <Sparkles className="h-4 w-4" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-teal-300">Dica da sua IA de Estudos</p>
-                      <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                      <p className="text-xs font-bold text-blue-800">Dica da sua IA de Estudos</p>
+                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                         "Joshua, você está muito bem em humanas. Hoje, ao fazer a bateria de Física, foque nas fórmulas de calor sensível (Q=mcΔT). Elas respondem por 45% das questões de calorimetria no ENEM!"
                       </p>
                     </div>
@@ -577,66 +576,66 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
 
               {activeDemoTab === 'weekly' && (
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center border-b border-slate-900 pb-3 mb-2">
-                    <h4 className="text-sm font-bold text-white uppercase tracking-wider">Cronograma Otimizado (Semana 1)</h4>
-                    <span className="text-xs text-teal-400 font-semibold">12h estimadas</span>
+                  <div className="flex justify-between items-center border-b border-line pb-3 mb-2">
+                    <h4 className="text-sm font-bold text-ink uppercase tracking-wider font-display">Cronograma Otimizado (Semana 1)</h4>
+                    <span className="text-xs text-blue-600 font-semibold">12h estimadas</span>
                   </div>
 
                   <div className="grid gap-3">
-                    <div className="bg-slate-900/40 border border-slate-800/80 p-4 rounded-xl flex items-center justify-between">
+                    <div className="bg-white border border-line p-4 rounded-xl flex items-center justify-between shadow-xs">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/35 text-emerald-400">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600">
                           <Check className="h-4 w-4 stroke-[3]" />
                         </div>
                         <div>
-                          <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Segunda-feira</span>
-                          <span className="font-extrabold text-sm text-white">Razão, Proporção e Regra de Três</span>
-                          <span className="text-xs text-slate-400 block sm:inline sm:ml-2">(Matemática • 60min)</span>
+                          <span className="text-[10px] text-muted font-bold block uppercase tracking-wider">Segunda-feira</span>
+                          <span className="font-extrabold text-sm text-ink font-display">Razão, Proporção e Regra de Três</span>
+                          <span className="text-xs text-muted block sm:inline sm:ml-2">(Matemática • 60min)</span>
                         </div>
                       </div>
-                      <span className="text-[10px] font-bold bg-teal-500/10 border border-teal-500/20 text-teal-300 px-2 py-0.5 rounded">Alta Incidência</span>
+                      <span className="text-[10px] font-bold bg-blue-50 border border-blue-200 text-blue-700 px-2 py-0.5 rounded">Alta Incidência</span>
                     </div>
 
-                    <div className="bg-slate-900/40 border border-slate-800/80 p-4 rounded-xl flex items-center justify-between">
+                    <div className="bg-white border border-line p-4 rounded-xl flex items-center justify-between shadow-xs">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/35 text-emerald-400">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600">
                           <Check className="h-4 w-4 stroke-[3]" />
                         </div>
                         <div>
-                          <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Terça-feira</span>
-                          <span className="font-extrabold text-sm text-white">Cadeias Alimentares e Ecologia</span>
-                          <span className="text-xs text-slate-400 block sm:inline sm:ml-2">(Biologia • 50min)</span>
+                          <span className="text-[10px] text-muted font-bold block uppercase tracking-wider">Terça-feira</span>
+                          <span className="font-extrabold text-sm text-ink font-display">Cadeias Alimentares e Ecologia</span>
+                          <span className="text-xs text-muted block sm:inline sm:ml-2">(Biologia • 50min)</span>
                         </div>
                       </div>
-                      <span className="text-[10px] font-bold bg-teal-500/10 border border-teal-500/20 text-teal-300 px-2 py-0.5 rounded">Alta Incidência</span>
+                      <span className="text-[10px] font-bold bg-blue-50 border border-blue-200 text-blue-700 px-2 py-0.5 rounded">Alta Incidência</span>
                     </div>
 
-                    <div className="bg-slate-900/90 border border-slate-700/80 p-4 rounded-xl flex items-center justify-between">
+                    <div className="bg-blue-50/50 border border-blue-200 p-4 rounded-xl flex items-center justify-between shadow-sm">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400">
-                          <Clock className="h-4 w-4 text-teal-400" />
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 border border-blue-200 text-blue-600">
+                          <Clock className="h-4 w-4 text-blue-600" />
                         </div>
                         <div>
-                          <span className="text-[10px] text-teal-400 font-bold block uppercase tracking-wider">Quarta-feira (Hoje)</span>
-                          <span className="font-extrabold text-sm text-white">Termodinâmica e Calorimetria</span>
-                          <span className="text-xs text-slate-400 block sm:inline sm:ml-2">(Física • 50min)</span>
+                          <span className="text-[10px] text-blue-600 font-bold block uppercase tracking-wider">Quarta-feira (Hoje)</span>
+                          <span className="font-extrabold text-sm text-ink font-display">Termodinâmica e Calorimetria</span>
+                          <span className="text-xs text-muted block sm:inline sm:ml-2">(Física • 50min)</span>
                         </div>
                       </div>
-                      <span className="text-[10px] font-bold bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded">Alta Incidência</span>
+                      <span className="text-[10px] font-bold bg-blue-100 border border-blue-200 text-blue-800 px-2 py-0.5 rounded">Alta Incidência</span>
                     </div>
 
-                    <div className="bg-slate-900/30 border border-slate-900 p-4 rounded-xl flex items-center justify-between opacity-60">
+                    <div className="bg-white border border-line p-4 rounded-xl flex items-center justify-between opacity-50">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-800 border border-slate-700 text-slate-400">
-                          <Lock className="h-4 w-4 text-slate-500" />
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 border border-line text-muted">
+                          <Lock className="h-4 w-4 text-muted" />
                         </div>
                         <div>
-                          <span className="text-[10px] text-slate-500 font-bold block uppercase tracking-wider">Quinta-feira</span>
-                          <span className="font-extrabold text-sm text-slate-300">Revolução Industrial & Iluminismo</span>
-                          <span className="text-xs text-slate-500 block sm:inline sm:ml-2">(História • 45min)</span>
+                          <span className="text-[10px] text-muted font-bold block uppercase tracking-wider">Quinta-feira</span>
+                          <span className="font-extrabold text-sm text-ink font-display">Revolução Industrial & Iluminismo</span>
+                          <span className="text-xs text-muted block sm:inline sm:ml-2">(História • 45min)</span>
                         </div>
                       </div>
-                      <span className="text-[10px] font-bold bg-slate-900 text-slate-500 px-2 py-0.5 rounded">Estratégico</span>
+                      <span className="text-[10px] font-bold bg-slate-100 text-muted px-2 py-0.5 rounded">Estratégico</span>
                     </div>
                   </div>
                 </div>
@@ -644,35 +643,35 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
 
               {activeDemoTab === 'calendar' && (
                 <div className="space-y-6">
-                  <div className="flex justify-between items-center border-b border-slate-900 pb-3">
-                    <h4 className="text-sm font-bold text-white uppercase tracking-wider">Acompanhamento Ativo & Correção de Atrasos</h4>
-                    <span className="text-xs text-amber-400 font-bold flex items-center gap-1">
+                  <div className="flex justify-between items-center border-b border-line pb-3">
+                    <h4 className="text-sm font-bold text-ink uppercase tracking-wider font-display">Acompanhamento Ativo &amp; Correção de Atrasos</h4>
+                    <span className="text-xs text-amber-600 font-bold flex items-center gap-1">
                       <RefreshCw className="h-3 w-3 animate-spin" />
                       Auto-ajustável
                     </span>
                   </div>
 
-                  <div className="bg-slate-900/50 border border-slate-800 p-4 rounded-2xl flex flex-col md:flex-row gap-6 items-center justify-between">
+                  <div className="bg-white border border-line p-4 rounded-2xl flex flex-col md:flex-row gap-6 items-center justify-between shadow-xs">
                     <div className="space-y-2">
-                      <div className="text-xs text-amber-400 font-bold flex items-center gap-1.5">
+                      <div className="text-xs text-amber-600 font-bold flex items-center gap-1.5">
                         <AlertCircle className="h-4 w-4 shrink-0" />
                         <span>DETECTAMOS ATRASO NA QUARTA-FEIRA</span>
                       </div>
-                      <p className="text-xs text-slate-300 leading-relaxed max-w-md">
+                      <p className="text-xs text-slate-600 leading-relaxed max-w-md">
                         "Sem acúmulo de matérias ou ansiedade: redistribuímos Calorimetria de Física para o seu Sábado mantendo o ritmo planejado."
                       </p>
                     </div>
                     
                     {/* Visual flow of movement */}
-                    <div className="flex items-center gap-3 bg-slate-950 p-3 rounded-xl border border-slate-800 shrink-0">
-                      <div className="text-center p-2 rounded-lg bg-red-950/30 border border-red-900/40">
-                        <div className="text-[8px] font-bold text-red-400">QUARTA</div>
-                        <div className="text-xs font-black text-red-200">FÍSICA</div>
+                    <div className="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-line shrink-0">
+                      <div className="text-center p-2 rounded-lg bg-red-50 border border-red-200">
+                        <div className="text-[8px] font-bold text-red-600">QUARTA</div>
+                        <div className="text-xs font-black text-red-800 font-display">FÍSICA</div>
                       </div>
-                      <ArrowRight className="h-5 w-5 text-teal-400" />
-                      <div className="text-center p-2 rounded-lg bg-teal-950/40 border border-teal-500/20">
-                        <div className="text-[8px] font-bold text-teal-400">SÁBADO</div>
-                        <div className="text-xs font-black text-teal-200">FÍSICA</div>
+                      <ArrowRight className="h-5 w-5 text-blue-600" />
+                      <div className="text-center p-2 rounded-lg bg-blue-50 border border-blue-200">
+                        <div className="text-[8px] font-bold text-blue-600">SÁBADO</div>
+                        <div className="text-xs font-black text-blue-800 font-display">FÍSICA</div>
                       </div>
                     </div>
                   </div>
@@ -680,19 +679,19 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                   {/* Calendar Matrix View */}
                   <div className="grid grid-cols-7 gap-1.5 max-w-sm mx-auto text-center text-xs mt-2">
                     {['S', 'T', 'Q', 'Q', 'S', 'S', 'D'].map((d, i) => (
-                      <div key={i} className="font-bold text-slate-500 py-1">{d}</div>
+                      <div key={i} className="font-bold text-muted py-1">{d}</div>
                     ))}
                     {[...Array(14)].map((_, i) => {
                       const day = i + 1;
-                      let bg = "bg-slate-900 border border-slate-800 text-slate-500";
-                      if (day < 3) bg = "bg-emerald-950/40 border border-emerald-800 text-emerald-400"; // studied
-                      if (day === 3) bg = "bg-red-950/40 border border-red-900 text-red-400 relative"; // missed
-                      if (day === 6) bg = "bg-teal-950/40 border border-teal-500 text-teal-400"; // relocated
+                      let bg = "bg-white border border-line text-muted";
+                      if (day < 3) bg = "bg-emerald-50 border border-emerald-200 text-emerald-600"; // studied
+                      if (day === 3) bg = "bg-red-50 border border-red-200 text-red-600 relative"; // missed
+                      if (day === 6) bg = "bg-blue-50 border border-blue-200 text-blue-600 relative"; // relocated
                       return (
                         <div key={i} className={`p-2 rounded-lg font-bold ${bg}`}>
                           {day}
                           {day === 3 && <div className="absolute top-1 right-1 h-1.5 w-1.5 bg-red-500 rounded-full" />}
-                          {day === 6 && <div className="absolute top-1 right-1 h-1.5 w-1.5 bg-teal-400 rounded-full" />}
+                          {day === 6 && <div className="absolute top-1 right-1 h-1.5 w-1.5 bg-blue-600 rounded-full" />}
                         </div>
                       );
                     })}
@@ -702,9 +701,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
 
               {activeDemoTab === 'ai' && (
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center border-b border-slate-900 pb-3">
-                    <h4 className="text-sm font-bold text-white uppercase tracking-wider">Suporte Pedagógico Inteligente 24h</h4>
-                    <span className="rounded-full bg-teal-500/10 border border-teal-500/20 px-2 py-0.5 text-[9px] font-bold text-teal-400">
+                  <div className="flex justify-between items-center border-b border-line pb-3">
+                    <h4 className="text-sm font-bold text-ink uppercase tracking-wider font-display">Suporte Pedagógico Inteligente 24h</h4>
+                    <span className="rounded-full bg-blue-50 border border-blue-200 px-2 py-0.5 text-[9px] font-bold text-blue-700">
                       Voz da Matéria Oficial
                     </span>
                   </div>
@@ -712,24 +711,24 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                   <div className="space-y-3.5 max-w-2xl mx-auto">
                     {/* User Prompt */}
                     <div className="flex items-start gap-2.5 justify-end">
-                      <div className="bg-slate-900 border border-slate-800 p-3 rounded-2xl rounded-tr-xs max-w-md text-xs text-white">
+                      <div className="bg-slate-100 border border-line p-3 rounded-2xl rounded-tr-xs max-w-md text-xs text-slate-800">
                         Como eu diferencio Quimiossíntese de Fotossíntese de forma rápida para o ENEM?
                       </div>
                     </div>
 
                     {/* AI Answer */}
                     <div className="flex items-start gap-2.5">
-                      <div className="h-7 w-7 rounded-lg bg-teal-500/10 border border-teal-500/25 flex items-center justify-center text-teal-400 text-xs shrink-0 font-black">
+                      <div className="h-7 w-7 rounded-lg bg-blue-100 border border-blue-200 flex items-center justify-center text-blue-600 text-xs shrink-0 font-black">
                         IA
                       </div>
-                      <div className="bg-indigo-950/20 border border-indigo-900/20 p-4 rounded-2xl rounded-tl-xs text-xs text-slate-200 leading-relaxed space-y-2">
-                        <p className="font-bold text-teal-300">Dica resumida do ENEM:</p>
+                      <div className="bg-blue-50/50 border border-blue-100 p-4 rounded-2xl rounded-tl-xs text-xs text-slate-700 leading-relaxed space-y-2">
+                        <p className="font-bold text-blue-800">Dica resumida do ENEM:</p>
                         <p>A diferença crucial está na <strong>fonte de energia</strong> utilizada para produzir matéria orgânica:</p>
-                        <ul className="list-disc pl-4 space-y-1 mt-1 text-slate-300">
+                        <ul className="list-disc pl-4 space-y-1 mt-1 text-slate-600">
                           <li><strong>Fotossíntese:</strong> Usa energia da <strong>luz solar</strong> (plantas, algas, cianobactérias).</li>
                           <li><strong>Quimiossíntese:</strong> Usa energia livre de <strong>reações químicas inorgânicas</strong> (bactérias oxidantes do ferro, enxofre).</li>
                         </ul>
-                        <p className="text-[10px] text-teal-400/80 italic mt-2">Dica: O ENEM costuma cobrar quimiossíntese contextualizada com ecossistemas sem luz (ex: fossas abissais).</p>
+                        <p className="text-[10px] text-blue-600 italic mt-2">Dica: O ENEM costuma cobrar quimiossíntese contextualizada com ecossistemas sem luz (ex: fossas abissais).</p>
                       </div>
                     </div>
                   </div>
@@ -738,30 +737,30 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
 
               {activeDemoTab === 'evolution' && (
                 <div className="space-y-5">
-                  <div className="flex justify-between items-center border-b border-slate-900 pb-3">
-                    <h4 className="text-sm font-bold text-white uppercase tracking-wider">Acompanhamento de Evolução e Probabilidades</h4>
-                    <span className="text-xs text-teal-400 font-bold">Méd. Geral Projetada: 760</span>
+                  <div className="flex justify-between items-center border-b border-line pb-3">
+                    <h4 className="text-sm font-bold text-ink uppercase tracking-wider font-display">Acompanhamento de Evolução e Probabilidades</h4>
+                    <span className="text-xs text-blue-600 font-bold">Méd. Geral Projetada: 760</span>
                   </div>
 
                   <div className="space-y-4 max-w-xl mx-auto">
                     {/* Subject 1 */}
                     <div className="space-y-1">
                       <div className="flex justify-between text-xs">
-                        <span className="font-bold text-slate-300">Matemática (Meta: 800+)</span>
-                        <span className="font-black text-teal-400">810 • Projeção Aprovado (Medicina USP)</span>
+                        <span className="font-bold text-slate-700">Matemática (Meta: 800+)</span>
+                        <span className="font-black text-blue-600">810 • Projeção Aprovado (Medicina USP)</span>
                       </div>
-                      <div className="w-full bg-slate-900 rounded-full h-2 border border-slate-800 overflow-hidden">
-                        <div className="bg-teal-500 h-2 rounded-full" style={{ width: '88%' }}></div>
+                      <div className="w-full bg-slate-100 rounded-full h-2 border border-line overflow-hidden">
+                        <div className="bg-blue-600 h-2 rounded-full" style={{ width: '88%' }}></div>
                       </div>
                     </div>
 
                     {/* Subject 2 */}
                     <div className="space-y-1">
                       <div className="flex justify-between text-xs">
-                        <span className="font-bold text-slate-300">Ciências da Natureza (Meta: 750+)</span>
-                        <span className="font-black text-amber-400">735 • Recuperando nas últimas 2 semanas</span>
+                        <span className="font-bold text-slate-700">Ciências da Natureza (Meta: 750+)</span>
+                        <span className="font-black text-amber-600">735 • Recuperando nas últimas 2 semanas</span>
                       </div>
-                      <div className="w-full bg-slate-900 rounded-full h-2 border border-slate-800 overflow-hidden">
+                      <div className="w-full bg-slate-100 rounded-full h-2 border border-line overflow-hidden">
                         <div className="bg-amber-500 h-2 rounded-full" style={{ width: '74%' }}></div>
                       </div>
                     </div>
@@ -769,11 +768,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                     {/* Subject 3 */}
                     <div className="space-y-1">
                       <div className="flex justify-between text-xs">
-                        <span className="font-bold text-slate-300">Redação (Meta: 900+)</span>
-                        <span className="font-black text-teal-400">920 • Próximo ao teto estratégico</span>
+                        <span className="font-bold text-slate-700">Redação (Meta: 900+)</span>
+                        <span className="font-black text-blue-600">920 • Próximo ao teto estratégico</span>
                       </div>
-                      <div className="w-full bg-slate-900 rounded-full h-2 border border-slate-800 overflow-hidden">
-                        <div className="bg-teal-500 h-2 rounded-full" style={{ width: '92%' }}></div>
+                      <div className="w-full bg-slate-100 rounded-full h-2 border border-line overflow-hidden">
+                        <div className="bg-blue-600 h-2 rounded-full" style={{ width: '92%' }}></div>
                       </div>
                     </div>
                   </div>
@@ -798,7 +797,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
 
       {/* Footer */}
       <footer className="border-t border-line bg-white px-4 py-10 text-center text-xs text-muted relative z-10">
-        <p>© 2026 Trilha ENEM — Auxiliar de Estudos Personalizado com IA. Todos os direitos reservados.</p>
+        <p>© 2026 AdaptoSTDY — Auxiliar de Estudos Personalizado com IA. Todos os direitos reservados.</p>
         <p className="mt-2 text-muted/80">Baseado 100% na Matriz de Referência Oficial do ENEM.</p>
       </footer>
 

@@ -125,12 +125,12 @@ export const EmailNotificationPreview: React.FC<EmailNotificationPreviewProps> =
           
           {/* Email Meta */}
           <div className="border-b border-slate-200 pb-3 text-xs space-y-1">
-            <p className="text-slate-600"><strong className="text-slate-800">De:</strong> Trilha ENEM &lt;notificacoes@trilhaenem.com.br&gt;</p>
+            <p className="text-slate-600"><strong className="text-slate-800">De:</strong> AdaptoSTDY &lt;notificacoes@adaptostdy.com.br&gt;</p>
             <p className="text-slate-600"><strong className="text-slate-800">Para:</strong> {name} &lt;{email}&gt;</p>
-            <p className="text-teal-900 font-bold pt-1">
+            <p className="text-blue-900 font-bold pt-1">
               {activeTemplate === 'daily' 
-                ? `Assunto: ${name}, seu tópico de Matemática de hoje te espera! (Check-in Trilha ENEM)`
-                : `Assunto: Seu Resumo Semanal de Estudos no ENEM — Veja seu progresso!`}
+                ? `Assunto: ${name}, seu tópico de Matemática de hoje te espera! (Check-in AdaptoSTDY)`
+                : `Assunto: Seu Resumo Semanal de Estudos AdaptoSTDY — Veja seu progresso!`}
             </p>
           </div>
 

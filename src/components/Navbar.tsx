@@ -35,12 +35,17 @@ export const Navbar: React.FC<NavbarProps> = ({
           className="flex cursor-pointer items-center gap-2.5 group"
         >
           <div className="flex h-10 w-10 overflow-hidden items-center justify-center rounded-xl bg-white shadow-xs border border-line group-hover:bg-slate-50 transition-all duration-300">
-            <img src="/logo.png" alt="Trilha ENEM Logo" className="h-full w-full object-cover" />
+            <svg className="h-7 w-7 text-blue-600" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 58 L50 75 V85 L15 68 Z" fill="#1D4ED8" />
+              <path d="M50 75 L85 58 V68 L50 85 Z" fill="#60A5FA" />
+              <path d="M15 58 L50 75 L85 58 L50 41 Z" fill="#2563EB" />
+              <path d="M50 55 L78 27 M78 27 H62 M78 27 V43" stroke="#2563EB" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </div>
           <div>
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-xl tracking-tight text-ink font-display">
-                trilha<span className="text-blue-600">enem</span>
+                adapto<span className="text-blue-600">stdy</span>
               </span>
               <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[9px] font-extrabold text-blue-700 border border-blue-200 uppercase tracking-wider">
                 PRO

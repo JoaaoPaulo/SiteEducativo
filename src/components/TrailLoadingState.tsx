@@ -41,13 +41,13 @@ export const TrailLoadingState: React.FC<TrailLoadingStateProps> = ({ onFinished
         
         {/* Animated Icon */}
         <div className="relative inline-block">
-          <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-teal-700 text-white font-bold shadow-md mx-auto">
+          <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-blue-600 text-white font-bold shadow-md mx-auto">
             <GraduationCap className="h-10 w-10 animate-pulse stroke-[2]" />
           </div>
         </div>
 
         <div>
-          <h2 className="text-2xl font-black text-slate-900">Construindo sua Trilha ENEM</h2>
+          <h2 className="text-2xl font-black text-slate-900">Construindo seu AdaptoSTDY</h2>
           <p className="text-xs text-slate-500 mt-1">Organização personalizada em andamento...</p>
         </div>
 
