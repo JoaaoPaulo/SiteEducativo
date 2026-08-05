@@ -1,54 +1,73 @@
 @import "tailwindcss";
 
 @theme {
-  --color-teal-50: #f0f5ff;
-  --color-teal-100: #e0ebff;
-  --color-teal-200: #c2d6ff;
-  --color-teal-300: #94b8ff;
-  --color-teal-400: #5c93ff;
-  --color-teal-500: #4f7dff;
-  --color-teal-600: #2e59e6;
-  --color-teal-700: #1f3ebd;
-  --color-teal-800: #162b94;
-  --color-teal-900: #132273;
-  --color-teal-950: #0b1142;
+  --color-blue-400: #60A5FA;
+  --color-blue-600: #2563EB;
+  --color-blue-700: #1D4ED8;
+  
+  --color-surface: #F8FAFC;
+  --color-ink: #0F172A;
+  --color-muted: #64748B;
+  --color-line: #E2E8F0;
+  --color-success: #22C55E;
 
-  --color-emerald-50: #f0fdf4;
-  --color-emerald-100: #dcfce7;
-  --color-emerald-200: #bbf7d0;
-  --color-emerald-300: #86efac;
-  --color-emerald-400: #4ade80;
-  --color-emerald-500: #22c55e;
-  --color-emerald-600: #16a34a;
-  --color-emerald-700: #15803d;
-  --color-emerald-800: #166534;
-  --color-emerald-900: #14532d;
-  --color-emerald-950: #052e16;
+  /* Aliases to prevent teal breaking existing components */
+  --color-teal-50: #F8FAFC;
+  --color-teal-100: #EFF6FF;
+  --color-teal-200: #BFDBFE;
+  --color-teal-300: #93C5FD;
+  --color-teal-400: #60A5FA;
+  --color-teal-500: #2563EB;
+  --color-teal-600: #1D4ED8;
+  --color-teal-700: #1D4ED8;
+  --color-teal-800: #1E40AF;
+  --color-teal-900: #1E3A8A;
+  --color-teal-950: #0F172A;
 
-  --font-sans: 'Outfit', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Manrope', sans-serif;
 }
 
 @utility glass {
-  background-color: rgba(15, 23, 42, 0.45);
+  background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 @utility glass-glow {
-  background-color: rgba(79, 125, 255, 0.03);
+  background-color: rgba(37, 99, 235, 0.03);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(79, 125, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(79, 125, 255, 0.05);
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(37, 99, 235, 0.05);
 }
 
 @utility text-glow {
-  text-shadow: 0 0 20px rgba(79, 125, 255, 0.4);
+  text-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+}
+
+/* Gradientes Oficiais */
+@utility bg-grad-institucional {
+  background-image: linear-gradient(135deg, #1D4ED8 0%, #2563EB 50%, #60A5FA 100%);
+}
+
+@utility bg-grad-superficie {
+  background-image: linear-gradient(180deg, #F8FAFC 0%, #EFF6FF 100%);
+}
+
+@utility bg-grad-profundidade {
+  background-image: linear-gradient(160deg, #0F172A 0%, #1D4ED8 100%);
 }
 
 body, button, input, select, textarea {
-  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
+  background-color: #F8FAFC;
+  color: #0F172A;
 }
 
-
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Manrope', sans-serif !important;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}

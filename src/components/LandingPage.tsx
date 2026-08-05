@@ -90,14 +90,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
   const [activeStep, setActiveStep] = useState<number>(0);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-teal-500 selection:text-slate-950 relative overflow-hidden">
+    <div className="min-h-screen bg-surface text-ink flex flex-col selection:bg-blue-600 selection:text-white relative overflow-hidden bg-grad-superficie">
       
       {/* Background Decorative Blur Spheres - reduced opacity to keep it premium and simple */}
-      <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] rounded-full bg-teal-500/5 blur-[120px] pointer-events-none" />
-      <div className="absolute top-[40%] right-[-10%] w-[400px] h-[400px] rounded-full bg-teal-500/3 blur-[100px] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] rounded-full bg-blue-600/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-[40%] right-[-10%] w-[400px] h-[400px] rounded-full bg-blue-600/3 blur-[100px] pointer-events-none" />
 
       {/* HERO SECTION */}
-      <section className="relative pt-16 pb-16 px-4 sm:px-6 lg:px-8 border-b border-slate-900">
+      <section className="relative pt-16 pb-16 px-4 sm:px-6 lg:px-8 border-b border-line">
         <div className="mx-auto max-w-4xl relative z-10">
           
           {/* Main Headline */}
@@ -106,15 +106,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl font-extrabold tracking-tight sm:text-5xl text-white leading-tight"
+              className="text-4xl font-extrabold tracking-tight sm:text-5xl text-ink leading-tight font-display"
             >
-              Passe no ENEM estudando <span className="text-teal-400">exatamente o que você precisa.</span>
+              Passe no ENEM estudando <span className="text-blue-600">exatamente o que você precisa.</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-medium"
+              className="mt-4 text-base sm:text-lg text-muted max-w-2xl mx-auto font-medium"
             >
               Nossa IA cria um plano personalizado baseado no seu curso, tempo disponível e nível atual.
             </motion.p>
@@ -126,14 +126,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="glass p-5 rounded-2xl border-slate-800 bg-slate-900/30 text-left"
+              className="bg-white border border-line p-5 rounded-2xl shadow-2xs text-left"
             >
-              <div className="flex items-center gap-2 mb-2 text-teal-400">
+              <div className="flex items-center gap-2 mb-2 text-blue-600">
                 <Sparkles className="h-4 w-4" />
                 <span className="text-xs font-bold uppercase tracking-widest block">O que é?</span>
               </div>
-              <h3 className="font-extrabold text-sm text-white mb-1.5">Cronograma Inteligente</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <h3 className="font-extrabold text-sm text-ink mb-1.5 font-display">Cronograma Inteligente</h3>
+              <p className="text-xs text-muted leading-relaxed">
                 Um guia de estudos dinâmico que diz exatamente o que revisar e exercitar a cada dia, cobrindo 100% da matriz do ENEM.
               </p>
             </motion.div>
@@ -142,14 +142,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="glass p-5 rounded-2xl border-slate-800 bg-slate-900/30 text-left"
+              className="bg-white border border-line p-5 rounded-2xl shadow-2xs text-left"
             >
-              <div className="flex items-center gap-2 mb-2 text-teal-400">
+              <div className="flex items-center gap-2 mb-2 text-blue-600">
                 <Users className="h-4 w-4" />
                 <span className="text-xs font-bold uppercase tracking-widest block">Para quem é?</span>
               </div>
-              <h3 className="font-extrabold text-sm text-white mb-1.5">Estudantes Focados</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <h3 className="font-extrabold text-sm text-ink mb-1.5 font-display">Estudantes Focados</h3>
+              <p className="text-xs text-muted leading-relaxed">
                 Para quem quer passar em cursos concorridos (Medicina, Engenharia) e precisa otimizar cada hora disponível.
               </p>
             </motion.div>
@@ -158,14 +158,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="glass p-5 rounded-2xl border-slate-800 bg-slate-900/30 text-left"
+              className="bg-white border border-line p-5 rounded-2xl shadow-2xs text-left"
             >
-              <div className="flex items-center gap-2 mb-2 text-teal-400">
+              <div className="flex items-center gap-2 mb-2 text-blue-600">
                 <RefreshCw className="h-4 w-4" />
                 <span className="text-xs font-bold uppercase tracking-widest block">Por que é melhor?</span>
               </div>
-              <h3 className="font-extrabold text-sm text-white mb-1.5">Replanejamento Ativo</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <h3 className="font-extrabold text-sm text-ink mb-1.5 font-display">Replanejamento Ativo</h3>
+              <p className="text-xs text-muted leading-relaxed">
                 Se você atrasar um dia, a IA reorganiza a semana automaticamente. Sem acúmulo de matéria, sem culpa e sem ansiedade.
               </p>
             </motion.div>
@@ -180,7 +180,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
           >
             <button
               onClick={onStartWizard}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-teal-500 via-teal-400 to-indigo-500 hover:from-teal-400 hover:via-teal-300 hover:to-indigo-400 text-slate-950 px-10 py-5 text-lg font-black shadow-2xl shadow-teal-500/25 transform hover:-translate-y-1 hover:scale-105 transition-all duration-300 border border-white/20 cursor-pointer animate-pulse"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl bg-grad-institucional hover:opacity-95 text-white px-10 py-5 text-lg font-black shadow-xl shadow-blue-600/25 transform hover:-translate-y-1 hover:scale-105 transition-all duration-300 border border-white/10 cursor-pointer animate-pulse"
             >
               <Sparkles className="h-5.5 w-5.5" />
               <span>Criar meu plano gratuito</span>
@@ -191,47 +191,47 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
         </div>
       </section>
 
-      {/* METRICS SECTION (Coloque números) */}
-      <section className="py-12 bg-slate-950/40 border-b border-slate-900 px-4">
+      {/* METRICS SECTION */}
+      <section className="py-12 bg-slate-50/50 border-b border-line px-4">
         <div className="mx-auto max-w-5xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/70 backdrop-blur-xs">
-              <div className="text-3xl sm:text-4xl font-extrabold text-white bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
+            <div className="p-4 rounded-2xl border border-line bg-white shadow-2xs">
+              <div className="text-3xl sm:text-4xl font-extrabold text-blue-600">
                 <CountUp end={1000} prefix="+" />
               </div>
-              <div className="text-xs text-slate-400 font-semibold mt-1">Questões Resolvidas (Meta Mínima)</div>
+              <div className="text-xs text-muted font-semibold mt-1">Questões Resolvidas (Meta Mínima)</div>
             </div>
-            <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/70 backdrop-blur-xs">
-              <div className="text-3xl sm:text-4xl font-extrabold text-white bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
+            <div className="p-4 rounded-2xl border border-line bg-white shadow-2xs">
+              <div className="text-3xl sm:text-4xl font-extrabold text-blue-600">
                 <CountUp end={50} />
               </div>
-              <div className="text-xs text-slate-400 font-semibold mt-1">Disciplinas e Mapas Mentais</div>
+              <div className="text-xs text-muted font-semibold mt-1">Disciplinas e Mapas Mentais</div>
             </div>
-            <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/70 backdrop-blur-xs">
-              <div className="text-3xl sm:text-4xl font-extrabold text-white bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
+            <div className="p-4 rounded-2xl border border-line bg-white shadow-2xs">
+              <div className="text-3xl sm:text-4xl font-extrabold text-blue-600">
                 <CountUp end={100} suffix="%" />
               </div>
-              <div className="text-xs text-slate-400 font-semibold mt-1">Personalizado p/ sua Meta</div>
+              <div className="text-xs text-muted font-semibold mt-1">Personalizado p/ sua Meta</div>
             </div>
-            <div className="p-4 rounded-2xl border border-slate-900 bg-slate-950/70 backdrop-blur-xs">
-              <div className="text-3xl sm:text-4xl font-extrabold text-white bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
+            <div className="p-4 rounded-2xl border border-line bg-white shadow-2xs">
+              <div className="text-3xl sm:text-4xl font-extrabold text-blue-600">
                 <CountUp end={24} suffix="h" />
               </div>
-              <div className="text-xs text-slate-400 font-semibold mt-1">Suporte Tira-Dúvidas com IA</div>
+              <div className="text-xs text-muted font-semibold mt-1">Suporte Tira-Dúvidas com IA</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* SECTION 2: COMO FUNCIONA EM 3 PASSOS (INTERATIVO) */}
-      <section className="px-4 py-20 sm:px-6 lg:px-8 border-b border-slate-900 bg-slate-950/50">
+      <section className="px-4 py-20 sm:px-6 lg:px-8 border-b border-line bg-grad-superficie">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-12">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-teal-400">Simplicidade Extrema</h2>
-            <p className="text-3xl font-black text-white sm:text-5xl mt-3">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 font-display">Simplicidade Extrema</h2>
+            <p className="text-3xl font-black text-ink sm:text-5xl mt-3 font-display">
               Como funciona o sistema?
             </p>
-            <p className="text-slate-400 text-sm sm:text-base mt-2">
+            <p className="text-muted text-sm sm:text-base mt-2">
               Em menos de 3 minutos, você sai do absoluto zero com um plano de estudos blindado
             </p>
           </div>
@@ -268,17 +268,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                     onClick={() => setActiveStep(s.id)}
                     className={`p-5 rounded-2xl border transition-all duration-300 text-left cursor-pointer ${
                       isActive 
-                        ? 'border-teal-500/40 bg-teal-500/5 shadow-lg shadow-teal-500/5' 
-                        : 'border-slate-900 bg-slate-950/30 hover:border-slate-800'
+                        ? 'border-blue-600/30 bg-blue-600/5 shadow-md shadow-blue-600/5' 
+                        : 'border-line bg-white hover:border-slate-300'
                     }`}
                   >
                     <div className="flex items-center gap-3 mb-2">
                       <span className={`text-xs font-black px-2 py-0.5 rounded ${
-                        isActive ? 'bg-teal-500/20 text-teal-300' : 'bg-slate-900 text-slate-500'
+                        isActive ? 'bg-blue-600/15 text-blue-600' : 'bg-slate-100 text-muted'
                       }`}>{s.num}</span>
-                      <h3 className={`font-black text-sm ${isActive ? 'text-white' : 'text-slate-400'}`}>{s.title}</h3>
+                      <h3 className={`font-black text-sm ${isActive ? 'text-ink font-display' : 'text-muted font-display'}`}>{s.title}</h3>
                     </div>
-                    <p className="text-xs text-slate-400 leading-relaxed">{s.desc}</p>
+                    <p className="text-xs text-muted leading-relaxed">{s.desc}</p>
                   </div>
                 );
               })}
@@ -286,8 +286,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
 
             {/* Dynamic Visual Showcase */}
             <div className="md:col-span-7 flex flex-col justify-center">
-              <div className="glass rounded-3xl p-6 min-h-[280px] flex flex-col justify-between border-slate-900 bg-slate-900/20 shadow-xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 h-24 w-24 rounded-full bg-teal-500/5 blur-xl pointer-events-none" />
+              <div className="rounded-3xl p-6 min-h-[280px] flex flex-col justify-between border-slate-800 bg-grad-profundidade shadow-2xl relative overflow-hidden text-white">
+                <div className="absolute top-0 right-0 h-24 w-24 rounded-full bg-blue-600/10 blur-xl pointer-events-none" />
                 
                 {/* Step 1 Visual content */}
                 {activeStep === 0 && (
@@ -411,7 +411,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
           <div className="mt-14 text-center">
             <button
               onClick={onStartWizard}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-400 hover:to-indigo-500 text-white px-8 py-4.5 text-base font-black shadow-lg shadow-teal-500/20 transform hover:-translate-y-1 hover:scale-103 transition-all duration-300 border border-white/10 cursor-pointer animate-pulse"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-2xl bg-grad-institucional hover:opacity-95 text-white px-8 py-4.5 text-base font-black shadow-xl shadow-blue-600/25 transform hover:-translate-y-1 hover:scale-103 transition-all duration-300 border border-white/10 cursor-pointer animate-pulse"
             >
               <Sparkles className="h-5 w-5" />
               <span>Começar minha trilha agora</span>
@@ -422,20 +422,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
       </section>
 
       {/* PRODUCT SHOWCASE (Mostrar o Produto) */}
-      <section className="px-4 py-20 sm:px-6 lg:px-8 border-b border-slate-900 bg-slate-950">
+      <section className="px-4 py-20 sm:px-6 lg:px-8 border-b border-line bg-surface">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-12">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-teal-400">Visualização em Tempo Real</h2>
-            <p className="text-3xl font-black text-white sm:text-5xl mt-3">
+            <h2 className="text-xs font-bold uppercase tracking-widest text-blue-600 font-display">Visualização em Tempo Real</h2>
+            <p className="text-3xl font-black text-ink sm:text-5xl mt-3 font-display">
               Explore o sistema por dentro
             </p>
-            <p className="text-slate-400 text-sm sm:text-base mt-2">
+            <p className="text-muted text-sm sm:text-base mt-2">
               Nossa interface foi projetada para ser limpa, motivadora e extremamente eficiente.
             </p>
           </div>
 
           {/* Interactive Showcase Component */}
-          <div className="rounded-3xl border border-slate-900 bg-slate-950/70 p-1 md:p-2 shadow-2xl relative overflow-hidden backdrop-blur-md">
+          <div className="rounded-3xl border border-slate-800 bg-grad-profundidade p-1 md:p-2 shadow-2xl relative overflow-hidden text-white">
             
             {/* Tab Selectors */}
             <div className="flex flex-wrap border-b border-slate-900 p-2 gap-1.5 md:gap-2">
@@ -787,19 +787,19 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
           <div className="mt-12 text-center">
             <button
               onClick={onStartWizard}
-              className="inline-flex items-center gap-3 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-slate-800 px-6 py-3.5 text-sm font-bold text-white shadow-lg transition-all cursor-pointer"
+              className="inline-flex items-center gap-3 rounded-2xl bg-grad-institucional hover:opacity-95 px-6 py-3.5 text-sm font-black text-white shadow-xl shadow-blue-600/25 transition-all cursor-pointer"
             >
               <span>Começar agora</span>
-              <ArrowRight className="h-4 w-4 text-teal-400" />
+              <ArrowRight className="h-4 w-4 text-white" />
             </button>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950 px-4 py-10 text-center text-xs text-slate-500 relative z-10">
+      <footer className="border-t border-line bg-white px-4 py-10 text-center text-xs text-muted relative z-10">
         <p>© 2026 Trilha ENEM — Auxiliar de Estudos Personalizado com IA. Todos os direitos reservados.</p>
-        <p className="mt-2 text-slate-600">Baseado 100% na Matriz de Referência Oficial do ENEM.</p>
+        <p className="mt-2 text-muted/80">Baseado 100% na Matriz de Referência Oficial do ENEM.</p>
       </footer>
 
     </div>
