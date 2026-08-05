@@ -697,28 +697,28 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                       <h4 className="text-lg font-bold text-ink font-display">Olá, Joshua</h4>
                       <p className="text-xs text-muted">Meta: Medicina (USP) • Faltam 95 dias para o ENEM</p>
                     </div>
-                    <div className="flex items-center gap-2 bg-blue-50 border border-blue-200 px-3.5 py-1.5 rounded-xl">
+                    <div className="flex items-center gap-2 bg-blue-50 border border-blue-200 px-3.5 py-1.5 rounded-[10px]">
                       <Zap className="h-4 w-4 text-blue-600 fill-blue-600" />
-                      <span className="text-xs font-bold text-blue-700">5 dias de ofensiva!</span>
+                      <span className="text-xs font-bold text-blue-700">5 dias de consistência!</span>
                     </div>
                   </div>
 
                   <div className="grid gap-4 md:grid-cols-3">
-                    <div className="bg-white border border-line p-4 rounded-xl">
+                    <div className="bg-white border border-line p-4 rounded-[10px]">
                       <div className="text-[10px] uppercase font-bold tracking-wider text-muted">Progresso Geral</div>
                       <div className="text-2xl font-black text-ink mt-1">64%</div>
                       <div className="w-full bg-slate-100 rounded-full h-1.5 mt-2 overflow-hidden">
                         <div className="bg-blue-600 h-1.5 rounded-full" style={{ width: '64%' }}></div>
                       </div>
                     </div>
-                    <div className="bg-white border border-line p-4 rounded-xl">
+                    <div className="bg-white border border-line p-4 rounded-[10px]">
                       <div className="text-[10px] uppercase font-bold tracking-wider text-muted">Meta da Semana</div>
                       <div className="text-2xl font-black text-ink mt-1">9 / 12h</div>
                       <div className="w-full bg-slate-100 rounded-full h-1.5 mt-2 overflow-hidden">
                         <div className="bg-blue-600 h-1.5 rounded-full" style={{ width: '75%' }}></div>
                       </div>
                     </div>
-                    <div className="bg-white border border-line p-4 rounded-xl">
+                    <div className="bg-white border border-line p-4 rounded-[10px]">
                       <div className="text-[10px] uppercase font-bold tracking-wider text-muted">Respostas Corretas</div>
                       <div className="text-2xl font-black text-ink mt-1">82.4%</div>
                       <div className="text-[10px] text-blue-600 mt-2 font-medium">Acima da média de corte (800+)</div>
@@ -726,7 +726,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                   </div>
 
                   {/* Task Card */}
-                  <div className="bg-white border border-line p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
+                  <div className="bg-white border border-line p-4 rounded-[10px] flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
                     <div>
                       <div className="inline-block text-[9px] font-extrabold bg-blue-50 border border-blue-200 px-2 py-0.5 rounded text-blue-700 mb-1">
                         TAREFA DE HOJE • ALTA INCIDÊNCIA
@@ -734,19 +734,19 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                       <h5 className="font-extrabold text-sm text-ink font-display">Termodinâmica e Calorimetria</h5>
                       <p className="text-xs text-muted mt-0.5">Física • 50 minutos • Videoaula + 10 questões</p>
                     </div>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center justify-center gap-1.5 self-start sm:self-auto cursor-pointer">
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-[10px] text-xs flex items-center justify-center gap-1.5 self-start sm:self-auto cursor-pointer">
                       <Check className="h-4 w-4 stroke-[3]" />
                       <span>Concluir Estudo</span>
                     </button>
                   </div>
 
-                  {/* IA MOTIVATION BUBBLE */}
-                  <div className="bg-blue-50 border border-blue-100/50 p-3.5 rounded-2xl flex items-start gap-3">
-                    <div className="bg-blue-100 border border-blue-200 p-2 rounded-xl text-blue-600">
+                  {/* STRATEGIC OPTIMIZATION BUBBLE */}
+                  <div className="bg-blue-50 border border-blue-100/50 p-3.5 rounded-[10px] flex items-start gap-3">
+                    <div className="bg-blue-100 border border-blue-200 p-2 rounded-[10px] text-blue-600">
                       <Sparkles className="h-4 w-4" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-blue-800">Dica da sua IA de Estudos</p>
+                      <p className="text-xs font-bold text-blue-800">Foco Estratégico do Plano</p>
                       <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                         "Joshua, você está muito bem em humanas. Hoje, ao fazer a bateria de Física, foque nas fórmulas de calor sensível (Q=mcΔT). Elas respondem por 45% das questões de calorimetria no ENEM!"
                       </p>
@@ -763,7 +763,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                   </div>
 
                   <div className="grid gap-3">
-                    <div className="bg-white border border-line p-4 rounded-xl flex items-center justify-between shadow-xs">
+                    <div className="bg-white border border-line p-4 rounded-[10px] flex items-center justify-between shadow-xs">
                       <div className="flex items-center gap-3">
                         <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600">
                           <Check className="h-4 w-4 stroke-[3]" />
@@ -777,7 +777,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                       <span className="text-[10px] font-bold bg-blue-50 border border-blue-200 text-blue-700 px-2 py-0.5 rounded">Alta Incidência</span>
                     </div>
 
-                    <div className="bg-white border border-line p-4 rounded-xl flex items-center justify-between shadow-xs">
+                    <div className="bg-white border border-line p-4 rounded-[10px] flex items-center justify-between shadow-xs">
                       <div className="flex items-center gap-3">
                         <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600">
                           <Check className="h-4 w-4 stroke-[3]" />
@@ -791,7 +791,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                       <span className="text-[10px] font-bold bg-blue-50 border border-blue-200 text-blue-700 px-2 py-0.5 rounded">Alta Incidência</span>
                     </div>
 
-                    <div className="bg-blue-50/50 border border-blue-200 p-4 rounded-xl flex items-center justify-between shadow-sm">
+                    <div className="bg-blue-50/50 border border-blue-200 p-4 rounded-[10px] flex items-center justify-between shadow-sm">
                       <div className="flex items-center gap-3">
                         <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 border border-blue-200 text-blue-600">
                           <Clock className="h-4 w-4 text-blue-600" />
@@ -832,7 +832,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                     </span>
                   </div>
 
-                  <div className="bg-white border border-line p-4 rounded-2xl flex flex-col md:flex-row gap-6 items-center justify-between shadow-xs">
+                  <div className="bg-white border border-line p-4 rounded-[10px] flex flex-col md:flex-row gap-6 items-center justify-between shadow-xs">
                     <div className="space-y-2">
                       <div className="text-xs text-amber-600 font-bold flex items-center gap-1.5">
                         <AlertCircle className="h-4 w-4 shrink-0" />
@@ -844,13 +844,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                     </div>
                     
                     {/* Visual flow of movement */}
-                    <div className="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-line shrink-0">
-                      <div className="text-center p-2 rounded-lg bg-red-50 border border-red-200">
+                    <div className="flex items-center gap-3 bg-slate-50 p-3 rounded-[10px] border border-line shrink-0">
+                      <div className="text-center p-2 rounded-[8px] bg-red-50 border border-red-200">
                         <div className="text-[8px] font-bold text-red-600">QUARTA</div>
                         <div className="text-xs font-black text-red-800 font-display">FÍSICA</div>
                       </div>
                       <ArrowRight className="h-5 w-5 text-blue-600" />
-                      <div className="text-center p-2 rounded-lg bg-blue-50 border border-blue-200">
+                      <div className="text-center p-2 rounded-[8px] bg-blue-50 border border-blue-200">
                         <div className="text-[8px] font-bold text-blue-600">SÁBADO</div>
                         <div className="text-xs font-black text-blue-800 font-display">FÍSICA</div>
                       </div>
@@ -869,7 +869,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                       if (day === 3) bg = "bg-red-50 border border-red-200 text-red-600 relative"; // missed
                       if (day === 6) bg = "bg-blue-50 border border-blue-200 text-blue-600 relative"; // relocated
                       return (
-                        <div key={i} className={`p-2 rounded-lg font-bold ${bg}`}>
+                        <div key={i} className={`p-2 rounded-[8px] font-bold ${bg}`}>
                           {day}
                           {day === 3 && <div className="absolute top-1 right-1 h-1.5 w-1.5 bg-red-500 rounded-full" />}
                           {day === 6 && <div className="absolute top-1 right-1 h-1.5 w-1.5 bg-blue-600 rounded-full" />}
@@ -883,7 +883,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
               {activeDemoTab === 'ai' && (
                 <div className="space-y-4">
                   <div className="flex justify-between items-center border-b border-line pb-3">
-                    <h4 className="text-sm font-bold text-ink uppercase tracking-wider font-display">Suporte Pedagógico Inteligente 24h</h4>
+                    <h4 className="text-sm font-bold text-ink uppercase tracking-wider font-display">Suporte Pedagógico 24h</h4>
                     <span className="rounded-full bg-blue-50 border border-blue-200 px-2 py-0.5 text-[9px] font-bold text-blue-700">
                       Voz da Matéria Oficial
                     </span>
@@ -892,17 +892,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartWizard }) => {
                   <div className="space-y-3.5 max-w-2xl mx-auto">
                     {/* User Prompt */}
                     <div className="flex items-start gap-2.5 justify-end">
-                      <div className="bg-slate-100 border border-line p-3 rounded-2xl rounded-tr-xs max-w-md text-xs text-slate-800">
+                      <div className="bg-slate-100 border border-line p-3 rounded-[10px] rounded-tr-xs max-w-md text-xs text-slate-800">
                         Como eu diferencio Quimiossíntese de Fotossíntese de forma rápida para o ENEM?
                       </div>
                     </div>
 
                     {/* AI Answer */}
                     <div className="flex items-start gap-2.5">
-                      <div className="h-7 w-7 rounded-lg bg-blue-100 border border-blue-200 flex items-center justify-center text-blue-600 text-xs shrink-0 font-black">
-                        IA
+                      <div className="h-7 w-7 rounded-[8px] bg-blue-100 border border-blue-200 flex items-center justify-center text-blue-600 text-xs shrink-0 font-black font-display uppercase">
+                        S
                       </div>
-                      <div className="bg-blue-50/50 border border-blue-100 p-4 rounded-2xl rounded-tl-xs text-xs text-slate-700 leading-relaxed space-y-2">
+                      <div className="bg-blue-50/50 border border-blue-100 p-4 rounded-[10px] rounded-tl-xs text-xs text-slate-700 leading-relaxed space-y-2">
                         <p className="font-bold text-blue-800">Dica resumida do ENEM:</p>
                         <p>A diferença crucial está na <strong>fonte de energia</strong> utilizada para produzir matéria orgânica:</p>
                         <ul className="list-disc pl-4 space-y-1 mt-1 text-slate-600">

@@ -49,7 +49,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 overflow-y-auto">
-      <div className="relative w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xl text-slate-800">
+      <div className="relative w-full max-w-lg rounded-[16px] border border-slate-200 bg-white p-6 sm:p-8 shadow-xl text-slate-800">
         
         {/* Close Button */}
         <button
@@ -86,13 +86,13 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
               <button
                 key={m.id}
                 onClick={() => { setPaymentMethod(m.id as PaymentMethod); setPaymentStatus('idle'); }}
-                className={`flex flex-col items-center justify-center p-3 rounded-2xl border transition-all ${
+                className={`flex flex-col items-center justify-center p-3 rounded-[10px] border transition-all ${
                   isSel
-                    ? 'border-teal-700 bg-teal-50/80 text-teal-900 font-bold shadow-2xs'
+                    ? 'border-blue-600 bg-blue-50/80 text-blue-900 font-bold shadow-2xs'
                     : 'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300'
                 }`}
               >
-                <Icon className="h-5 w-5 mb-1 text-teal-700" />
+                <Icon className="h-5 w-5 mb-1 text-blue-600" />
                 <span className="text-xs">{m.label}</span>
                 <span className="text-[9px] text-slate-500 mt-0.5">{m.badge}</span>
               </button>
@@ -102,7 +102,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
 
         {/* Payment Form / Details */}
-        <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/80 p-4">
+        <div className="mt-6 rounded-[10px] border border-slate-200 bg-slate-50/80 p-4">
           
           {/* PIX */}
           {paymentMethod === 'pix' && (
@@ -111,14 +111,14 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 Copie a chave Pix abaixo para pagar R$ 29,90 no seu aplicativo de banco:
               </p>
 
-              <div className="rounded-xl border border-slate-200 bg-white p-3 text-[11px] font-mono text-slate-700 break-all select-all">
+              <div className="rounded-[10px] border border-slate-200 bg-white p-3 text-[11px] font-mono text-slate-700 break-all select-all">
                 {pixKey}
               </div>
 
               <div className="flex gap-2">
                 <button
                   onClick={handleCopyPix}
-                  className="flex-1 flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-all"
+                  className="flex-1 flex items-center justify-center gap-2 rounded-[10px] border border-slate-300 bg-white py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-all"
                 >
                   <Copy className="h-3.5 w-3.5" />
                   <span>{copiedPix ? 'Copiado com Sucesso!' : 'Copiar Chave Pix'}</span>
@@ -127,7 +127,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 <button
                   onClick={() => handleSimulatePayment('approved')}
                   disabled={isProcessing}
-                  className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-teal-700 py-2.5 text-xs font-bold text-white hover:bg-teal-800 transition-all"
+                  className="flex-1 flex items-center justify-center gap-2 rounded-[10px] bg-[#2563EB] py-2.5 text-xs font-bold text-white hover:bg-[#1D4ED8] transition-all"
                 >
                   {isProcessing ? (
                     <RefreshCw className="h-3.5 w-3.5 animate-spin" />
@@ -151,7 +151,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   placeholder="0000 0000 0000 0000"
                   value={cardNumber}
                   onChange={e => setCardNumber(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-teal-700 focus:outline-none"
+                  className="w-full rounded-[10px] border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-blue-600 focus:outline-none"
                 />
               </div>
 
@@ -162,7 +162,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   placeholder="Nome impresso no cartão"
                   value={cardName}
                   onChange={e => setCardName(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-teal-700 focus:outline-none"
+                  className="w-full rounded-[10px] border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-blue-600 focus:outline-none"
                 />
               </div>
 
@@ -174,7 +174,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                     placeholder="12/28"
                     value={expiry}
                     onChange={e => setExpiry(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-teal-700 focus:outline-none"
+                    className="w-full rounded-[10px] border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-blue-600 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -184,7 +184,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                     placeholder="123"
                     value={cvv}
                     onChange={e => setCvv(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-teal-700 focus:outline-none"
+                    className="w-full rounded-[10px] border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-blue-600 focus:outline-none"
                   />
                 </div>
               </div>
@@ -193,7 +193,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 <button
                   onClick={() => handleSimulatePayment('approved')}
                   disabled={isProcessing}
-                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-teal-700 py-3 text-xs font-bold text-white hover:bg-teal-800 transition-all"
+                  className="w-full flex items-center justify-center gap-2 rounded-[10px] bg-[#2563EB] py-3 text-xs font-bold text-white hover:bg-[#1D4ED8] transition-all"
                 >
                   {isProcessing ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Lock className="h-4 w-4" />}
                   <span>Assinar Pro por R$ 29,90/mês</span>
@@ -212,9 +212,9 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
               <button
                 onClick={() => handleSimulatePayment('approved')}
                 disabled={isProcessing}
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-slate-800 py-3 text-xs font-bold text-white hover:bg-slate-900 transition-all"
+                className="w-full flex items-center justify-center gap-2 rounded-[10px] bg-slate-800 py-3 text-xs font-bold text-white hover:bg-slate-900 transition-all"
               >
-                <FileText className="h-4 w-4 text-teal-400" />
+                <FileText className="h-4 w-4 text-blue-400" />
                 <span>Gerar Boleto & Ativar Acesso Teste</span>
               </button>
             </div>
@@ -225,19 +225,19 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
         {/* Payment Outcome Notification */}
         {paymentStatus === 'approved' && (
-          <div className="mt-4 rounded-xl bg-teal-50 border border-teal-200 p-3 text-center text-xs text-teal-900 font-bold animate-pulse">
+          <div className="mt-4 rounded-[10px] bg-emerald-50 border border-emerald-200 p-3 text-center text-xs text-emerald-900 font-bold animate-pulse">
             Pagamento Confirmado! Redirecionando para seu Dashboard Pro...
           </div>
         )}
 
         {paymentStatus === 'failed' && (
-          <div className="mt-4 rounded-xl bg-rose-50 border border-rose-200 p-3 text-center text-xs text-rose-800">
+          <div className="mt-4 rounded-[10px] bg-rose-50 border border-rose-200 p-3 text-center text-xs text-rose-800">
             Pagamento recusado. Tente novamente ou troque a forma de pagamento.
           </div>
         )}
 
         <div className="mt-5 text-center text-[10px] text-slate-500 flex items-center justify-center gap-1">
-          <ShieldCheck className="h-3.5 w-3.5 text-teal-700 shrink-0" />
+          <ShieldCheck className="h-3.5 w-3.5 text-blue-600 shrink-0" />
           <span>Processamento seguro com criptografia. Cancele quando quiser nas configurações.</span>
         </div>
 
